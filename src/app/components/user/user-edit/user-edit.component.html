@@ -1,0 +1,13 @@
+<h3 *ngIf="id > 0">Edit - {{ id }}</h3>
+<h3 *ngIf="!id">Add</h3>
+<form action="">
+    <label for="first_name">First Name: </label><br />
+    <input type="text" id="first_name"><br />
+    <label for="last_name">Last Name: </label><br />
+    <input type="text" id="last_name"><br />
+    <label for="age">Age: </label><br />
+    <input type="text" id="age"><br />
+    <label for="job">Job: </label><br />
+    <input type="text" id="job"><br />
+    <input type="submit" class="btn btn-primary" value="Add user">
+</form>
