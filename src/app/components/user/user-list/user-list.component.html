@@ -2,46 +2,22 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First name</th>
-            <th scope="col">Last name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Details</th>
-            <th scope="col">Edit</th>
+            <th>#</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Berg</td>
-            <td>24</td>
-            <td><a routerLink="1" ariaCurrentWhenActive="page">Details</a></td>
-            <td><a routerLink="1/edit" ariaCurrentWhenActive="page">Edit</a></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>John</td>
-            <td>Page</td>
-            <td>35</td>
-            <td><a routerLink="2" ariaCurrentWhenActive="page">Details</a></td>
-            <td><a routerLink="2/edit" ariaCurrentWhenActive="page">Edit</a></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Jesse</td>
-            <td>Hands</td>
-            <td>22</td>
-            <td><a routerLink="3" ariaCurrentWhenActive="page">Details</a></td>
-            <td><a routerLink="3/edit" ariaCurrentWhenActive="page">Edit</a></td>
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-            <td>Robin</td>
-            <td>Place</td>
-            <td>27</td>
-            <td><a routerLink="4" ariaCurrentWhenActive="page">Details</a></td>
-            <td><a routerLink="4/edit" ariaCurrentWhenActive="page">Edit</a></td>
+        <tr *ngFor="let user of users; let i = index">
+            <th>{{i+1}}</th>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td><a class="btn btn-primary" routerLink={{user.id}} ariaCurrentWhenActive="page">Details</a></td>
+            <td><a class="btn btn-warning" routerLink="{{user.id}}/edit" ariaCurrentWhenActive="page">Edit</a></td>
+            <td><button class="btn btn-danger" (click)="deleteUser(user.id)" ariaCurrentWhenActive="page">Delete</button></td>
         </tr>
     </tbody>
 </table>

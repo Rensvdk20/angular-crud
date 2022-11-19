@@ -1,22 +1,76 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { IUser } from 'src/app/shared/models/user.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-user-edit',
-  templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.scss']
+	selector: 'app-user-edit',
+	templateUrl: './user-edit.component.html',
+	styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
-    id : number = 0;
+	user: IUser | undefined;
+	tempUser: IUser | undefined;
 
-    constructor(private route: ActivatedRoute) {
+	constructor(
+		private userService: UserService,
+		private route: ActivatedRoute,
+		private router: Router
+	) {}
 
-    }
+	ngOnInit(): void {
+		this.route.params.subscribe((params: Params) => {
+			if (params['id']) {
+				//Get the user by id
+				this.user = this.userService.getUserById(params['id']);
 
-    ngOnInit(): void {
-        this.route.params.subscribe((params: Params) => {
-            this.id = params['id'];
-        });
-    }
+				//Deepclone the user
+				this.tempUser = JSON.parse(JSON.stringify(this.user));
+			} else {
+				//Create an empty user
+				this.tempUser = {
+					id: 0,
+					firstName: '',
+					lastName: '',
+					age: 0,
+					job: '',
+				};
+			}
+		});
+	}
 
+	onSubmit(userForm: NgForm) {
+		if (!this.user) {
+			//Add new user
+
+			//Add id to the new user
+			this.tempUser = {
+				id: this.userService.getAllUsers().length + 1,
+				...userForm.value,
+			};
+
+			//Add the user
+			this.userService.addNewUser(this.tempUser!);
+
+			//Redirect to the user list
+			this.router.navigate(['user']);
+		} else {
+			// Edit user
+
+			//Add the old id to the edited user
+			this.tempUser = {
+				id: this.user!.id,
+				...userForm.value,
+			};
+
+			//Edit the user
+			this.userService.editUserById(this.tempUser!);
+
+			//Redirect to the user list
+			this.router.navigate(['user']);
+		}
+
+		console.log(this.userService.getAllUsers());
+	}
 }

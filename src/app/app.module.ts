@@ -10,23 +10,20 @@ import { UserDetailsComponent } from './components/user/user-details/user-detail
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserColumnsComponent } from './components/user/user-columns.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    FooterComponent,
-    UserListComponent,
-    UserDetailsComponent,
-    UserColumnsComponent,
-    UserEditComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavComponent,
+		FooterComponent,
+		UserListComponent,
+		UserDetailsComponent,
+		UserColumnsComponent,
+		UserEditComponent,
+	],
+	imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

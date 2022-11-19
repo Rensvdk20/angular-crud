@@ -1,13 +1,17 @@
-<h3 *ngIf="id">Edit - {{ id }}</h3>
-<h3 *ngIf="!id">Add</h3>
-<form action="">
-    <label for="first_name">First Name: </label><br />
-    <input type="text" id="first_name"><br />
-    <label for="last_name">Last Name: </label><br />
-    <input type="text" id="last_name"><br />
+<h3 *ngIf="user">Edit - {{ user.firstName }}</h3>
+<h3 *ngIf="!user">Add</h3>
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)" novalidate>
+    <label for="firstName">First Name: </label><br />
+    <input type="text" id="firstName" name="firstName" [(ngModel)]="tempUser!.firstName"><br />
+
+    <label for="lastName">Last Name: </label><br />
+    <input type="text" id="lastName" name="lastName" [(ngModel)]="tempUser!.lastName"><br />
+
     <label for="age">Age: </label><br />
-    <input type="text" id="age"><br />
+    <input type="number" id="age" name="age" [(ngModel)]="tempUser!.age"><br />
+    
     <label for="job">Job: </label><br />
-    <input type="text" id="job"><br />
-    <input type="submit" class="btn btn-primary" value="Add user">
+    <input type="text" id="job" name="job" [(ngModel)]="tempUser!.job"><br />
+    <button *ngIf="user" class="btn btn-primary">Edit user</button>
+    <button *ngIf="!user" class="btn btn-primary">Add user</button>
 </form>
