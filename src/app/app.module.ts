@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserColumnsComponent } from './components/user/user-columns.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { FormsModule } from '@angular/forms';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
 	declarations: [
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 		UserDetailsComponent,
 		UserColumnsComponent,
 		UserEditComponent,
+		AboutComponent,
 	],
 	imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
 	providers: [],
