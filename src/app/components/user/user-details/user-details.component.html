@@ -4,16 +4,16 @@
         <tr>
             <th scope="col">First name</th>
             <th scope="col">Last name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Job</th>
+            <th scope="col">Email</th>
+            <th scope="col">Birthday</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>{{user!.firstName}}</td>
             <td>{{user!.lastName}}</td>
-            <td>{{user!.age}}</td>
-            <td>{{user!.job}}</td>
+            <td>{{user!.email}}</td>
+            <td>{{user!.birthday | date: 'MM/dd/yyyy'}}</td>
         </tr>
     </tbody>
 </table>
