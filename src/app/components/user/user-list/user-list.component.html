@@ -1,0 +1,23 @@
+<h3>Users</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; let i = index">
+            <th>{{i+1}}</th>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td><a class="btn btn-primary" routerLink={{user.id}} ariaCurrentWhenActive="page">Details</a></td>
+            <td><a class="btn btn-warning" routerLink="{{user.id}}/edit" ariaCurrentWhenActive="page">Edit</a></td>
+            <td><button class="btn btn-danger" (click)="deleteUser(user.id)" ariaCurrentWhenActive="page">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
