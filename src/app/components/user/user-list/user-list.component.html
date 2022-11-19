@@ -5,6 +5,7 @@
             <th>#</th>
             <th>First name</th>
             <th>Last name</th>
+            <th>Email</th>
             <th>Details</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -15,6 +16,7 @@
             <th>{{i+1}}</th>
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
             <td><a class="btn btn-primary" routerLink={{user.id}} ariaCurrentWhenActive="page">Details</a></td>
             <td><a class="btn btn-warning" routerLink="{{user.id}}/edit" ariaCurrentWhenActive="page">Edit</a></td>
             <td><button class="btn btn-danger" (click)="deleteUser(user.id)" ariaCurrentWhenActive="page">Delete</button></td>

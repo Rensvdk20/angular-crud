@@ -33,8 +33,8 @@ export class UserEditComponent implements OnInit {
 					id: 0,
 					firstName: '',
 					lastName: '',
-					age: 0,
-					job: '',
+					birthday: new Date(),
+					email: '',
 				};
 			}
 		});
