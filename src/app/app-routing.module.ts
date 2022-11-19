@@ -6,19 +6,20 @@ import { UserDetailsComponent } from './components/user/user-details/user-detail
 import { UserColumnsComponent } from './components/user/user-columns.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'user', pathMatch: 'full' },
-    {
-        path: 'user', component: UserColumnsComponent,
-        children: [
-            { path: ':id', component: UserDetailsComponent },
-            { path: 'add', component: UserEditComponent },
-            { path: ':id/edit', component: UserEditComponent },
-        ]
-    }
+	{ path: '', redirectTo: 'user', pathMatch: 'full' },
+	{
+		path: 'user',
+		component: UserColumnsComponent,
+		children: [
+			{ path: 'add', component: UserEditComponent },
+			{ path: ':id/edit', component: UserEditComponent },
+			{ path: ':id', component: UserDetailsComponent },
+		],
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
