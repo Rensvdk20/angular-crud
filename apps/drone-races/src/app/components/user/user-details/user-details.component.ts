@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IUser } from 'src/app/shared/models/user.model';
-import { UserService } from 'src/app/shared/services/user.service';
+import { IUser } from '../../../shared/models/user.model';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
 	selector: 'app-user-details',

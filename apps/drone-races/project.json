@@ -1,0 +1,100 @@
+{
+  "name": "drone-races",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "sourceRoot": "apps/drone-races/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/drone-races",
+        "index": "apps/drone-races/src/index.html",
+        "main": "apps/drone-races/src/main.ts",
+        "polyfills": "apps/drone-races/src/polyfills.ts",
+        "tsConfig": "apps/drone-races/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/drone-races/src/favicon.ico",
+          "apps/drone-races/src/assets"
+        ],
+        "styles": [
+          "apps/drone-races/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/drone-races/src/environments/environment.ts",
+              "with": "apps/drone-races/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "drone-races:build:production"
+        },
+        "development": {
+          "browserTarget": "drone-races:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "drone-races:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "apps/drone-races/src/test.ts",
+        "polyfills": "apps/drone-races/src/polyfills.ts",
+        "tsConfig": "apps/drone-races/tsconfig.spec.json",
+        "karmaConfig": "apps/drone-races/karma.conf.js",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/drone-races/src/favicon.ico",
+          "apps/drone-races/src/assets"
+        ],
+        "styles": [
+          "apps/drone-races/src/styles.scss"
+        ],
+        "scripts": []
+      }
+    }
+  }
+}
