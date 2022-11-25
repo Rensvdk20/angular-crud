@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { CommonModule } from '@angular/common';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
