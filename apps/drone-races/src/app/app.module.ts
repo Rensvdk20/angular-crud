@@ -3,15 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavComponent } from './shared/nav/nav.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { UserListComponent } from './components/user/user-list/user-list.component';
-import { UserDetailsComponent } from './components/user/user-details/user-details.component';
+import { NavComponent } from '@drone-races/shared/nav/nav.component';
+import { FooterComponent } from '@drone-races/shared/footer/footer.component';
+import { UserListComponent } from '@drone-races/components/user/user-list/user-list.component';
+import { UserDetailsComponent } from '@drone-races/components/user/user-details/user-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UserColumnsComponent } from './components/user/user-columns.component';
-import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { UserColumnsComponent } from '@drone-races/components/user/user-columns.component';
+import { UserEditComponent } from '@drone-races/components/user/user-edit/user-edit.component';
 import { FormsModule } from '@angular/forms';
-import { AboutComponent } from './components/about/about.component';
+import { AboutComponent } from '@drone-races/components/about/about.component';
 
 @NgModule({
 	declarations: [
