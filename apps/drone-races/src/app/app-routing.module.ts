@@ -1,9 +1,9 @@
-import { UserEditComponent } from '@drone-races/components/user/user-edit/user-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserDetailsComponent } from '@drone-races/components/user/user-details/user-details.component';
-import { UserColumnsComponent } from '@drone-races/components/user/user-columns.component';
-import { AboutComponent } from '@drone-races/components/about/about.component';
+import { AboutComponent } from '@drone-races/features-ui/src/lib/about/about.component';
+import { UserColumnsComponent } from '@drone-races/features-ui/src/lib/user/user-columns.component';
+import { UserDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-details/user-details.component';
+import { UserEditComponent } from '@drone-races/features-ui/src/lib/user/user-edit/user-edit.component';
 
 const routes: Routes = [
 	{ path: 'about', component: AboutComponent, pathMatch: 'full' },

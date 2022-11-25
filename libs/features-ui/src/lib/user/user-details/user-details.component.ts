@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IUser } from '../../../shared/models/user.model';
-import { UserService } from '../../../shared/services/user.service';
+import { IUser } from '@drone-races/shared/src/lib/models/user.model';
+import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 
 @Component({
 	selector: 'app-user-details',
