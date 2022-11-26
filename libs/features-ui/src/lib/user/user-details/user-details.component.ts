@@ -4,7 +4,7 @@ import { IUser } from '@drone-races/shared/src/lib/models/user.model';
 import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 
 @Component({
-	selector: 'app-user-details',
+	selector: 'drone-races-user-details',
 	templateUrl: './user-details.component.html',
 	styleUrls: ['./user-details.component.scss'],
 })
@@ -19,8 +19,6 @@ export class UserDetailsComponent implements OnInit {
 	ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
 			this.user = this.userService.getUserById(params['id']);
-
-			console.log(this.user);
 		});
 	}
 }

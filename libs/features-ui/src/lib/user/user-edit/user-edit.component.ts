@@ -5,7 +5,7 @@ import { IUser } from '@drone-races/shared/src/lib/models/user.model';
 import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 
 @Component({
-	selector: 'app-user-edit',
+	selector: 'drone-races-user-edit',
 	templateUrl: './user-edit.component.html',
 	styleUrls: ['./user-edit.component.scss'],
 })

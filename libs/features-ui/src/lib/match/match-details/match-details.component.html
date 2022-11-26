@@ -1,0 +1,26 @@
+<h3>Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Rank</th>
+            <th>Prize money</th>
+            <th>Winner</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{match!.name}}</td>
+            <td>{{match!.date | date: 'MM/dd/yyyy'}}</td>
+            <td>{{match!.location}}</td>
+            <td>{{match!.rank }}</td>
+            <td>&euro; {{match!.prizeMoney}}</td>
+            <!-- <td><a [routerLink]="['/user', match!.winner!.id]">{{(match!.winner) ?  match!.winner.firstName + " " + match!.winner.lastName : '-'}}</a></td> -->
+            <td *ngIf="!match!.winner">-</td>
+            <td *ngIf="match!.winner"><a [routerLink]="['/user', match!.winner!.id]">{{match!.winner!.firstName + " " + match!.winner!.lastName}}</a></td>
+
+        </tr>
+    </tbody>
+</table>

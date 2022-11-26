@@ -24,7 +24,9 @@
             "prefix": "drone-races",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@angular-eslint/no-empty-lifecycle-method": "off",
+        "@angular-eslint/no-empty-function": "off",
       }
     },
     {
