@@ -1,0 +1,24 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "esnext",
+		"lib": ["es2017", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"@drone-races/*": ["libs/*"],
+			"@drone-races/features-ui": ["libs/features-ui/src/index.ts"],
+			"@drone-races/shared": ["libs/shared/src/index.ts"]
+		}
+	},
+	"exclude": ["node_modules", "tmp"]
+}

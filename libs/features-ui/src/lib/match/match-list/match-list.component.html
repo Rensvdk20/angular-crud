@@ -1,0 +1,27 @@
+<h3>Matches</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Rank</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let match of matches; let i = index">
+            <th>{{i+1}}</th>
+            <td>{{match.name}}</td>
+            <td>{{match.date | date: 'MM/dd/yyyy'}}</td>
+            <td>{{match.location}}</td>
+            <td>{{match.rank}}</td>
+            <td><a class="btn btn-primary" routerLink={{match.id}} ariaCurrentWhenActive="page">Details</a></td>
+            <td><a class="btn btn-warning" routerLink="{{match.id}}/edit" ariaCurrentWhenActive="page">Edit</a></td>
+            <td><button class="btn btn-danger" (click)="deleteMatch(match.id)" ariaCurrentWhenActive="page">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
