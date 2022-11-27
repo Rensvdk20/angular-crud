@@ -17,9 +17,8 @@
             <td>{{match!.location}}</td>
             <td>{{match!.rank }}</td>
             <td>&euro; {{match!.prizeMoney}}</td>
-            <!-- <td><a [routerLink]="['/user', match!.winner!.id]">{{(match!.winner) ?  match!.winner.firstName + " " + match!.winner.lastName : '-'}}</a></td> -->
-            <td *ngIf="!match!.winner">-</td>
-            <td *ngIf="match!.winner"><a [routerLink]="['/user', match!.winner!.id]">{{match!.winner!.firstName + " " + match!.winner!.lastName}}</a></td>
+            <td *ngIf="!matchWinner">-</td>
+            <td *ngIf="matchWinner"><a [routerLink]="['/user', matchWinner.id]">{{matchWinner!.firstName + " " + matchWinner!.lastName}}</a></td>
 
         </tr>
     </tbody>

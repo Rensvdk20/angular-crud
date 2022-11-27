@@ -52,9 +52,6 @@ export class UserEditComponent implements OnInit {
 
 			//Add the user
 			this.userService.addNewUser(this.tempUser!);
-
-			//Redirect to the user list
-			this.router.navigate(['user']);
 		} else {
 			// Edit user
 
@@ -66,11 +63,9 @@ export class UserEditComponent implements OnInit {
 
 			//Edit the user
 			this.userService.editUserById(this.tempUser!);
-
-			//Redirect to the user list
-			this.router.navigate(['user']);
 		}
 
-		console.log(this.userService.getAllUsers());
+		//Redirect to the user overview
+		this.router.navigate(['user']);
 	}
 }
