@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserManagerColumnsComponent } from './user-manager-overview.component';
+import { UserManagerOverviewComponent } from './user-manager-overview.component';
 
-describe('UserManagerColumnsComponent', () => {
-	let component: UserManagerColumnsComponent;
-	let fixture: ComponentFixture<UserManagerColumnsComponent>;
+describe('UserManagerOverviewComponent', () => {
+	let component: UserManagerOverviewComponent;
+	let fixture: ComponentFixture<UserManagerOverviewComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [UserManagerColumnsComponent],
+			declarations: [UserManagerOverviewComponent],
 		}).compileComponents();
 
-		fixture = TestBed.createComponent(UserManagerColumnsComponent);
+		fixture = TestBed.createComponent(UserManagerOverviewComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
