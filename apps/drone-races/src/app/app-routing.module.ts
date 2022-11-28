@@ -1,35 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AboutComponent } from 'apps/drone-races/src/app/pages/about/about.component';
 
-import { MatchDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-details/match-details.component';
-import { MatchEditComponent } from '@drone-races/features-ui/src/lib/match/match-edit/match-edit.component';
-import { MatchOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-overview.component';
+import { MatchManagerDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-manager-details/match-manager-details.component';
+import { MatchManagerEditComponent } from '@drone-races/features-ui/src/lib/match/match-manager-edit/match-manager-edit.component';
+import { MatchManagerOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-manager-overview.component';
 
-import { UserColumnsComponent } from '@drone-races/features-ui/src/lib/user/user-overview.component';
-import { UserDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-details/user-details.component';
-import { UserEditComponent } from '@drone-races/features-ui/src/lib/user/user-edit/user-edit.component';
-import { HomepageComponent } from './pages/homepage/homepage.component';
+import { UserManagerColumnsComponent } from '@drone-races/features-ui/src/lib/user/user-manager-overview.component';
+import { UserManagerDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-manager-details/user-manager-details.component';
+import { UserManagerEditComponent } from '@drone-races/features-ui/src/lib/user/user-manager-edit/user-manager-edit.component';
 
 const routes: Routes = [
 	{ path: '', component: HomepageComponent, pathMatch: 'full' },
 	{ path: 'about', component: AboutComponent, pathMatch: 'full' },
 	{
 		path: 'user',
-		component: UserColumnsComponent,
+		component: UserManagerColumnsComponent,
 		children: [
-			{ path: 'add', component: UserEditComponent },
-			{ path: ':id/edit', component: UserEditComponent },
-			{ path: ':id', component: UserDetailsComponent },
+			{ path: 'add', component: UserManagerEditComponent },
+			{ path: ':id/edit', component: UserManagerEditComponent },
+			{ path: ':id', component: UserManagerDetailsComponent },
 		],
 	},
 	{
 		path: 'match',
-		component: MatchOverviewComponent,
+		component: MatchManagerOverviewComponent,
 		children: [
-			{ path: 'add', component: MatchEditComponent },
-			{ path: ':id/edit', component: MatchEditComponent },
-			{ path: ':id', component: MatchDetailsComponent },
+			{ path: 'add', component: MatchManagerEditComponent },
+			{ path: ':id/edit', component: MatchManagerEditComponent },
+			{ path: ':id', component: MatchManagerDetailsComponent },
 		],
 	},
 ];

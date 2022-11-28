@@ -3,11 +3,11 @@ import { IUser } from '@drone-races/shared/src/lib/models/user.model';
 import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 
 @Component({
-	selector: 'drone-races-user-list',
-	templateUrl: './user-list.component.html',
-	styleUrls: ['./user-list.component.scss'],
+	selector: 'drone-races-user-manager-list',
+	templateUrl: './user-manager-list.component.html',
+	styleUrls: ['./user-manager-list.component.scss'],
 })
-export class UserListComponent implements OnInit {
+export class UserManagerListComponent implements OnInit {
 	users: IUser[] = [];
 
 	constructor(private userService: UserService) {}
