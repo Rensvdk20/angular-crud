@@ -6,11 +6,11 @@ import { MatchService } from '@drone-races/shared/src/lib/services/match.service
 import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 
 @Component({
-	selector: 'drone-races-match-details',
-	templateUrl: './match-details.component.html',
-	styleUrls: ['./match-details.component.scss'],
+	selector: 'drone-races-match-manager-details',
+	templateUrl: './match-manager-details.component.html',
+	styleUrls: ['./match-manager-details.component.scss'],
 })
-export class MatchDetailsComponent {
+export class MatchManagerDetailsComponent {
 	match: IMatch | undefined;
 	matchWinner: IUser | undefined;
 

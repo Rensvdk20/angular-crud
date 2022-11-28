@@ -7,11 +7,11 @@ import { MatchService } from '@drone-races/shared/src/lib/services/match.service
 import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 
 @Component({
-	selector: 'drone-races-match-edit',
-	templateUrl: './match-edit.component.html',
-	styleUrls: ['./match-edit.component.scss'],
+	selector: 'drone-races-match-manager-edit',
+	templateUrl: './match-manager-edit.component.html',
+	styleUrls: ['./match-manager-edit.component.scss'],
 })
-export class MatchEditComponent {
+export class MatchManagerEditComponent {
 	match: IMatch | undefined;
 	tempMatch: IMatch | undefined;
 

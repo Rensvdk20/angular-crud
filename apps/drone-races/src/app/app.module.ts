@@ -17,10 +17,10 @@ import { UserListComponent } from '@drone-races/features-ui/src/lib/user/user-li
 import { UserDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-details/user-details.component';
 import { UserEditComponent } from '@drone-races/features-ui/src/lib/user/user-edit/user-edit.component';
 
-import { MatchOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-overview.component';
-import { MatchListComponent } from '@drone-races/features-ui/src/lib/match/match-list/match-list.component';
-import { MatchDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-details/match-details.component';
-import { MatchEditComponent } from '@drone-races/features-ui/src/lib/match/match-edit/match-edit.component';
+import { MatchManagerOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-manager-overview.component';
+import { MatchManagerListComponent } from '@drone-races/features-ui/src/lib/match/match-manager-list/match-manager-list.component';
+import { MatchManagerDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-manager-details/match-manager-details.component';
+import { MatchManagerEditComponent } from '@drone-races/features-ui/src/lib/match/match-manager-edit/match-manager-edit.component';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -34,10 +34,10 @@ import { MatchEditComponent } from '@drone-races/features-ui/src/lib/match/match
 		UserDetailsComponent,
 		UserEditComponent,
 
-		MatchOverviewComponent,
-		MatchListComponent,
-		MatchDetailsComponent,
-		MatchEditComponent,
+		MatchManagerOverviewComponent,
+		MatchManagerListComponent,
+		MatchManagerDetailsComponent,
+		MatchManagerEditComponent,
 	],
 	imports: [
 		BrowserModule,

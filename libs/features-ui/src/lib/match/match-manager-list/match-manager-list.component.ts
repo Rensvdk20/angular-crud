@@ -3,11 +3,11 @@ import { IMatch } from '@drone-races/shared/src/lib/models/match.model';
 import { MatchService } from '@drone-races/shared/src/lib/services/match.service';
 
 @Component({
-	selector: 'drone-races-match-list',
-	templateUrl: './match-list.component.html',
-	styleUrls: ['./match-list.component.scss'],
+	selector: 'drone-races-match-manager-list',
+	templateUrl: './match-manager-list.component.html',
+	styleUrls: ['./match-manager-list.component.scss'],
 })
-export class MatchListComponent {
+export class MatchManagerListComponent {
 	matches: IMatch[] = [];
 
 	constructor(private matchService: MatchService) {}

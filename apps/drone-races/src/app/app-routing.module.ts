@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from '@drone-races/features-ui/src/lib/about/about.component';
 
-import { MatchDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-details/match-details.component';
-import { MatchEditComponent } from '@drone-races/features-ui/src/lib/match/match-edit/match-edit.component';
-import { MatchOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-overview.component';
+import { MatchManagerDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-manager-details/match-manager-details.component';
+import { MatchManagerEditComponent } from '@drone-races/features-ui/src/lib/match/match-manager-edit/match-manager-edit.component';
+import { MatchManagerOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-manager-overview.component';
 
 import { UserColumnsComponent } from '@drone-races/features-ui/src/lib/user/user-overview.component';
 import { UserDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-details/user-details.component';
@@ -23,11 +23,11 @@ const routes: Routes = [
 	},
 	{
 		path: 'match',
-		component: MatchOverviewComponent,
+		component: MatchManagerOverviewComponent,
 		children: [
-			{ path: 'add', component: MatchEditComponent },
-			{ path: ':id/edit', component: MatchEditComponent },
-			{ path: ':id', component: MatchDetailsComponent },
+			{ path: 'add', component: MatchManagerEditComponent },
+			{ path: ':id/edit', component: MatchManagerEditComponent },
+			{ path: ':id', component: MatchManagerDetailsComponent },
 		],
 	},
 ];
