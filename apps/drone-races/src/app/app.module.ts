@@ -12,10 +12,10 @@ import { FooterComponent } from '@drone-races/shared/src/lib/footer/footer.compo
 
 import { AboutComponent } from '@drone-races/features-ui/src/lib/about/about.component';
 
-import { UserColumnsComponent } from '@drone-races/features-ui/src/lib/user/user-overview.component';
-import { UserListComponent } from '@drone-races/features-ui/src/lib/user/user-list/user-list.component';
-import { UserDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-details/user-details.component';
-import { UserEditComponent } from '@drone-races/features-ui/src/lib/user/user-edit/user-edit.component';
+import { UserManagerColumnsComponent } from '@drone-races/features-ui/src/lib/user/user-manager-overview.component';
+import { UserManagerListComponent } from '@drone-races/features-ui/src/lib/user/user-manager-list/user-manager-list.component';
+import { UserManagerDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-manager-details/user-manager-details.component';
+import { UserManagerEditComponent } from '@drone-races/features-ui/src/lib/user/user-manager-edit/user-manager-edit.component';
 
 import { MatchManagerOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-manager-overview.component';
 import { MatchManagerListComponent } from '@drone-races/features-ui/src/lib/match/match-manager-list/match-manager-list.component';
@@ -29,10 +29,10 @@ import { MatchManagerEditComponent } from '@drone-races/features-ui/src/lib/matc
 		FooterComponent,
 		AboutComponent,
 
-		UserColumnsComponent,
-		UserListComponent,
-		UserDetailsComponent,
-		UserEditComponent,
+		UserManagerColumnsComponent,
+		UserManagerListComponent,
+		UserManagerDetailsComponent,
+		UserManagerEditComponent,
 
 		MatchManagerOverviewComponent,
 		MatchManagerListComponent,

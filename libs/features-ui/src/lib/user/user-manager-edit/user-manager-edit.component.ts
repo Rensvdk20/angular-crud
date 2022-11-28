@@ -5,11 +5,11 @@ import { IUser } from '@drone-races/shared/src/lib/models/user.model';
 import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 
 @Component({
-	selector: 'drone-races-user-edit',
-	templateUrl: './user-edit.component.html',
-	styleUrls: ['./user-edit.component.scss'],
+	selector: 'drone-races-user-manager-edit',
+	templateUrl: './user-manager-edit.component.html',
+	styleUrls: ['./user-manager-edit.component.scss'],
 })
-export class UserEditComponent implements OnInit {
+export class UserManagerEditComponent implements OnInit {
 	user: IUser | undefined;
 	tempUser: IUser | undefined;
 

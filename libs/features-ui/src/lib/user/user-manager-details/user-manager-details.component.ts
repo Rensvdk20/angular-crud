@@ -4,11 +4,11 @@ import { IUser } from '@drone-races/shared/src/lib/models/user.model';
 import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 
 @Component({
-	selector: 'drone-races-user-details',
-	templateUrl: './user-details.component.html',
-	styleUrls: ['./user-details.component.scss'],
+	selector: 'drone-races-user-manager-details',
+	templateUrl: './user-manager-details.component.html',
+	styleUrls: ['./user-manager-details.component.scss'],
 })
-export class UserDetailsComponent implements OnInit {
+export class UserManagerDetailsComponent implements OnInit {
 	user: IUser | undefined;
 
 	constructor(
