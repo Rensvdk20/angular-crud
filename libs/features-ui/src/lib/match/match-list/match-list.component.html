@@ -1,0 +1,18 @@
+<div class="races">
+    <div class="row">
+        <div *ngFor="let match of matches;" class="col-3">
+            <div class="race">
+                <a [routerLink]="['/match', match.id]">
+                    <div class="race-img">
+                        <img src="https://i.imgur.com/cbX6J2V.png" alt="Drone Race">
+                    </div>
+                    <div class="race-info">
+                        <b>{{ match.name }} - Rank {{ match.rank }}</b><br />
+                        {{ match.date | date: 'MM/dd/yyyy' }}<br />
+                        {{ match.location }}<br />
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

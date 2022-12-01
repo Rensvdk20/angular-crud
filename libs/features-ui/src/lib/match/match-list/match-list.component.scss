@@ -1,0 +1,24 @@
+.races {
+    .race {
+        margin-bottom: 40px;
+        box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+        border-radius: 10px;
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        &-info {
+            padding: 1rem;
+        }
+
+        &-img {
+            img {
+                width: 100%;
+                border-top-right-radius: 10px;
+                border-top-left-radius: 10px;
+            }
+        }
+    }
+}

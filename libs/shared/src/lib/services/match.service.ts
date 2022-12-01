@@ -34,7 +34,7 @@ export class MatchService {
 			winnerId: 3,
 		},
 		{
-			id: 3,
+			id: 4,
 			name: 'National match',
 			date: new Date('2-8-2021'),
 			location: 'Jaarbeurs Utrecht',
@@ -43,7 +43,7 @@ export class MatchService {
 			winnerId: 3,
 		},
 		{
-			id: 3,
+			id: 5,
 			name: 'World Champion match',
 			date: new Date('2-8-2021'),
 			location: 'London O2 Arena',

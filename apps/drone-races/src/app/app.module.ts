@@ -7,21 +7,24 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
-import { NavComponent } from '@drone-races/shared/src/lib/components/nav/nav.component';
-import { FooterComponent } from '@drone-races/shared/src/lib/components/footer/footer.component';
+import { NavComponent } from '@drone-races/shared';
+import { FooterComponent } from '@drone-races/shared';
 
 import { HomepageComponent } from './pages/homepage/homepage.component';
-
-import { UserManagerOverviewComponent } from '@drone-races/features-ui/src/lib/user/user-manager/user-manager-overview.component';
-import { UserManagerListComponent } from '@drone-races/features-ui/src/lib/user/user-manager/user-manager-list/user-manager-list.component';
-import { UserManagerDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-manager/user-manager-details/user-manager-details.component';
-import { UserManagerEditComponent } from '@drone-races/features-ui/src/lib/user/user-manager/user-manager-edit/user-manager-edit.component';
-
-import { MatchManagerOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-manager/match-manager-overview.component';
-import { MatchManagerListComponent } from '@drone-races/features-ui/src/lib/match/match-manager/match-manager-list/match-manager-list.component';
-import { MatchManagerDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-manager/match-manager-details/match-manager-details.component';
-import { MatchManagerEditComponent } from '@drone-races/features-ui/src/lib/match/match-manager/match-manager-edit/match-manager-edit.component';
 import { AboutComponent } from './pages/about/about.component';
+
+import { MatchListComponent } from '@drone-races/features-ui';
+import { MatchDetailsComponent } from '@drone-races/features-ui';
+
+import { UserManagerOverviewComponent } from '@drone-races/features-ui';
+import { UserManagerListComponent } from '@drone-races/features-ui';
+import { UserManagerDetailsComponent } from '@drone-races/features-ui';
+import { UserManagerEditComponent } from '@drone-races/features-ui';
+
+import { MatchManagerOverviewComponent } from '@drone-races/features-ui';
+import { MatchManagerListComponent } from '@drone-races/features-ui';
+import { MatchManagerDetailsComponent } from '@drone-races/features-ui';
+import { MatchManagerEditComponent } from '@drone-races/features-ui';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -31,6 +34,9 @@ import { AboutComponent } from './pages/about/about.component';
 
 		HomepageComponent,
 		AboutComponent,
+
+		MatchListComponent,
+		MatchDetailsComponent,
 
 		UserManagerOverviewComponent,
 		UserManagerListComponent,

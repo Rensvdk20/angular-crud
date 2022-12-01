@@ -1,0 +1,23 @@
+<div class="match">
+    <div class="match-info">
+        <div class="row">
+            <div class="col-6">
+                <h1>{{ match!.name }} - Rank {{ match!.rank }}</h1><br />
+                <p><b>Date: </b>{{ match!.date | date: 'MM/dd/yyyy' }}<br /></p>
+                <p><b>Location: </b>{{ match!.location }}<br /></p>
+                <p><b>Prize pool: </b>&euro; {{ match!.prizeMoney }}<br /></p>
+                <p *ngIf="matchWinner">
+                    <b>Winner: </b>
+                    {{ matchWinner.firstName + " " + matchWinner.lastName }}
+                </p><br />
+            </div>
+            <div class="col-6">
+                <img src="https://i.imgur.com/cbX6J2V.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="match-recommended">
+        <h2>Recommended</h2>
+        <drone-races-match-list></drone-races-match-list>
+    </div>
+</div>

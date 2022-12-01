@@ -11,12 +11,16 @@ import { MatchManagerOverviewComponent } from '@drone-races/features-ui/src/lib/
 import { UserManagerOverviewComponent } from '@drone-races/features-ui/src/lib/user/user-manager/user-manager-overview.component';
 import { UserManagerDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-manager/user-manager-details/user-manager-details.component';
 import { UserManagerEditComponent } from '@drone-races/features-ui/src/lib/user/user-manager/user-manager-edit/user-manager-edit.component';
+import { MatchDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-details/match-details.component';
 
 const routes: Routes = [
 	{ path: '', component: HomepageComponent, pathMatch: 'full' },
 	{ path: 'about', component: AboutComponent, pathMatch: 'full' },
+
+	{ path: 'match/:id', component: MatchDetailsComponent },
+
 	{
-		path: 'user',
+		path: 'user-manager',
 		component: UserManagerOverviewComponent,
 		children: [
 			{ path: 'add', component: UserManagerEditComponent },
@@ -25,7 +29,7 @@ const routes: Routes = [
 		],
 	},
 	{
-		path: 'match',
+		path: 'match-manager',
 		component: MatchManagerOverviewComponent,
 		children: [
 			{ path: 'add', component: MatchManagerEditComponent },

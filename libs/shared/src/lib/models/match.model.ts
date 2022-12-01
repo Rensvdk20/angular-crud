@@ -1,5 +1,3 @@
-import { IUser } from './user.model';
-
 export interface IMatch {
 	id: number;
 	name: string;
