@@ -15,7 +15,6 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@drone-races/*": ["libs/*"],
 			"@drone-races/features-ui": ["libs/features-ui/src/index.ts"],
 			"@drone-races/shared": ["libs/shared/src/index.ts"]
 		}

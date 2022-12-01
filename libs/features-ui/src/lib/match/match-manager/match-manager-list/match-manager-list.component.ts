@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IMatch } from '@drone-races/shared/src/lib/models/match.model';
-import { MatchService } from '@drone-races/shared/src/lib/services/match.service';
+import { IMatch } from '@drone-races/shared';
+import { MatchService } from '@drone-races/shared';
 
 @Component({
 	selector: 'drone-races-match-manager-list',

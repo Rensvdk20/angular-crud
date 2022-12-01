@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IMatch } from '@drone-races/shared/src/lib/models/match.model';
-import { IUser } from '@drone-races/shared/src/lib/models/user.model';
-import { MatchService } from '@drone-races/shared/src/lib/services/match.service';
-import { UserService } from '@drone-races/shared/src/lib/services/user.service';
+import { IMatch } from '@drone-races/shared';
+import { IUser } from '@drone-races/shared';
+import { MatchService } from '@drone-races/shared';
+import { UserService } from '@drone-races/shared';
 
 @Component({
 	selector: 'drone-races-match-details',
