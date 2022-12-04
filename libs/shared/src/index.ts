@@ -5,3 +5,5 @@ export * from './lib/services/match.service';
 export * from './lib/services/user.service';
 export * from './lib/models/match.model';
 export * from './lib/models/user.model';
+export * from './lib/models/id.type';
+export * from './lib/models/auth/auth.model';
