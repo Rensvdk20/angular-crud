@@ -7,3 +7,4 @@ export * from './lib/models/match.model';
 export * from './lib/models/user.model';
 export * from './lib/models/id.type';
 export * from './lib/models/auth/auth.model';
+export * from './lib/models/api/api-response.model';
