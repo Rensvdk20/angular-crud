@@ -22,6 +22,9 @@ export class User {
 	@Prop({ required: true })
 	birthday!: Date;
 
+	@Prop({ required: true })
+	isAdmin!: boolean;
+
 	@Prop()
 	racer: Racer | null;
 }

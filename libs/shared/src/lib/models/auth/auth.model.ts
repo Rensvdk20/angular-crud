@@ -9,6 +9,7 @@ export interface UserRegistration {
 	firstName: string;
 	lastName: string;
 	birthday: Date;
+	isAdmin: boolean;
 }
 
 export interface Token {

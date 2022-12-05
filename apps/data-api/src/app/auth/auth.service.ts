@@ -21,14 +21,17 @@ export class AuthService {
 		firstName: string,
 		lastName: string,
 		email: string,
-		birthday: Date
+		birthday: Date,
+		isAdmin: boolean
 	): Promise<string> {
 		const user = new this.userModel({
 			firstName,
 			lastName,
 			email,
 			birthday,
+			isAdmin,
 		});
+
 		await user.save();
 		return user.id;
 	}

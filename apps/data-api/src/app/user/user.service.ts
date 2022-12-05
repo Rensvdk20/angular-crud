@@ -44,4 +44,11 @@ export class UserService {
 			{ new: true }
 		);
 	}
+
+	async checkIfAdmin(userId: string): Promise<boolean> {
+		const user = await this.getUser(userId);
+		if (user != null) {
+			return user.isAdmin;
+		}
+	}
 }

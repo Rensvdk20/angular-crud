@@ -31,7 +31,8 @@ export class AuthController {
 					credentials.firstName,
 					credentials.lastName,
 					credentials.email,
-					credentials.birthday
+					credentials.birthday,
+					credentials.isAdmin
 				),
 			};
 		} catch (e) {
