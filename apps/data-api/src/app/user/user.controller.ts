@@ -14,6 +14,7 @@ import { UserService } from './user.service';
 import { User } from './user.schema';
 import { InjectToken, Token } from '../auth/token.decorator';
 import { ResourceId } from '@drone-races/shared';
+import { Racer } from '../racer/racer.schema';
 
 @Controller('user')
 export class UserController {
@@ -21,8 +22,7 @@ export class UserController {
 
 	@Get()
 	async getUserInfo(@InjectToken() token: Token): Promise<User> {
-		console.log('token', token);
-		return this.userService.getOne(token.id);
+		return this.userService.getUser(token.id);
 	}
 
 	@Put()
@@ -31,5 +31,13 @@ export class UserController {
 		@Body() user: User
 	): Promise<User> {
 		return this.userService.update(token.id, user);
+	}
+
+	@Post('register-racer')
+	async registerRacer(
+		@InjectToken() token: Token,
+		@Body() racer: Racer
+	): Promise<User> {
+		return this.userService.registerRacer(token.id, racer);
 	}
 }

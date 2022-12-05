@@ -1,12 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import { Racer } from '../racer/racer.schema';
 
 export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-	@Prop()
+	@Prop({ default: uuidv4 })
 	id!: string;
 
 	@Prop({ required: true })
@@ -20,6 +21,9 @@ export class User {
 
 	@Prop({ required: true })
 	birthday!: Date;
+
+	@Prop()
+	racer: Racer | null;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

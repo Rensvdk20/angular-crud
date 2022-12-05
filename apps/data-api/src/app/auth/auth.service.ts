@@ -62,7 +62,7 @@ export class AuthService {
 		if (!identity || !(await compare(password, identity.hash)))
 			throw new Error('user not authorized');
 
-		const user = await this.userModel.findOne({ name: email });
+		const user = await this.userModel.findOne({ email: email });
 
 		return new Promise((resolve, reject) => {
 			sign(

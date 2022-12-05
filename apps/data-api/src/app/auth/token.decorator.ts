@@ -3,7 +3,7 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { Id } from '@drone-races/shared';
 
 export interface Token {
-	username: Id;
+	email: Id;
 	id: string;
 }
 
