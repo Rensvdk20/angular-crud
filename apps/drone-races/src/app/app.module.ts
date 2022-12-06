@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NavComponent } from '@drone-races/shared';
+import { LoginFormComponent, NavComponent } from '@drone-races/shared';
 import { FooterComponent } from '@drone-races/shared';
 
 import { HomepageComponent } from './pages/homepage/homepage.component';
@@ -25,37 +25,39 @@ import { MatchManagerOverviewComponent } from '@drone-races/features-ui';
 import { MatchManagerListComponent } from '@drone-races/features-ui';
 import { MatchManagerDetailsComponent } from '@drone-races/features-ui';
 import { MatchManagerEditComponent } from '@drone-races/features-ui';
+import { LoginComponent } from './pages/account/login/login.component';
+
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
 	declarations: [
 		AppComponent,
-
 		NavComponent,
 		FooterComponent,
-
 		HomepageComponent,
 		AboutComponent,
-
 		MatchListComponent,
 		MatchDetailsComponent,
-
 		UserManagerOverviewComponent,
 		UserManagerListComponent,
 		UserManagerDetailsComponent,
 		UserManagerEditComponent,
-
 		MatchManagerOverviewComponent,
 		MatchManagerListComponent,
 		MatchManagerDetailsComponent,
 		MatchManagerEditComponent,
+		LoginComponent,
+		LoginFormComponent,
 	],
+	providers: [],
+	bootstrap: [AppComponent],
 	imports: [
 		BrowserModule,
 		RouterModule,
 		AppRoutingModule,
 		NgbModule,
 		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule,
 	],
-	providers: [],
-	bootstrap: [AppComponent],
 })
 export class AppModule {}

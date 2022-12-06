@@ -1,6 +1,10 @@
 .races {
-    .race {
+    >.row > div {
         margin-bottom: 40px;
+    }
+
+    .race {
+        height: 100%;
         box-shadow: 0 0 5px rgb(0 0 0 / 20%);
         border-radius: 10px;
 

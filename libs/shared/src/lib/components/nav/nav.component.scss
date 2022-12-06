@@ -1,0 +1,16 @@
+.navbar-nav {
+    width: 100%;
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+
+        &-login {
+            margin-left: auto;
+        }
+    }
+    
+    img {
+        width: 40px;
+    }
+}
