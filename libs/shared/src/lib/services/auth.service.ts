@@ -7,19 +7,21 @@ import {
 	UserRegistration,
 } from '../models/auth/auth.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserInfo } from '@drone-races/shared';
+import { UserInfo, UserService } from '@drone-races/shared';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthService {
-	private readonly CURRENT_USER = 'userToken';
+	public currentUser$ = new BehaviorSubject<UserInfo | undefined>(undefined);
+	private readonly TOKEN = 'userToken';
+	private readonly CURRENT_USER = 'currentUser';
 	private readonly headers = new HttpHeaders({
 		'Access-Control-Allow-Origin': '*',
 		'Content-Type': 'application/json',
 	});
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private userService: UserService) {}
 
 	login(formData: UserCredentials) {
 		return this.http
@@ -29,7 +31,11 @@ export class AuthService {
 			.pipe(
 				map((data: any) => data.results),
 				map((token: Token) => {
-					this.saveUserToLocalStorage(token);
+					this.saveTokenToLocalStorage(token);
+					this.userService.getUserInfo().subscribe((user) => {
+						this.currentUser$.next(user);
+						this.saveUserToLocalStorage(user);
+					});
 					return 'success';
 				}),
 				catchError((error) => {
@@ -49,7 +55,11 @@ export class AuthService {
 		}
 	}
 
-	private saveUserToLocalStorage(token: Token): void {
-		localStorage.setItem(this.CURRENT_USER, JSON.stringify(token));
+	private saveTokenToLocalStorage(token: Token): void {
+		localStorage.setItem(this.TOKEN, JSON.stringify(token));
+	}
+
+	private saveUserToLocalStorage(user: UserInfo): void {
+		localStorage.setItem(this.CURRENT_USER, JSON.stringify(user));
 	}
 }

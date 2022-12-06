@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IUser } from '../models/user.model';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class UserService {
+	API_URL: string = 'http://localhost:3333/data-api/user/';
 	users: IUser[] = [
 		{
 			id: 1,
@@ -43,7 +46,7 @@ export class UserService {
 		},
 	];
 
-	constructor() {}
+	constructor(private httpClient: HttpClient) {}
 
 	getAllUsers() {
 		return this.users;
@@ -65,5 +68,19 @@ export class UserService {
 
 	addNewUser(user: IUser) {
 		this.users.push(user);
+	}
+
+	getUserInfo(): Observable<IUser> {
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient.get<IUser>(
+			`http://localhost:3333/data-api/user`,
+			{
+				headers: headers,
+			}
+		);
 	}
 }
