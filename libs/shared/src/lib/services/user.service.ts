@@ -52,8 +52,18 @@ export class UserService {
 		return this.users;
 	}
 
-	getUserById(id: number) {
-		return this.users.find((user) => user.id == id);
+	getUserById(id: string) {
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient.get<IUser>(
+			`http://localhost:3333/data-api/user/${id}`,
+			{
+				headers: headers,
+			}
+		);
 	}
 
 	editUserById(user: IUser) {

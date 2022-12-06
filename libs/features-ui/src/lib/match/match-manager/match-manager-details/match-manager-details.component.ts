@@ -22,10 +22,11 @@ export class MatchManagerDetailsComponent {
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
-			this.match = this.matchService.getMatchById(params['id']);
-			this.matchWinner = this.userService.getUserById(
-				this.match!.winnerId!
-			);
+			this.matchService
+				.getMatchById(params['id'])
+				.subscribe((match: any) => {
+					this.match = match.results;
+				});
 		});
 	}
 }

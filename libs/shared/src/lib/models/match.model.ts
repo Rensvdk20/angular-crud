@@ -1,3 +1,5 @@
+import { IUser } from './user.model';
+
 export interface IMatch {
 	id: number;
 	name: string;
@@ -5,5 +7,5 @@ export interface IMatch {
 	location: string;
 	rank: number;
 	prizeMoney: number;
-	winnerId: number | null;
+	winnerId: IUser | null;
 }

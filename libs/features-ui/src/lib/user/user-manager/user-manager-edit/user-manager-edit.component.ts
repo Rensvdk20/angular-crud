@@ -23,7 +23,11 @@ export class UserManagerEditComponent implements OnInit {
 		this.route.params.subscribe((params: Params) => {
 			if (params['id']) {
 				//Get the user by id
-				this.user = this.userService.getUserById(params['id']);
+				this.userService
+					.getUserById(params['id'])
+					.subscribe((user: any) => {
+						this.user = user.results;
+					});
 
 				//Deepclone the user
 				this.tempUser = JSON.parse(JSON.stringify(this.user));

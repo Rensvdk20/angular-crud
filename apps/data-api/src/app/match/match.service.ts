@@ -13,12 +13,32 @@ export class MatchService {
 		private readonly userService: UserService
 	) {}
 
-	async getAllMatches(userId: string): Promise<Match[]> {
+	async getAllMatches(): Promise<Match[]> {
 		return this.matchModel.find().exec();
+	}
+
+	async getMatchById(userId: string, matchId: string): Promise<Match> {
+		if (await this.userService.checkIfAdmin(userId)) {
+			const user = await this.matchModel
+				.findOne({ id: matchId })
+				.populate('winnerId');
+
+			if (user == null) return null;
+
+			return user;
+		}
 	}
 
 	async addMatch(userId: string, match: Match): Promise<Match> {
 		if (await this.userService.checkIfAdmin(userId)) {
+			if ('winnerId' in match) {
+				const matchWinner = await this.userService.getUser(
+					String(match.winnerId)
+				);
+
+				match.winnerId = matchWinner;
+			}
+
 			const newMatch = new this.matchModel(match);
 			return newMatch.save();
 		}

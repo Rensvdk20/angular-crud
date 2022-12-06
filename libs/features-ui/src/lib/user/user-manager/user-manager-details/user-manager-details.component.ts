@@ -18,7 +18,11 @@ export class UserManagerDetailsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
-			this.user = this.userService.getUserById(params['id']);
+			this.userService
+				.getUserById(params['id'])
+				.subscribe((user: any) => {
+					this.user = user.results;
+				});
 		});
 	}
 }

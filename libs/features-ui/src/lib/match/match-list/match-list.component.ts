@@ -13,6 +13,8 @@ export class MatchListComponent {
 	constructor(private matchService: MatchService) {}
 
 	ngOnInit(): void {
-		this.matches = this.matchService.getAllMatches();
+		this.matchService.getAllMatches().subscribe((matches: any) => {
+			this.matches = matches.results;
+		});
 	}
 }

@@ -2,13 +2,13 @@
     <div class="match-info">
         <div class="row">
             <div class="col-6">
-                <h1>{{ match!.name }} - Rank {{ match!.rank }}</h1><br />
-                <p><b>Date: </b>{{ match!.date | date: 'MM/dd/yyyy' }}<br /></p>
-                <p><b>Location: </b>{{ match!.location }}<br /></p>
-                <p><b>Prize pool: </b>&euro; {{ match!.prizeMoney }}<br /></p>
-                <p *ngIf="matchWinner">
+                <h1>{{ match?.name }} - Rank {{ match?.rank }}</h1><br />
+                <p><b>Date: </b>{{ match?.date | date: 'MM/dd/yyyy' }}<br /></p>
+                <p><b>Location: </b>{{ match?.location }}<br /></p>
+                <p><b>Prize pool: </b>&euro; {{ match?.prizeMoney }}<br /></p>
+                <p *ngIf="match?.winnerId">
                     <b>Winner: </b>
-                    {{ matchWinner.firstName + " " + matchWinner.lastName }}
+                    {{ match?.winnerId!.firstName + " " + match!.winnerId!.lastName }}
                 </p><br />
             </div>
             <div class="col-6">

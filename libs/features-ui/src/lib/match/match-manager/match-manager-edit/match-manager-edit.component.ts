@@ -28,7 +28,13 @@ export class MatchManagerEditComponent {
 		this.route.params.subscribe((params: Params) => {
 			if (params['id']) {
 				//Get the user by id
-				this.match = this.matchService.getMatchById(params['id']);
+				this.route.params.subscribe((params: Params) => {
+					this.matchService
+						.getMatchById(params['id'])
+						.subscribe((match: any) => {
+							this.match = match.results;
+						});
+				});
 
 				//Deepclone the user
 				this.tempMatch = JSON.parse(JSON.stringify(this.match));
@@ -54,10 +60,10 @@ export class MatchManagerEditComponent {
 			//Add new match
 
 			//Add id to the new match
-			this.tempMatch = {
-				id: this.matchService.getAllMatches().length + 1,
-				...userForm.value,
-			};
+			// this.tempMatch = {
+			// 	id: this.matchService.getAllMatches().length + 1,
+			// 	...userForm.value,
+			// };
 
 			//Add the match
 			this.matchService.addNewMatch(this.tempMatch!);
