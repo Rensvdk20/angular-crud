@@ -33,9 +33,19 @@ export class MatchService {
 		);
 	}
 
-	editMatchById(Match: IMatch) {
-		// let MatchToEdit = this.matches.findIndex((u) => u.id == Match.id);
-		// this.matches[MatchToEdit] = Match;
+	editMatchById(match: IMatch) {
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient.put<IMatch>(
+			`http://localhost:3333/data-api/match/${match.id}`,
+			match,
+			{
+				headers: headers,
+			}
+		);
 	}
 
 	deleteMatchById(id: number) {
@@ -45,5 +55,16 @@ export class MatchService {
 
 	addNewMatch(Match: IMatch) {
 		// this.matches.push(Match);
+		// const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		// const headers = new HttpHeaders({
+		// 	'Access-Control-Allow-Origin': '*',
+		// 	Authorization: `${token}`,
+		// });
+		// return this.httpClient.post<IMatch>(
+		// 	`http://localhost:3333/data-api/match/`,
+		// 	{
+		// 		headers: headers,
+		// 	}
+		// );
 	}
 }

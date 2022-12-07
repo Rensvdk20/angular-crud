@@ -7,7 +7,6 @@ import { IUser } from '../models/user.model';
 	providedIn: 'root',
 })
 export class UserService {
-	API_URL: string = 'http://localhost:3333/data-api/user/';
 	users: IUser[] = [
 		{
 			id: 1,
@@ -49,7 +48,17 @@ export class UserService {
 	constructor(private httpClient: HttpClient) {}
 
 	getAllUsers() {
-		return this.users;
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient.get<IUser>(
+			`http://localhost:3333/data-api/user/`,
+			{
+				headers: headers,
+			}
+		);
 	}
 
 	getUserById(id: string) {
@@ -87,7 +96,7 @@ export class UserService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient.get<IUser>(
-			`http://localhost:3333/data-api/user`,
+			`http://localhost:3333/data-api/user/info`,
 			{
 				headers: headers,
 			}

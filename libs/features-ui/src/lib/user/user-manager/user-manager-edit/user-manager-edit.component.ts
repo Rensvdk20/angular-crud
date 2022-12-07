@@ -50,7 +50,7 @@ export class UserManagerEditComponent implements OnInit {
 
 			//Add id to the new user
 			this.tempUser = {
-				id: this.userService.getAllUsers().length + 1,
+				// id: this.userService.getAllUsers().length + 1,
 				...userForm.value,
 			};
 

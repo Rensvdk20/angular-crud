@@ -20,21 +20,41 @@ export class MatchService {
 	async getMatchById(matchId: string): Promise<Match> {
 		const user = await this.matchModel
 			.findOne({ id: matchId })
-			.populate('winnerId');
+			.populate('winner');
 
 		if (user == null) return null;
 
 		return user;
 	}
 
-	async addMatch(userId: string, match: Match): Promise<Match> {
+	async editMatchById(
+		userId: string,
+		matchId: string,
+		match: Match
+	): Promise<Match> {
 		if (await this.userService.checkIfAdmin(userId)) {
-			if ('winnerId' in match) {
-				const matchWinner = await this.userService.getUser(
-					String(match.winnerId)
+			if ('winner' in match) {
+				const matchWinner = await this.userService.getUserInfo(
+					String(match.winner)
 				);
 
-				match.winnerId = matchWinner;
+				match.winner = matchWinner;
+			}
+
+			return this.matchModel.findOneAndUpdate({ id: matchId }, match, {
+				new: true,
+			});
+		}
+	}
+
+	async addMatch(userId: string, match: Match): Promise<Match> {
+		if (await this.userService.checkIfAdmin(userId)) {
+			if ('winner' in match) {
+				const matchWinner = await this.userService.getUserInfo(
+					String(match.winner)
+				);
+
+				match.winner = matchWinner;
 			}
 
 			const newMatch = new this.matchModel(match);

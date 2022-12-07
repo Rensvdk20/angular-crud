@@ -28,16 +28,15 @@ export class MatchManagerEditComponent {
 		this.route.params.subscribe((params: Params) => {
 			if (params['id']) {
 				//Get the user by id
-				this.route.params.subscribe((params: Params) => {
-					this.matchService
-						.getMatchById(params['id'])
-						.subscribe((match: any) => {
-							this.match = match.results;
-						});
-				});
+				this.matchService
+					.getMatchById(params['id'])
+					.subscribe((match: any) => {
+						this.match = match.results;
+						//Deepclone the user
+						this.tempMatch = JSON.parse(JSON.stringify(this.match));
 
-				//Deepclone the user
-				this.tempMatch = JSON.parse(JSON.stringify(this.match));
+						console.log(this.tempMatch);
+					});
 			} else {
 				//Create an empty user
 				this.tempMatch = {
@@ -47,12 +46,15 @@ export class MatchManagerEditComponent {
 					location: '',
 					rank: 0,
 					prizeMoney: 0,
-					winnerId: null,
+					winner: null,
 				};
 			}
 		});
 
-		this.users = this.userService.getAllUsers();
+		// this.users = this.userService.getAllUsers();
+		this.userService.getAllUsers().subscribe((users: any) => {
+			this.users = users.results;
+		});
 	}
 
 	onSubmit(userForm: NgForm) {
@@ -77,10 +79,13 @@ export class MatchManagerEditComponent {
 			};
 
 			//Edit the user
-			this.matchService.editMatchById(this.tempMatch!);
+			this.matchService
+				.editMatchById(this.tempMatch!)
+				.subscribe((test: any) => {
+					//Redirect to the match overview
+					console.log('redirect', test);
+					this.router.navigate(['match-manager']);
+				});
 		}
-
-		//Redirect to the match overview
-		this.router.navigate(['match']);
 	}
 }

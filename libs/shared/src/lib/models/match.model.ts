@@ -7,5 +7,5 @@ export interface IMatch {
 	location: string;
 	rank: number;
 	prizeMoney: number;
-	winnerId: IUser | null;
+	winner: IUser | null;
 }

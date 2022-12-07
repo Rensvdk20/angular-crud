@@ -6,9 +6,9 @@
                 <p><b>Date: </b>{{ match?.date | date: 'MM/dd/yyyy' }}<br /></p>
                 <p><b>Location: </b>{{ match?.location }}<br /></p>
                 <p><b>Prize pool: </b>&euro; {{ match?.prizeMoney }}<br /></p>
-                <p *ngIf="match?.winnerId">
+                <p *ngIf="match?.winner">
                     <b>Winner: </b>
-                    {{ match?.winnerId!.firstName + " " + match!.winnerId!.lastName }}
+                    {{ match?.winner!.firstName + " " + match!.winner!.lastName }}
                 </p><br />
             </div>
             <div class="col-6">

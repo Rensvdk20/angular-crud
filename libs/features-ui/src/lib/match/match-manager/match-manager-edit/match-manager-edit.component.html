@@ -1,24 +1,29 @@
 <h3 *ngIf="match">Edit - {{ match!.name }}</h3>
 <h3 *ngIf="!match">Add</h3>
-<form #matchForm="ngForm" (ngSubmit)="onSubmit(matchForm)" novalidate>
+<form *ngIf="tempMatch" #matchForm="ngForm" (ngSubmit)="onSubmit(matchForm)" novalidate>
     <label for="name">Name: </label><br />
-    <input type="text" id="name" name="name" [(ngModel)]="tempMatch!.name"><br />
+    <input type="text" id="name" name="name" [(ngModel)]="tempMatch.name"><br />
 
     <label for="date">Date: </label><br />
-    <input type="text" id="date" name="date" (ngModel)="tempMatch!.date" [ngModel]="tempMatch!.date | date: 'MM/dd/yyyy'"><br />
+    <input type="text" id="date" name="date" (ngModel)="tempMatch.date" [ngModel]="tempMatch.date | date: 'MM/dd/yyyy'"><br />
 
     <label for="location">Location: </label><br />
-    <input type="text" id="location" name="location" [(ngModel)]="tempMatch!.location"><br />
+    <input type="text" id="location" name="location" [(ngModel)]="tempMatch.location"><br />
     
     <label for="rank">Rank: </label><br />
-    <input type="number" id="rank" name="rank" [(ngModel)]="tempMatch!.rank"><br />
+    <input type="number" id="rank" name="rank" [(ngModel)]="tempMatch.rank"><br />
     
     <label for="prizeMoney">Prize money (&euro;): </label><br />
-    <input type="number" id="prizeMoney" name="prizeMoney" [(ngModel)]="tempMatch!.prizeMoney"><br />
+    <input type="number" id="prizeMoney" name="prizeMoney" [(ngModel)]="tempMatch.prizeMoney"><br />
     
-    <label for="winnerId">Winner: </label><br />
-    <select name="winnerId" id="winnerId" [(ngModel)]="tempMatch!.winnerId">
-        <option [value]="null">-</option>
+    <label for="winner">Winner: </label><br />
+    <select *ngIf="tempMatch.winner?.id" name="winner" id="winner" [(ngModel)]="tempMatch.winner!.id!">
+        <option selected [value]="null">-</option>
+        <option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
+    </select>
+
+    <select *ngIf="!tempMatch.winner?.id" name="winner" id="winner" [(ngModel)]="tempMatch.winner!">
+        <option selected [value]="null">-</option>
         <option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
     </select><br />
 

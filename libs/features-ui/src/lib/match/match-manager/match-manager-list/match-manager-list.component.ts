@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IMatch } from '@drone-races/shared';
 import { MatchService } from '@drone-races/shared';
 
@@ -10,13 +11,22 @@ import { MatchService } from '@drone-races/shared';
 export class MatchManagerListComponent {
 	matches: IMatch[] = [];
 
-	constructor(private matchService: MatchService) {}
-
-	ngOnInit(): void {
-		this.matchService.getAllMatches().subscribe((matches: any) => {
-			this.matches = matches.results;
+	constructor(
+		private route: ActivatedRoute,
+		private matchService: MatchService,
+		private router: Router
+	) {
+		this.route.params.subscribe((val) => {
+			console.log('retrieveee');
+			this.matchService.getAllMatches().subscribe((matches: any) => {
+				this.matches = matches.results;
+			});
 		});
 	}
+
+	ngOnInit(): void {}
+
+	ngOnnDestroy(): void {}
 
 	deleteMatch(id: number) {
 		this.matchService.deleteMatchById(id);

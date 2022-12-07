@@ -45,7 +45,7 @@ export class AuthService {
 					}
 				})
 			)
-			.subscribe(() => console.log('Startup auth done'));
+			.subscribe();
 	}
 
 	login(formData: UserCredentials) {

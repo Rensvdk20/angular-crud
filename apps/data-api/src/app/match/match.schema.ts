@@ -26,7 +26,7 @@ export class Match {
 	prizeMoney!: number;
 
 	@Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
-	winnerId!: User;
+	winner!: User;
 }
 
 export const MatchSchema = SchemaFactory.createForClass(Match);

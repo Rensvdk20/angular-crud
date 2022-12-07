@@ -10,26 +10,44 @@ import { Racer } from '../racer/racer.schema';
 export class UserService {
 	constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
 
-	async getAllUsers(): Promise<User[]> {
-		return this.userModel.find().exec();
+	async getAllUsers(userId: string): Promise<User[]> {
+		if (await this.checkIfAdmin(userId)) {
+			return this.userModel.find().exec();
+		}
+
+		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
 	}
 
-	async getUser(userId: string): Promise<User | null> {
-		const user = await this.userModel.findOne({ id: userId });
+	async getUserById(userId: string, id: string): Promise<User> {
+		if (await this.checkIfAdmin(userId)) {
+			return this.userModel.findOne({ id: id });
+		}
 
-		if (user == null) return null;
+		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
+	}
 
-		return user;
+	async getUserInfo(userId: string): Promise<User | null> {
+		if (await this.checkIfAdmin(userId)) {
+			const user = await this.userModel.findOne({ id: userId });
+
+			if (user == null) return null;
+
+			return user;
+		}
 	}
 
 	async update(userId: string, user: User): Promise<User> {
-		return this.userModel.findOneAndUpdate({ id: userId }, user, {
-			new: true,
-		});
+		if (await this.checkIfAdmin(userId)) {
+			return this.userModel.findOneAndUpdate({ id: userId }, user, {
+				new: true,
+			});
+		}
+
+		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
 	}
 
 	async registerRacer(userId: string, racer: Racer): Promise<User> {
-		const user = await this.getUser(userId);
+		const user = await this.userModel.findOne({ id: userId });
 
 		if (user.racer != null) {
 			throw new HttpException(
@@ -46,7 +64,8 @@ export class UserService {
 	}
 
 	async checkIfAdmin(userId: string): Promise<boolean> {
-		const user = await this.getUser(userId);
+		const user = await this.userModel.findOne({ id: userId });
+
 		if (user != null) {
 			return user.isAdmin;
 		}
