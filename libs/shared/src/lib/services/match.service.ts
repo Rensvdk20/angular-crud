@@ -10,10 +10,8 @@ export class MatchService {
 	constructor(private httpClient: HttpClient) {}
 
 	getAllMatches(): Observable<IMatch[]> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
-			Authorization: `${token}`,
 		});
 		return this.httpClient.get<IMatch[]>(
 			`http://localhost:3333/data-api/match`,
@@ -24,10 +22,8 @@ export class MatchService {
 	}
 
 	getMatchById(id: number) {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
-			Authorization: `${token}`,
 		});
 		return this.httpClient.get<IMatch>(
 			`http://localhost:3333/data-api/match/${id}`,

@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 // import { UserIdentity } from '@drone-races/shared';
-import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
+import {
+	BehaviorSubject,
+	catchError,
+	map,
+	Observable,
+	of,
+	switchMap,
+} from 'rxjs';
 import {
 	Token,
 	UserCredentials,
@@ -8,6 +15,7 @@ import {
 } from '../models/auth/auth.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserInfo, UserService } from '@drone-races/shared';
+import { Router } from '@angular/router';
 
 @Injectable({
 	providedIn: 'root',
@@ -21,7 +29,24 @@ export class AuthService {
 		'Content-Type': 'application/json',
 	});
 
-	constructor(private http: HttpClient, private userService: UserService) {}
+	constructor(
+		private http: HttpClient,
+		private userService: UserService,
+		private router: Router
+	) {
+		this.getUserFromLocalStorage()
+			.pipe(
+				switchMap((user: UserInfo | undefined) => {
+					if (user) {
+						this.currentUser$.next(user);
+						return of(user);
+					} else {
+						return of(undefined);
+					}
+				})
+			)
+			.subscribe(() => console.log('Startup auth done'));
+	}
 
 	login(formData: UserCredentials) {
 		return this.http
@@ -43,6 +68,13 @@ export class AuthService {
 					return of(error);
 				})
 			);
+	}
+
+	logout() {
+		this.router.navigate(['/']);
+		localStorage.removeItem(this.TOKEN);
+		localStorage.removeItem(this.CURRENT_USER);
+		this.currentUser$.next(undefined);
 	}
 
 	getUserFromLocalStorage(): Observable<UserInfo | undefined> {

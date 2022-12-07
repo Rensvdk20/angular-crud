@@ -42,6 +42,8 @@ const routes: Routes = [
 			{ path: ':id', component: MatchManagerDetailsComponent },
 		],
 	},
+	//Page not found
+	{ path: '**', pathMatch: 'full', component: HomepageComponent },
 ];
 
 @NgModule({

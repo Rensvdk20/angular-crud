@@ -17,16 +17,14 @@ export class MatchService {
 		return this.matchModel.find().exec();
 	}
 
-	async getMatchById(userId: string, matchId: string): Promise<Match> {
-		if (await this.userService.checkIfAdmin(userId)) {
-			const user = await this.matchModel
-				.findOne({ id: matchId })
-				.populate('winnerId');
+	async getMatchById(matchId: string): Promise<Match> {
+		const user = await this.matchModel
+			.findOne({ id: matchId })
+			.populate('winnerId');
 
-			if (user == null) return null;
+		if (user == null) return null;
 
-			return user;
-		}
+		return user;
 	}
 
 	async addMatch(userId: string, match: Match): Promise<Match> {

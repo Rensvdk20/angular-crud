@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { RouterModule } from '@nestjs/core';
 
 import { MongooseModule } from '@nestjs/mongoose';
@@ -28,6 +28,12 @@ import { DataModule } from './data.module';
 })
 export class AppModule {
 	configure(consumer: MiddlewareConsumer) {
-		consumer.apply(TokenMiddleware).forRoutes('data-api');
+		consumer
+			.apply(TokenMiddleware)
+			.exclude(
+				{ path: 'data-api/match', method: RequestMethod.GET },
+				{ path: 'data-api/match/:id', method: RequestMethod.GET }
+			)
+			.forRoutes('data-api');
 	}
 }

@@ -14,11 +14,8 @@ export class MatchController {
 	}
 
 	@Get(':id')
-	async getMatchById(
-		@InjectToken() token: Token,
-		@Param('id') matchId: string
-	): Promise<Match> {
-		return this.matchService.getMatchById(token.id, matchId);
+	async getMatchById(@Param('id') matchId: string): Promise<Match> {
+		return this.matchService.getMatchById(matchId);
 	}
 
 	@Post()
