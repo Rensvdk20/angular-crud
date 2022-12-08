@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Post,
+	Put,
+} from '@nestjs/common';
 
 import { MatchService } from './match.service';
 import { Match } from './match.schema';
@@ -33,5 +41,13 @@ export class MatchController {
 		@Body() match: Match
 	): Promise<Match> {
 		return this.matchService.editMatchById(token.id, matchId, match);
+	}
+
+	@Delete(':id')
+	async deleteMatchById(
+		@InjectToken() token: Token,
+		@Param('id') matchId: string
+	): Promise<Match> {
+		return this.matchService.deleteMatchById(token.id, matchId);
 	}
 }

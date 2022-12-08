@@ -63,4 +63,16 @@ export class MatchService {
 
 		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
 	}
+
+	async deleteMatchById(userId: string, matchId: string): Promise<Match> {
+		if (await this.userService.checkIfAdmin(userId)) {
+			const match = await this.matchModel.findOne({ id: matchId });
+
+			if (match == null) {
+				throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+			}
+
+			return await match.remove();
+		}
+	}
 }

@@ -27,13 +27,11 @@ export class UserService {
 	}
 
 	async getUserInfo(userId: string): Promise<User | null> {
-		if (await this.checkIfAdmin(userId)) {
-			const user = await this.userModel.findOne({ id: userId });
+		const user = await this.userModel.findOne({ id: userId });
 
-			if (user == null) return null;
+		if (user == null) return null;
 
-			return user;
-		}
+		return user;
 	}
 
 	async update(userId: string, user: User): Promise<User> {

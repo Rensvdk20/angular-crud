@@ -24,17 +24,17 @@ export class UserController {
 		return this.userService.getAllUsers(token.id);
 	}
 
+	@Get('info')
+	async getUserInfo(@InjectToken() token: Token): Promise<User> {
+		return this.userService.getUserInfo(token.id);
+	}
+
 	@Get(':id')
 	async getUserById(
 		@InjectToken() token: Token,
 		@Param('id') id: string
 	): Promise<User> {
 		return this.userService.getUserById(token.id, id);
-	}
-
-	@Get('info')
-	async getUserInfo(@InjectToken() token: Token): Promise<User> {
-		return this.userService.getUserInfo(token.id);
 	}
 
 	@Put()

@@ -53,7 +53,7 @@ export class UserService {
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
 		});
-		return this.httpClient.get<IUser>(
+		return this.httpClient.get<IUser[]>(
 			`http://localhost:3333/data-api/user/`,
 			{
 				headers: headers,
