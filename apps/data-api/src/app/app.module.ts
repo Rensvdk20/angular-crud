@@ -9,7 +9,9 @@ import { DataModule } from './data.module';
 
 @Module({
 	imports: [
-		MongooseModule.forRoot(`mongodb://127.0.0.1:27017/drone-races`),
+		MongooseModule.forRoot(
+			`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`
+		),
 		AuthModule,
 		DataModule,
 		RouterModule.register([
