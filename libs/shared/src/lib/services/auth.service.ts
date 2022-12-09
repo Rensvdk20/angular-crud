@@ -70,6 +70,20 @@ export class AuthService {
 			);
 	}
 
+	register(formData: UserRegistration) {
+		return this.http
+			.post<any>(`http://localhost:3333/auth-api/register`, formData, {
+				headers: this.headers,
+			})
+			.pipe(
+				map((data: any) => data.results),
+				catchError((error) => {
+					console.log('error:', error);
+					return of(error);
+				})
+			);
+	}
+
 	logout() {
 		this.router.navigate(['/']);
 		localStorage.removeItem(this.TOKEN);

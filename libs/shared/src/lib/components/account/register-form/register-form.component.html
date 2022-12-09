@@ -1,0 +1,25 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <span class="text-success">{{loginSuccessResult}}</span>
+    <span class="text-danger">{{loginErrorResult}}</span><br />
+    <label for="firstName">First name</label><br/>
+    <input type="text" formControlName="firstName" id="firstName">
+    <br />
+
+    <label for="lastName">Last name</label><br/>
+    <input type="text" formControlName="lastName" id="lastName">
+    <br />
+
+    <label for="email">Email</label><br/>
+    <input type="text" formControlName="email" id="email">
+    <br/>
+
+    <label for="password">Password</label><br/>
+    <input type="password" formControlName="password" id="password">
+    <br />
+
+    <label for="birthday">Birthday</label><br/>
+    <input type="date" formControlName="birthday" id="birthday">
+    <br />
+
+    <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+</form>

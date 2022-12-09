@@ -17,6 +17,10 @@
             <li *ngIf="(loggedInUser$ | async) == undefined" class="nav-item nav-item-login">
                 <a class="nav-link" routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
             </li>
+            <li *ngIf="(loggedInUser$ | async) == undefined" class="nav-item nav-item-login">
+                <a class="nav-link" routerLink="register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
+            </li>
+
             <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">
                 <a class="nav-link" routerLink="account">Account</a>
             </li>

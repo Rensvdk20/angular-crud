@@ -28,6 +28,8 @@ import { MatchManagerEditComponent } from '@drone-races/features-ui';
 import { LoginComponent } from './pages/account/login/login.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './pages/account/register/register.component';
+import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/account/register-form/register-form.component';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -47,6 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
 		MatchManagerEditComponent,
 		LoginComponent,
 		LoginFormComponent,
+		RegisterComponent,
+		RegisterFormComponent,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

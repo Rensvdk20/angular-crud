@@ -13,12 +13,14 @@ import { UserManagerDetailsComponent } from '@drone-races/features-ui';
 import { UserManagerEditComponent } from '@drone-races/features-ui';
 import { MatchDetailsComponent } from '@drone-races/features-ui';
 import { LoginComponent } from './pages/account/login/login.component';
+import { RegisterComponent } from './pages/account/register/register.component';
 
 const routes: Routes = [
 	//Pages
 	{ path: '', component: HomepageComponent, pathMatch: 'full' },
 	{ path: 'about', component: AboutComponent, pathMatch: 'full' },
 	{ path: 'login', component: LoginComponent, pathMatch: 'full' },
+	{ path: 'register', component: RegisterComponent, pathMatch: 'full' },
 
 	//Features
 	{ path: 'match/:id', component: MatchDetailsComponent },
