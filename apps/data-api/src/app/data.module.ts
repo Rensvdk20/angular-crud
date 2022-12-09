@@ -8,9 +8,11 @@ import { UserService } from './user/user.service';
 import { MatchController } from './match/match.controller';
 import { MatchSchema } from './match/match.schema';
 import { MatchService } from './match/match.service';
+import { IdentitySchema } from './auth/identity.schema';
 @Module({
 	imports: [
 		MongooseModule.forFeature([
+			{ name: 'Identity', schema: IdentitySchema },
 			{ name: 'User', schema: UserSchema },
 			{ name: 'Match', schema: MatchSchema },
 		]),

@@ -5,10 +5,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
 import { ResourceId } from '@drone-races/shared';
 import { Racer } from '../racer/racer.schema';
+import { IdentityDocument } from '../auth/identity.schema';
 
 @Injectable()
 export class UserService {
-	constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
+	constructor(
+		@InjectModel('User') private userModel: Model<UserDocument>,
+		@InjectModel('Identity') private identityModel: Model<IdentityDocument>
+	) {}
 
 	async getAllUsers(userId: string): Promise<User[]> {
 		if (await this.checkIfAdmin(userId)) {
@@ -59,6 +63,18 @@ export class UserService {
 			{ racer: racer },
 			{ new: true }
 		);
+	}
+
+	async deleteUser(userId: string, userEmail: string): Promise<User> {
+		const identity = await this.identityModel.findOne({ email: userEmail });
+		const user = await this.userModel.findOne({ id: userId });
+
+		if (identity == null || user == null) {
+			throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+		}
+
+		await identity.remove();
+		return await user.remove();
 	}
 
 	async checkIfAdmin(userId: string): Promise<boolean> {

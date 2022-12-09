@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	HttpException,
 	HttpStatus,
@@ -51,5 +52,10 @@ export class UserController {
 		@Body() racer: Racer
 	): Promise<User> {
 		return this.userService.registerRacer(token.id, racer);
+	}
+
+	@Delete()
+	async deleteUser(@InjectToken() token: Token): Promise<User> {
+		return this.userService.deleteUser(token.id, token.email);
 	}
 }
