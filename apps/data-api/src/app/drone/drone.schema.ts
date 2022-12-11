@@ -7,16 +7,16 @@ export type UserDocument = Drone & Document;
 @Schema()
 export class Drone {
 	@Prop({ required: true })
-	name!: string;
+	name: string;
 
 	@Prop({ required: true })
-	category!: string;
+	category: string;
 
 	@Prop({ required: true })
-	weight!: number;
+	weight: number;
 
 	@Prop({ required: true })
-	brushless!: boolean;
+	brushless: boolean;
 }
 
 export const DroneSchema = SchemaFactory.createForClass(Drone);

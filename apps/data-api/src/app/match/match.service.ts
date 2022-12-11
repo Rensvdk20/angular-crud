@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { ResourceId } from '@drone-races/shared';
 import { Match, MatchDocument } from './match.schema';
 import { UserService } from '../user/user.service';
 
@@ -18,13 +17,13 @@ export class MatchService {
 	}
 
 	async getMatchById(matchId: string): Promise<Match> {
-		const user = await this.matchModel
+		const match = await this.matchModel
 			.findOne({ id: matchId })
 			.populate('winner');
 
-		if (user == null) return null;
+		if (match == null) return null;
 
-		return user;
+		return match;
 	}
 
 	async editMatchById(

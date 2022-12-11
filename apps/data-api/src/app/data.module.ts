@@ -9,15 +9,19 @@ import { MatchController } from './match/match.controller';
 import { MatchSchema } from './match/match.schema';
 import { MatchService } from './match/match.service';
 import { IdentitySchema } from './auth/identity.schema';
+import { TicketSchema } from './ticket/ticket.schema';
+import { TicketService } from './ticket/ticket.service';
+import { TicketController } from './ticket/ticket.controller';
 @Module({
 	imports: [
 		MongooseModule.forFeature([
 			{ name: 'Identity', schema: IdentitySchema },
 			{ name: 'User', schema: UserSchema },
 			{ name: 'Match', schema: MatchSchema },
+			{ name: 'Ticket', schema: TicketSchema },
 		]),
 	],
-	controllers: [UserController, MatchController],
-	providers: [UserService, MatchService],
+	controllers: [UserController, TicketController, MatchController],
+	providers: [UserService, TicketService, MatchService],
 })
 export class DataModule {}

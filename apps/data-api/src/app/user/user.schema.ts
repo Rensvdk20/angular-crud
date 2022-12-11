@@ -8,22 +8,22 @@ export type UserDocument = User & Document;
 @Schema()
 export class User {
 	@Prop({ default: uuidv4 })
-	id!: string;
+	id: string;
 
 	@Prop({ required: true })
-	firstName!: string;
+	firstName: string;
 
 	@Prop({ required: true })
-	lastName!: string;
+	lastName: string;
 
 	@Prop({ required: true })
-	email!: string;
+	email: string;
 
 	@Prop({ required: true })
-	birthday!: Date;
+	birthday: Date;
 
 	@Prop({ required: true })
-	isAdmin!: boolean;
+	isAdmin: boolean;
 
 	@Prop()
 	racer: Racer | null;

@@ -21,7 +21,7 @@ export class MatchService {
 		);
 	}
 
-	getMatchById(id: number) {
+	getMatchById(id: string) {
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 		});

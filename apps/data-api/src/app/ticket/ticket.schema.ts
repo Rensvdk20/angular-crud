@@ -9,22 +9,26 @@ export type TicketDocument = Ticket & Document;
 @Schema()
 export class Ticket {
 	@Prop({ default: uuidv4 })
-	id!: string;
+	id: string;
 
 	@Prop({ required: true })
-	price!: number;
+	price: number;
 
 	@Prop({ required: true })
-	type!: string;
+	type: string;
 
 	@Prop({ required: true })
-	seatNumber!: number;
+	seatNumber: number;
 
-	@Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
-	user!: User;
+	@Prop({
+		required: true,
+		type: MongooseSchema.Types.ObjectId,
+		ref: Match.name,
+	})
+	match: Match;
 
-	@Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Match' })
-	match!: Match;
+	@Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
+	user: User | null;
 }
 
 export const TicketSchema = SchemaFactory.createForClass(Ticket);

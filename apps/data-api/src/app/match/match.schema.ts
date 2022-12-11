@@ -8,25 +8,25 @@ export type MatchDocument = Match & Document;
 @Schema()
 export class Match {
 	@Prop({ default: uuidv4 })
-	id!: string;
+	id: string;
 
 	@Prop({ required: true })
-	name!: string;
+	name: string;
 
 	@Prop({ required: true })
-	date!: Date;
+	date: Date;
 
 	@Prop({ required: true })
-	location!: string;
+	location: string;
 
 	@Prop({ required: true })
-	rank!: number;
+	rank: number;
 
 	@Prop({ required: true })
-	prizeMoney!: number;
+	prizeMoney: number;
 
-	@Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
-	winner!: User;
+	@Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
+	winner: User;
 }
 
 export const MatchSchema = SchemaFactory.createForClass(Match);
