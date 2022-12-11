@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -6,6 +6,7 @@ import { User, UserDocument } from './user.schema';
 import { ResourceId } from '@drone-races/shared';
 import { Racer } from '../racer/racer.schema';
 import { IdentityDocument } from '../auth/identity.schema';
+import { Drone } from '../drone/drone.schema';
 
 @Injectable()
 export class UserService {
@@ -13,6 +14,8 @@ export class UserService {
 		@InjectModel('User') private userModel: Model<UserDocument>,
 		@InjectModel('Identity') private identityModel: Model<IdentityDocument>
 	) {}
+
+	// ##### User #####
 
 	async getAllUsers(userId: string): Promise<User[]> {
 		if (await this.checkIfAdmin(userId)) {
@@ -38,31 +41,10 @@ export class UserService {
 		return user;
 	}
 
-	async update(userId: string, user: User): Promise<User> {
-		if (await this.checkIfAdmin(userId)) {
-			return this.userModel.findOneAndUpdate({ id: userId }, user, {
-				new: true,
-			});
-		}
-
-		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
-	}
-
-	async registerRacer(userId: string, racer: Racer): Promise<User> {
-		const user = await this.userModel.findOne({ id: userId });
-
-		if (user.racer != null) {
-			throw new HttpException(
-				'User is already a racer',
-				HttpStatus.BAD_REQUEST
-			);
-		}
-
-		return this.userModel.findOneAndUpdate(
-			{ id: userId },
-			{ racer: racer },
-			{ new: true }
-		);
+	async updateUser(userId: string, user: User): Promise<User> {
+		return this.userModel.findOneAndUpdate({ id: userId }, user, {
+			new: true,
+		});
 	}
 
 	async deleteUser(userId: string, userEmail: string): Promise<User> {
@@ -83,5 +65,137 @@ export class UserService {
 		if (user != null) {
 			return user.isAdmin;
 		}
+	}
+
+	// ##### Racer #####
+
+	async registerRacer(userId: string, racer: Racer): Promise<User> {
+		const user = await this.userModel.findOne({ id: userId });
+
+		if (user.racer != null) {
+			throw new HttpException(
+				'User is already a racer',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		return this.userModel.findOneAndUpdate(
+			{ id: userId },
+			{ racer: racer },
+			{ new: true }
+		);
+	}
+
+	async editRacer(userId: string, racer: Racer): Promise<User> {
+		const user = await this.userModel.findOne({ id: userId });
+
+		if (user == null) {
+			throw new HttpException('User Not found', HttpStatus.NOT_FOUND);
+		}
+
+		if (user.racer == null) {
+			throw new HttpException(
+				'User is not a racer',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		user.racer = racer;
+		return await user.save();
+	}
+
+	async deleteRacer(userId: string): Promise<User> {
+		const user = await this.userModel.findOne({ id: userId });
+
+		if (user == null) {
+			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+		}
+
+		if (user.racer == null) {
+			throw new HttpException(
+				'User is not a racer',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		user.racer = undefined;
+		return await user.save();
+	}
+
+	// ##### Drone #####
+
+	async registerDrone(userId: string, @Body() drone: Drone): Promise<User> {
+		const user = await this.userModel.findOne({ id: userId });
+
+		if (user == null) {
+			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+		}
+
+		if (user.racer == null) {
+			throw new HttpException(
+				'User is not a racer',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		if (user.racer.drone != null) {
+			throw new HttpException(
+				'User already has a drone',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		user.racer.drone = drone;
+		return await user.save();
+	}
+
+	async editDrone(userId: string, drone: Drone): Promise<User> {
+		const user = await this.userModel.findOne({ id: userId });
+
+		if (user == null) {
+			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+		}
+
+		if (user.racer == null) {
+			throw new HttpException(
+				'User is not a racer',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		if (user.racer.drone == null) {
+			throw new HttpException(
+				'User does not have a drone',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		user.racer.drone = drone;
+		return await user.save();
+	}
+
+	async deleteDrone(userId: string): Promise<User> {
+		const user = await this.userModel.findOne({ id: userId });
+
+		if (user == null) {
+			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+		}
+
+		if (user.racer == null) {
+			throw new HttpException(
+				'User is not a racer',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		if (user.racer.drone == null) {
+			throw new HttpException(
+				'User does not have a drone',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		user.racer.drone = undefined;
+		return await user.save();
 	}
 }
