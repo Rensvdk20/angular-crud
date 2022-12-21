@@ -6,12 +6,20 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { TokenMiddleware } from './auth/token.middleware';
 import { DataModule } from './data.module';
+import { Neo4jModule } from './neo4j/neo4j.module';
 
 @Module({
 	imports: [
 		MongooseModule.forRoot(
 			`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`
 		),
+		Neo4jModule.forRoot({
+			scheme: 'neo4j',
+			host: process.env.NEO4J_HOST,
+			username: process.env.NEO4J_USERNAME,
+			password: process.env.NEO4J_PASSWORD,
+			database: process.env.NEO4J_DATABASE,
+		}),
 		AuthModule,
 		DataModule,
 		RouterModule.register([

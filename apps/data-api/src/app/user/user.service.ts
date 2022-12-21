@@ -3,21 +3,29 @@ import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
-import { ResourceId } from '@drone-races/shared';
 import { Racer } from '../racer/racer.schema';
 import { IdentityDocument } from '../auth/identity.schema';
 import { Drone } from '../drone/drone.schema';
+import { Neo4jService } from '../neo4j/neo4j.service';
 
 @Injectable()
 export class UserService {
 	constructor(
 		@InjectModel('User') private userModel: Model<UserDocument>,
-		@InjectModel('Identity') private identityModel: Model<IdentityDocument>
+		@InjectModel('Identity') private identityModel: Model<IdentityDocument>,
+		private readonly neo4jService: Neo4jService
 	) {}
 
 	// ##### User #####
 
 	async getAllUsers(userId: string): Promise<User[]> {
+		const movies = await this.neo4jService.singleRead(
+			'MATCH (n) RETURN n LIMIT 25'
+		);
+		movies.records.forEach((record) => {
+			console.log(record.get('n'));
+		});
+
 		if (await this.checkIfAdmin(userId)) {
 			return this.userModel.find().exec();
 		}
