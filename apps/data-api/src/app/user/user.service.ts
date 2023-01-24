@@ -18,27 +18,23 @@ export class UserService {
 
 	// ##### User #####
 
-	async getAllUsers(userId: string): Promise<User[]> {
-		const movies = await this.neo4jService.singleRead(
-			'MATCH (n) RETURN n LIMIT 25'
-		);
-		movies.records.forEach((record) => {
-			console.log(record.get('n'));
-		});
+	async getAllUsers(): Promise<User[]> {
+		// const movies = await this.neo4jService.singleRead(
+		// 	'MATCH (n) RETURN n LIMIT 25'
+		// );
+		// movies.records.forEach((record) => {
+		// 	console.log(record.get('n'));
+		// });
 
-		if (await this.checkIfAdmin(userId)) {
-			return this.userModel.find().exec();
-		}
-
-		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
+		return this.userModel.find().exec();
 	}
 
-	async getUserById(userId: string, id: string): Promise<User> {
-		if (await this.checkIfAdmin(userId)) {
-			return this.userModel.findOne({ id: id });
-		}
+	async getUserById(id: string): Promise<User> {
+		const user = this.userModel.findOne({ id: id });
 
-		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
+        if (user == null) return null;
+
+        return user;
 	}
 
 	async getUserInfo(userId: string): Promise<User | null> {
@@ -65,14 +61,6 @@ export class UserService {
 
 		await identity.remove();
 		return await user.remove();
-	}
-
-	async checkIfAdmin(userId: string): Promise<boolean> {
-		const user = await this.userModel.findOne({ id: userId });
-
-		if (user != null) {
-			return user.isAdmin;
-		}
 	}
 
 	// ##### Racer #####

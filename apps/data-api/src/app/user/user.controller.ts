@@ -24,8 +24,8 @@ export class UserController {
 	// ##### User #####
 
 	@Get()
-	async getAllUsers(@InjectToken() token: Token): Promise<User[]> {
-		return this.userService.getAllUsers(token.id);
+	async getAllUsers(): Promise<User[]> {
+		return this.userService.getAllUsers();
 	}
 
 	@Get('info')
@@ -38,7 +38,7 @@ export class UserController {
 		@InjectToken() token: Token,
 		@Param('id') id: string
 	): Promise<User> {
-		return this.userService.getUserById(token.id, id);
+		return this.userService.getUserById(id);
 	}
 
 	@Put()

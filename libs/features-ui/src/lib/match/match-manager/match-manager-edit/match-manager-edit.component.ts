@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IMatch } from '@drone-races/shared';
 import { IUser } from '@drone-races/shared';
@@ -12,6 +12,7 @@ import { UserService } from '@drone-races/shared';
 	styleUrls: ['./match-manager-edit.component.scss'],
 })
 export class MatchManagerEditComponent {
+    matchForm!: FormGroup;
 	match: IMatch | undefined;
 	tempMatch: IMatch | undefined;
 
@@ -21,7 +22,7 @@ export class MatchManagerEditComponent {
 		private matchService: MatchService,
 		private userService: UserService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
 	) {}
 
 	ngOnInit(): void {
@@ -44,14 +45,13 @@ export class MatchManagerEditComponent {
 					name: '',
 					date: new Date(),
 					location: '',
-					rank: 0,
+					rank: 1,
 					prizeMoney: 0,
 					winner: null,
 				};
 			}
 		});
 
-		// this.users = this.userService.getAllUsers();
 		this.userService.getAllUsers().subscribe((users: any) => {
 			this.users = users.results;
 		});
@@ -60,15 +60,17 @@ export class MatchManagerEditComponent {
 	onSubmit(userForm: NgForm) {
 		if (!this.match) {
 			//Add new match
-
-			//Add id to the new match
-			// this.tempMatch = {
-			// 	id: this.matchService.getAllMatches().length + 1,
-			// 	...userForm.value,
-			// };
+            console.log(userForm.value);
+			this.tempMatch = {
+				// id: this.matchService.getAllMatches().length + 1,
+				// ...userForm.value,
+                ...userForm.value
+			};
 
 			//Add the match
-			this.matchService.addNewMatch(this.tempMatch!);
+			this.matchService.addNewMatch(this.tempMatch!).subscribe(() => {
+                this.router.navigate(['match-manager']);
+            });
 		} else {
 			// Edit match
 
@@ -82,9 +84,7 @@ export class MatchManagerEditComponent {
 			this.matchService
 				.editMatchById(this.tempMatch!)
 				.subscribe((test: any) => {
-					//Redirect to the match overview
-					console.log('redirect', test);
-					this.router.navigate(['match-manager']);
+                    this.router.navigate(['match-manager']);
 				});
 		}
 	}

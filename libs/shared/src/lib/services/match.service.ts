@@ -21,7 +21,7 @@ export class MatchService {
 		);
 	}
 
-	getMatchById(id: string) {
+	getMatchById(id: string): Observable<IMatch> {
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 		});
@@ -33,7 +33,7 @@ export class MatchService {
 		);
 	}
 
-	editMatchById(match: IMatch) {
+	editMatchById(match: IMatch): Observable<IMatch> {
 		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
@@ -48,23 +48,32 @@ export class MatchService {
 		);
 	}
 
-	deleteMatchById(id: number) {
-		// let MatchToDelete = this.matches.findIndex((match) => match.id == id);
-		// this.matches.splice(MatchToDelete, 1);
-	}
+	deleteMatchById(matchId: number): Observable<IMatch> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
 
-	addNewMatch(Match: IMatch) {
-		// this.matches.push(Match);
-		// const token = JSON.parse(localStorage.getItem('userToken') || '').token;
-		// const headers = new HttpHeaders({
-		// 	'Access-Control-Allow-Origin': '*',
-		// 	Authorization: `${token}`,
-		// });
-		// return this.httpClient.post<IMatch>(
-		// 	`http://localhost:3333/data-api/match/`,
-		// 	{
-		// 		headers: headers,
-		// 	}
-		// );
-	}
+		return this.httpClient.delete<IMatch>(
+            `http://localhost:3333/data-api/match/${matchId}`,
+            {
+                headers: headers,
+            }
+        );
+    }
+
+	addNewMatch(match: IMatch): Observable<IMatch> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+        const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `${token}`,
+        });
+        return this.httpClient.post<IMatch>(
+            `http://localhost:3333/data-api/match`, match,
+            {
+                headers: headers,
+            }
+        );
+    }
 }

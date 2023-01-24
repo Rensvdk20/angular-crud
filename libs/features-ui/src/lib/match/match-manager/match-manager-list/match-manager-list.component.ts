@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { IMatch } from '@drone-races/shared';
 import { MatchService } from '@drone-races/shared';
+import { filter, map } from 'rxjs';
 
 @Component({
 	selector: 'drone-races-match-manager-list',
@@ -16,19 +17,26 @@ export class MatchManagerListComponent {
 		private matchService: MatchService,
 		private router: Router
 	) {
-		this.route.params.subscribe((val) => {
-			console.log('retrieveee');
-			this.matchService.getAllMatches().subscribe((matches: any) => {
-				this.matches = matches.results;
-			});
-		});
+        router.events.pipe(
+            filter(event => event instanceof NavigationEnd),
+            map(event => event as NavigationStart),
+            filter(event => event.url === '/match-manager' || event.url === '/match-manager-list')
+        ).subscribe(() => {
+            this.getAllMatches();
+        });
 	}
 
 	ngOnInit(): void {}
 
-	ngOnnDestroy(): void {}
+    getAllMatches() {
+        this.matchService.getAllMatches().subscribe((matches: any) => {
+            this.matches = matches.results;
+        });
+    }
 
 	deleteMatch(id: number) {
-		this.matchService.deleteMatchById(id);
+		this.matchService.deleteMatchById(id).subscribe(() => {
+            this.getAllMatches();
+        });
 	}
 }

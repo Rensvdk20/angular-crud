@@ -9,7 +9,7 @@ import { MatchService } from '@drone-races/shared';
 	styleUrls: ['./match-details.component.scss'],
 })
 export class MatchDetailsComponent {
-	match: IMatch | undefined;
+	match!: IMatch;
 
 	constructor(
 		private matchService: MatchService,

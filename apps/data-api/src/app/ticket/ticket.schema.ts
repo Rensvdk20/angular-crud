@@ -28,7 +28,7 @@ export class Ticket {
 	match: Match;
 
 	@Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
-	user: User | null;
+	reservedBy: User | null;
 }
 
 export const TicketSchema = SchemaFactory.createForClass(Ticket);

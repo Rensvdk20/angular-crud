@@ -8,7 +8,7 @@ import { UserService } from '../user/user.service';
 @Injectable()
 export class MatchService {
 	constructor(
-		@InjectModel('Match') private matchModel: Model<MatchDocument>,
+		@InjectModel(Match.name) private matchModel: Model<MatchDocument>,
 		private readonly userService: UserService
 	) {}
 
@@ -31,47 +31,39 @@ export class MatchService {
 		matchId: string,
 		match: Match
 	): Promise<Match> {
-		if (await this.userService.checkIfAdmin(userId)) {
-			if ('winner' in match) {
-				const matchWinner = await this.userService.getUserInfo(
-					String(match.winner)
-				);
+        if ('winner' in match) {
+            const matchWinner = await this.userService.getUserInfo(
+                String(match.winner)
+            );
 
-				match.winner = matchWinner;
-			}
+            match.winner = matchWinner;
+        }
 
-			return this.matchModel.findOneAndUpdate({ id: matchId }, match, {
-				new: true,
-			});
-		}
+        return this.matchModel.findOneAndUpdate({ id: matchId }, match, {
+            new: true,
+        });
 	}
 
 	async addMatch(userId: string, match: Match): Promise<Match> {
-		if (await this.userService.checkIfAdmin(userId)) {
-			if ('winner' in match) {
-				const matchWinner = await this.userService.getUserInfo(
-					String(match.winner)
-				);
+        if ('winner' in match) {
+            const matchWinner = await this.userService.getUserInfo(
+                String(match.winner)
+            );
 
-				match.winner = matchWinner;
-			}
+            match.winner = matchWinner;
+        }
 
-			const newMatch = new this.matchModel(match);
-			return newMatch.save();
-		}
-
-		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
+        const newMatch = new this.matchModel(match);
+        return newMatch.save();
 	}
 
 	async deleteMatchById(userId: string, matchId: string): Promise<Match> {
-		if (await this.userService.checkIfAdmin(userId)) {
-			const match = await this.matchModel.findOne({ id: matchId });
+        const match = await this.matchModel.findOne({ id: matchId });
 
-			if (match == null) {
-				throw new HttpException('Not found', HttpStatus.NOT_FOUND);
-			}
+        if (match == null) {
+            throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+        }
 
-			return await match.remove();
-		}
+        return await match.remove();
 	}
 }

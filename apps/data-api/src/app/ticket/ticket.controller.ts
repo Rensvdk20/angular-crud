@@ -15,12 +15,32 @@ import { TicketService } from './ticket.service';
 @Controller('ticket')
 export class TicketController {
 	constructor(private readonly ticketService: TicketService) {}
+    @Post('reserve/:ticketId')
+    async ReserveTicket(
+        @InjectToken() token: Token,
+        @Param('ticketId') ticketId: string,
+    ): Promise<Ticket> {
+        return this.ticketService.reserveTicket(token.id, ticketId);
+    }
+
+    @Get('unreserved/:matchId')
+    async getAllUnreservedTicketsFromMatch(
+        @Param('matchId') matchId: string,
+    ): Promise<Ticket[]> {
+        return this.ticketService.getAllUnreservedTicketsFromMatch(matchId);
+    }
+
+    @Get(':matchId')
+    async getAllTicketsFromMatch(
+        @Param('matchId') matchId: string,
+    ): Promise<Ticket[]> {
+        return this.ticketService.getAllTicketsFromMatch(matchId);
+    }
 
 	@Post()
 	async addTicket(
-		@InjectToken() token: Token,
 		@Body() ticket: Ticket
 	): Promise<Ticket> {
-		return this.ticketService.addTicket(token.id, ticket);
+		return this.ticketService.addTicket(ticket);
 	}
 }

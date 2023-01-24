@@ -9,31 +9,52 @@ import { MatchService } from '../match/match.service';
 @Injectable()
 export class TicketService {
 	constructor(
-		@InjectModel('Match') private ticketModel: Model<TicketDocument>,
+		@InjectModel(Ticket.name) private ticketModel: Model<TicketDocument>,
 		private readonly userService: UserService,
 		private readonly matchService: MatchService
 	) {}
 
-	async addTicket(userId: string, ticket: Ticket): Promise<Ticket> {
-		if (await this.userService.checkIfAdmin(userId)) {
-			if ('match' in ticket) {
-				const match = await this.matchService.getMatchById(
-					String(ticket.match)
-				);
+    async getAllTicketsFromMatch(matchId: string): Promise<Ticket[]> {
+        const match = await this.matchService.getMatchById(matchId);
+        return this.ticketModel.find({ match: match });
+    }
 
-				console.log(match);
-				ticket.match = match;
-			} else {
-				throw new HttpException(
-					'Match is required',
-					HttpStatus.BAD_REQUEST
-				);
-			}
+    async getAllUnreservedTicketsFromMatch(matchId: string): Promise<Ticket[]> {
+        const match = await this.matchService.getMatchById(matchId);
+        return this.ticketModel.find({ match: match, reservedBy: null });
+    }
 
-			const newTicket = new this.ticketModel(ticket);
-			return newTicket.save();
-		}
+	async addTicket(ticket: Ticket): Promise<Ticket> {
+        if ('match' in ticket) {
+            const match = await this.matchService.getMatchById(
+                String(ticket.match)
+            );
 
-		throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
+            ticket.match = match;
+        } else {
+            throw new HttpException(
+                'Match is required',
+                HttpStatus.BAD_REQUEST
+            );
+        }
+
+        const newTicket = new this.ticketModel(ticket);
+        return newTicket.save();
 	}
+
+    async reserveTicket(userId: string, ticketId: string): Promise<Ticket> {
+        const ticket = await this.ticketModel.findOne({ id: ticketId });
+
+        if (ticket == null) {
+            throw new HttpException('Ticket not found', HttpStatus.NOT_FOUND);
+        }
+
+        if (ticket.reservedBy != null) {
+            throw new HttpException('Ticket already reserved', HttpStatus.BAD_REQUEST);
+        }
+
+        ticket.reservedBy = await this.userService.getUserById(userId);
+
+        return ticket.save();
+    }
 }

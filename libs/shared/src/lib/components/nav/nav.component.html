@@ -5,28 +5,41 @@
             Drone Races
         </a>
         <li class="nav-item">
-            <a class="nav-link" routerLink="user-manager" routerLinkActive="active" ariaCurrentWhenActive="page">User</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="match-manager" routerLinkActive="active" ariaCurrentWhenActive="page">Match</a>
+            <a class="nav-link" routerLink="matches" routerLinkActive="active"
+                ariaCurrentWhenActive="page">Matches</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" routerLink="about" routerLinkActive="active" ariaCurrentWhenActive="page">About</a>
         </li>
-        <div class="right-side">
-            <li *ngIf="(loggedInUser$ | async) == undefined" class="nav-item nav-item-login">
-                <a class="nav-link" routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
-            </li>
-            <li *ngIf="(loggedInUser$ | async) == undefined" class="nav-item nav-item-login">
-                <a class="nav-link" routerLink="register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
-            </li>
+        <li class="nav-item dropdown">
+            <div ngbDropdown class="d-inline-block">
+                <a class="nav-link" ngbDropdownToggle>Admin</a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li ngbDropdownItem class="nav-item">
+                        <a class="nav-link" routerLink="match-manager" routerLinkActive="active"
+                            ariaCurrentWhenActive="page">Match manager</a>
+                    </li>
+                    <li ngbDropdownItem class="nav-item">
+                        <a class="nav-link" routerLink="user-manager" routerLinkActive="active"
+                            ariaCurrentWhenActive="page">User manager</a>
+                    </li>
+                </div>
+            </div>
+        </li>
+<div class="right-side">
+    <li *ngIf="(loggedInUser$ | async) == undefined" class="nav-item nav-item-login">
+        <a class="nav-link" routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+    </li>
+    <li *ngIf="(loggedInUser$ | async) == undefined" class="nav-item nav-item-login">
+        <a class="nav-link" routerLink="register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
+    </li>
 
-            <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">
-                <a class="nav-link" routerLink="account">Account</a>
-            </li>
-            <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">
-                <a class="nav-link" (click)="logout()">Logout</a>
-            </li>
-        </div>
-      </ul>
+    <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">
+        <a class="nav-link" routerLink="account">Account</a>
+    </li>
+    <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">
+        <a class="nav-link" (click)="logout()">Logout</a>
+    </li>
+</div>
+</ul>
 </div>

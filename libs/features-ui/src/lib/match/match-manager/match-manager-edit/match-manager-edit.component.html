@@ -2,20 +2,29 @@
 <h3 *ngIf="!match">Add</h3>
 <form *ngIf="tempMatch" #matchForm="ngForm" (ngSubmit)="onSubmit(matchForm)" novalidate>
     <label for="name">Name: </label><br />
-    <input type="text" id="name" name="name" [(ngModel)]="tempMatch.name"><br />
+    <input type="text" required minlength="1" #name="ngModel" id="name" name="name" [(ngModel)]="tempMatch.name"><br />
+    <span *ngIf="!name.valid && name.touched" class="text-danger">*Fill in a name<br /></span>
 
     <label for="date">Date: </label><br />
-    <input type="text" id="date" name="date" (ngModel)="tempMatch.date" [ngModel]="tempMatch.date | date: 'MM/dd/yyyy'"><br />
+    <input type="text" required minlength="10" #date="ngModel" id="date" name="date" (ngModel)="tempMatch.date"
+        [ngModel]="tempMatch.date | date: 'MM/dd/yyyy'"><br />
+    <span *ngIf="!date.valid && date.touched" class="text-danger">*Fill in a date<br /></span>
 
     <label for="location">Location: </label><br />
-    <input type="text" id="location" name="location" [(ngModel)]="tempMatch.location"><br />
-    
+    <input type="text" required minlength="1" #location="ngModel" id="location" name="location"
+        [(ngModel)]="tempMatch.location"><br />
+    <span *ngIf="!location.valid && location.touched" class="text-danger">*Fill in a location<br /></span>
+
     <label for="rank">Rank: </label><br />
-    <input type="number" id="rank" name="rank" [(ngModel)]="tempMatch.rank"><br />
-    
+    <input type="number" required minlength="1" #rank="ngModel" min="1" max="3" id="rank" name="rank"
+        [(ngModel)]="tempMatch.rank"><br />
+    <span *ngIf="!rank.valid && rank.touched" class="text-danger">*Fill in a rank<br /></span>
+
     <label for="prizeMoney">Prize money (&euro;): </label><br />
-    <input type="number" id="prizeMoney" name="prizeMoney" [(ngModel)]="tempMatch.prizeMoney"><br />
-    
+    <input type="number" required minlength="1" #prizeMoney="ngModel" id="prizeMoney" name="prizeMoney"
+        [(ngModel)]="tempMatch.prizeMoney"><br />
+    <span *ngIf="!prizeMoney.valid && prizeMoney.touched" class="text-danger">*Fill in the prize money<br /></span>
+
     <label for="winner">Winner: </label><br />
     <select *ngIf="tempMatch.winner?.id" name="winner" id="winner" [(ngModel)]="tempMatch.winner!.id!">
         <option selected [value]="null">-</option>
@@ -27,8 +36,6 @@
         <option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
     </select><br />
 
-
-
-    <button *ngIf="match" class="btn btn-primary">Edit match</button>
-    <button *ngIf="!match" class="btn btn-primary">Add match</button>
+    <button *ngIf="match" [disabled]="!matchForm.valid" class="btn btn-primary">Edit match</button>
+    <button *ngIf="!match" [disabled]="!matchForm.valid" class="btn btn-primary">Add match</button>
 </form>

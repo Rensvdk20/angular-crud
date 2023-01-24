@@ -10,6 +10,7 @@
                     <b>Winner: </b>
                     {{ match?.winner!.firstName + " " + match!.winner!.lastName }}
                 </p><br />
+                <drone-races-match-reserve-tickets [matchId]="match.id"></drone-races-match-reserve-tickets>
             </div>
             <div class="col-6">
                 <img src="https://i.imgur.com/cbX6J2V.png" alt="">

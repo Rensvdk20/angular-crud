@@ -1,6 +1,11 @@
-input, select {
-    margin-bottom: 10px;
+input,
+select {
     border-radius: 5px;
     padding: 5px;
     border: 1px solid black;
+}
+
+label,
+button {
+    margin-top: 10px;
 }
