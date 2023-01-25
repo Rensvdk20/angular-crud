@@ -41,7 +41,7 @@ export class MatchManagerEditComponent {
 			} else {
 				//Create an empty user
 				this.tempMatch = {
-					id: 0,
+					id: "",
 					name: '',
 					date: new Date(),
 					location: '',

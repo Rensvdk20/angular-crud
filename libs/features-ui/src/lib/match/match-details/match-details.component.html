@@ -2,15 +2,17 @@
     <div class="match-info">
         <div class="row">
             <div class="col-6">
-                <h1>{{ match?.name }} - Rank {{ match?.rank }}</h1><br />
-                <p><b>Date: </b>{{ match?.date | date: 'MM/dd/yyyy' }}<br /></p>
-                <p><b>Location: </b>{{ match?.location }}<br /></p>
-                <p><b>Prize pool: </b>&euro; {{ match?.prizeMoney }}<br /></p>
+                <h1>{{ match.name }} - Rank {{ match.rank }}</h1><br />
+                <p><b>Date: </b>{{ match.date | date: 'MM/dd/yyyy' }}<br /></p>
+                <p><b>Location: </b>{{ match.location }}<br /></p>
+                <p><b>Prize pool: </b>&euro; {{ match.prizeMoney }}<br /></p>
                 <p *ngIf="match?.winner">
                     <b>Winner: </b>
-                    {{ match?.winner!.firstName + " " + match!.winner!.lastName }}
+                    {{ match.winner!.firstName + " " + match!.winner!.lastName }}
                 </p><br />
-                <drone-races-match-reserve-tickets [matchId]="match.id"></drone-races-match-reserve-tickets>
+                
+                <drone-races-match-reserve-tickets *ngIf="user && !user.racer" [matchId]="match.id"></drone-races-match-reserve-tickets>
+                <drone-races-match-compete-as-racer *ngIf="user && user.racer" [matchId]="match.id"></drone-races-match-compete-as-racer>
             </div>
             <div class="col-6">
                 <img src="https://i.imgur.com/cbX6J2V.png" alt="">

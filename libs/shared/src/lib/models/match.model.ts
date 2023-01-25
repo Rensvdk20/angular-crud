@@ -1,7 +1,7 @@
 import { IUser } from './user.model';
 
 export interface IMatch {
-	id: number;
+	id: string;
 	name: string;
 	date: Date;
 	location: string;

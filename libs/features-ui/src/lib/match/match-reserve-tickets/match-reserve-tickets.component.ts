@@ -7,28 +7,27 @@ import { IMatch, ITicket, MatchService, TicketService } from '@drone-races/share
 	styleUrls: ['./match-reserve-tickets.component.scss'],
 })
 export class MatchReserveTicketsComponent {
-    @Input() matchId!: number;
+    @Input() matchId!: string;
     tickets: ITicket[] = [];
     amountOfTickets: number = 1;
 
-    constructor(private ticketService: TicketService) {
-        // console.log(this.match);
-        // this.ticketService.getUnreservedTicketsForMatch(String(this.match.id)).subscribe((result) => {
-        //     console.log(result);
-        //     this.tickets = result;
-        // });
-    }
+    constructor(private ticketService: TicketService) { }
 
     ngOnChanges(): void {
+        this.getUnreservedTicketsForMatch();
+    }
+
+    getUnreservedTicketsForMatch() {
         this.ticketService.getUnreservedTicketsForMatch(String(this.matchId)).subscribe((tickets) => {
-            console.log(this.matchId);
-            console.log(tickets);
             this.tickets = tickets;
         });
     }
 
-    // reserveTickets() {
-    //     this.ticketService.reserveTicketsForMatch(this.match?.id, this.amountOfTickets).subscribe();
-    // }
+    reserveTicket(ticketId: string) {
+        this.ticketService.reserveTicketsForMatch(ticketId).subscribe((result) => {
+            console.log(result);
+            this.getUnreservedTicketsForMatch();
+        });
+    }
 }
 

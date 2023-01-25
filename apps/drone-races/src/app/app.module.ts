@@ -13,7 +13,7 @@ import { FooterComponent } from '@drone-races/shared';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AboutComponent } from './pages/about/about.component';
 
-import { MatchListComponent } from '@drone-races/features-ui';
+import { MatchCompeteAsRacerComponent, MatchListComponent } from '@drone-races/features-ui';
 import { MatchDetailsComponent } from '@drone-races/features-ui';
 
 import { UserManagerOverviewComponent } from '@drone-races/features-ui';
@@ -54,6 +54,7 @@ import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/ac
 		RegisterComponent,
 		RegisterFormComponent,
         MatchReserveTicketsComponent,
+        MatchCompeteAsRacerComponent,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

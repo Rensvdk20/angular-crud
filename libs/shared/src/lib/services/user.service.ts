@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IUser } from '../models/user.model';
 
@@ -100,6 +100,6 @@ export class UserService {
 			{
 				headers: headers,
 			}
-		);
+		).pipe(map((data: any) => data.results));
 	}
 }

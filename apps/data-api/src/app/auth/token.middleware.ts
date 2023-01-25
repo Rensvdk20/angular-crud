@@ -13,7 +13,7 @@ export class TokenMiddleware implements NestMiddleware {
 	constructor(private authService: AuthService) {}
 
 	async use(req: Request, res: Response, next: NextFunction) {
-		const authHeader = req.header('authorization');
+        const authHeader = req.header('authorization');
 
 		if (!authHeader) {
 			throw new HttpException(

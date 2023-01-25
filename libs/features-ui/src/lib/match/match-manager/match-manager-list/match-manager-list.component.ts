@@ -34,7 +34,7 @@ export class MatchManagerListComponent {
         });
     }
 
-	deleteMatch(id: number) {
+	deleteMatch(id: string) {
 		this.matchService.deleteMatchById(id).subscribe(() => {
             this.getAllMatches();
         });

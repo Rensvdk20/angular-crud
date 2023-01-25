@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IMatch } from '@drone-races/shared';
+import { AuthService, IMatch, UserInfo, UserService } from '@drone-races/shared';
 import { MatchService } from '@drone-races/shared';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'drone-races-match-details',
@@ -10,13 +11,18 @@ import { MatchService } from '@drone-races/shared';
 })
 export class MatchDetailsComponent {
 	match!: IMatch;
-
+    user: any;
+    
 	constructor(
-		private matchService: MatchService,
+        private matchService: MatchService,
+        private userService: UserService,
 		private route: ActivatedRoute
-	) {}
-
-	ngOnInit(): void {
+        ) {
+            // this.user = JSON.parse(localStorage.getItem('currentUser') || '{}').results;
+            // console.log(this.user);
+        }
+        
+    ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
 			this.matchService
 				.getMatchById(params['id'])
@@ -24,5 +30,10 @@ export class MatchDetailsComponent {
 					this.match = match.results;
 				});
 		});
+
+        this.userService.getUserInfo().subscribe((user: any) => {
+            this.user = user;
+            console.log(this.user);
+        });
 	}
 }

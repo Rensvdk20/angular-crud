@@ -13,3 +13,4 @@ export * from './lib/match/match-manager/match-manager-details/match-manager-det
 export * from './lib/match/match-manager/match-manager-edit/match-manager-edit.component';
 
 export * from './lib/match/match-reserve-tickets/match-reserve-tickets.component';
+export * from './lib/match/match-compete-as-racer/match-compete-as-racer.component';

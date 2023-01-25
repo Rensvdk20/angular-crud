@@ -17,10 +17,10 @@
     <tbody>
         <tr *ngFor="let ticket of tickets; let i = index">
             <th>{{i+1}}</th>
-            <td>{{ticket.price}}</td>
             <td>{{ticket.type}}</td>
+            <td>{{ticket.price}}</td>
             <td>{{ticket.seatNumber}}</td>
-            <td>Reserve</td>
+            <td><button (click)="reserveTicket(ticket.id)" class="btn btn-primary">Reserve</button></td>
         </tr>
     </tbody>
 </table>
