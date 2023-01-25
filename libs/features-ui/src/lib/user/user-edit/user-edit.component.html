@@ -1,0 +1,53 @@
+<h3>Edit user</h3>
+<form #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)" novalidate>
+    <div>
+        <label for="firstName">First Name: </label><br />
+        <input type="text" required minlength="1" #firstName="ngModel" id="firstName" name="firstName" [(ngModel)]="user.firstName"><br />
+        <span *ngIf="!firstName.valid && firstName.touched" class="text-danger">*Fill in a first name<br /></span>
+
+        <label for="lastName">Last Name: </label><br />
+        <input type="text"  required minlength="1" #lastName="ngModel" id="lastName" name="lastName" [(ngModel)]="user!.lastName"><br />
+        <span *ngIf="!lastName.valid && lastName.touched" class="text-danger">*Fill in a last name<br /></span>
+
+        
+        <label for="email">Email: </label><br />
+        <input type="text" required minlength="1" #email="ngModel" id="email" name="email" [(ngModel)]="user.email"><br />
+        <span *ngIf="!email.valid && email.touched" class="text-danger">*Fill in an email<br /></span>
+
+
+        <label for="birthday">Birthday: </label><br />
+        <input type="text" required minlength="1" #birthday="ngModel" id="birthday" name="birthday" (ngModel)="user.birthday" [ngModel]="user.birthday | date: 'MM/dd/yyyy'" pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"><br />
+        <span *ngIf="!birthday.valid && birthday.touched" class="text-danger">*Fill in a valid birthday<br /></span>
+    </div>
+
+    <div *ngIf="user.racer">
+    <h5>Racer</h5>
+        <label for="racer_team">Team: </label><br />
+        <input type="text" required minlength="1" #racer_team="ngModel" id="racer_team" name="racer_team" [(ngModel)]="user.racer!.team"><br />
+        <span *ngIf="!racer_team.valid && racer_team.touched" class="text-danger">*Fill in a team<br /></span>
+
+        <label for="racer_rank">Rank: </label><br />
+        <input type="number" required minlength="1" min="1" max="3" #racer_rank="ngModel" id="racer_rank" name="racer_rank" [(ngModel)]="user.racer!.rank"><br />
+        <span *ngIf="!racer_rank.valid && racer_rank.touched" class="text-danger">*Fill in a rank<br /></span>
+    </div>
+    
+    <div *ngIf="user.racer">
+        <h5>Drone</h5>
+        <label for="drone_name">Name: </label><br />
+        <input type="text" id="drone_name" name="drone_name" [(ngModel)]="user.racer!.drone.name"><br />
+
+        <label for="drone_category">Category: </label><br />
+        <input type="text" id="drone_category" name="drone_category" [(ngModel)]="user.racer!.drone.category"><br />
+
+        <label for="drone_weight">Category: </label><br />
+        <input type="number" id="drone_weight" name="drone_weight" [(ngModel)]="user.racer!.drone.weight"><br />
+
+        <label for="drone_brushless">Brushless: </label><br />
+        <select name="drone_brushless" id="drone_brushless" [(ngModel)]="user.racer!.drone.brushless">
+            <option [ngValue]="false">false</option>
+            <option [ngValue]="true">true</option>
+        </select><br />
+    </div>
+
+    <button class="btn btn-primary">Edit user</button>
+</form>

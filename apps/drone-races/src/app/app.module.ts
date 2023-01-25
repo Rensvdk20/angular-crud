@@ -12,14 +12,14 @@ import { FooterComponent } from '@drone-races/shared';
 
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AboutComponent } from './pages/about/about.component';
+import { AccountComponent } from './pages/account/account.component';
 
-import { MatchCompeteAsRacerComponent, MatchListComponent } from '@drone-races/features-ui';
+import {
+	MatchCompeteAsRacerComponent,
+	MatchListComponent,
+    UserEditComponent,
+} from '@drone-races/features-ui';
 import { MatchDetailsComponent } from '@drone-races/features-ui';
-
-import { UserManagerOverviewComponent } from '@drone-races/features-ui';
-import { UserManagerListComponent } from '@drone-races/features-ui';
-import { UserManagerDetailsComponent } from '@drone-races/features-ui';
-import { UserManagerEditComponent } from '@drone-races/features-ui';
 
 import { MatchManagerOverviewComponent } from '@drone-races/features-ui';
 import { MatchManagerListComponent } from '@drone-races/features-ui';
@@ -41,10 +41,6 @@ import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/ac
 		AboutComponent,
 		MatchListComponent,
 		MatchDetailsComponent,
-		UserManagerOverviewComponent,
-		UserManagerListComponent,
-		UserManagerDetailsComponent,
-		UserManagerEditComponent,
 		MatchManagerOverviewComponent,
 		MatchManagerListComponent,
 		MatchManagerDetailsComponent,
@@ -53,8 +49,10 @@ import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/ac
 		LoginFormComponent,
 		RegisterComponent,
 		RegisterFormComponent,
-        MatchReserveTicketsComponent,
-        MatchCompeteAsRacerComponent,
+		MatchReserveTicketsComponent,
+		MatchCompeteAsRacerComponent,
+		AccountComponent,
+        UserEditComponent
 	],
 	providers: [],
 	bootstrap: [AppComponent],

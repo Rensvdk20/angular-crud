@@ -8,12 +8,10 @@ import { MatchManagerDetailsComponent } from '@drone-races/features-ui';
 import { MatchManagerEditComponent } from '@drone-races/features-ui';
 import { MatchManagerOverviewComponent } from '@drone-races/features-ui';
 
-import { UserManagerOverviewComponent } from '@drone-races/features-ui';
-import { UserManagerDetailsComponent } from '@drone-races/features-ui';
-import { UserManagerEditComponent } from '@drone-races/features-ui';
 import { MatchDetailsComponent } from '@drone-races/features-ui';
 import { LoginComponent } from './pages/account/login/login.component';
 import { RegisterComponent } from './pages/account/register/register.component';
+import { AccountComponent } from './pages/account/account.component';
 
 const routes: Routes = [
 	//Pages
@@ -24,17 +22,9 @@ const routes: Routes = [
 
 	//Features
 	{ path: 'match/:id', component: MatchDetailsComponent },
+    { path: 'account', component: AccountComponent},
 
 	//Admin
-	{
-		path: 'user-manager',
-		component: UserManagerOverviewComponent,
-		children: [
-			{ path: 'add', component: UserManagerEditComponent },
-			{ path: ':id/edit', component: UserManagerEditComponent },
-			{ path: ':id', component: UserManagerDetailsComponent },
-		],
-	},
 	{
 		path: 'match-manager',
 		component: MatchManagerOverviewComponent,

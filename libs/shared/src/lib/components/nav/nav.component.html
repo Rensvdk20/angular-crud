@@ -19,10 +19,6 @@
                         <a class="nav-link" routerLink="match-manager" routerLinkActive="active"
                             ariaCurrentWhenActive="page">Match manager</a>
                     </li>
-                    <li ngbDropdownItem class="nav-item">
-                        <a class="nav-link" routerLink="user-manager" routerLinkActive="active"
-                            ariaCurrentWhenActive="page">User manager</a>
-                    </li>
                 </div>
             </div>
         </li>
@@ -37,6 +33,7 @@
     <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">
         <a class="nav-link" routerLink="account">Account</a>
     </li>
+
     <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">
         <a class="nav-link" (click)="logout()">Logout</a>
     </li>
