@@ -24,6 +24,11 @@ export class TicketService {
         return this.ticketModel.find({ match: match, reservedBy: null });
     }
 
+    async getAllTicketsFromUser(userId: string): Promise<Ticket[]> {
+        const user = await this.userService.getUserById(userId);
+        return this.ticketModel.find({ reservedBy: user }).populate('match');
+    }
+
 	async addTicket(ticket: Ticket): Promise<Ticket> {
         if ('match' in ticket) {
             const match = await this.matchService.getMatchById(

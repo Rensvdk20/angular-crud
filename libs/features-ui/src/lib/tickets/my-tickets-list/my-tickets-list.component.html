@@ -1,0 +1,19 @@
+<h3>My tickets</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Match</th>
+            <th>Type</th>
+            <th>Seatnumber</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ticket of tickets; let i = index">
+            <th>{{i+1}}</th>
+            <td><a [routerLink]="['/match', ticket.match.id]">{{ticket.match.name}}</a></td>
+            <td>{{ticket.type}}</td>
+            <td>{{ticket.seatNumber}}</td>
+        </tr>
+    </tbody>
+</table>

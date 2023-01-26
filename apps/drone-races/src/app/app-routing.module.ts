@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AboutComponent } from './pages/about/about.component';
 
-import { MatchManagerDetailsComponent } from '@drone-races/features-ui';
+import { MatchManagerDetailsComponent, MyTicketsListComponent } from '@drone-races/features-ui';
 import { MatchManagerEditComponent } from '@drone-races/features-ui';
 import { MatchManagerOverviewComponent } from '@drone-races/features-ui';
 
@@ -21,8 +21,9 @@ const routes: Routes = [
 	{ path: 'register', component: RegisterComponent, pathMatch: 'full' },
 
 	//Features
-	{ path: 'match/:id', component: MatchDetailsComponent },
-    { path: 'account', component: AccountComponent},
+	{ path: 'match/:id', component: MatchDetailsComponent, pathMatch: 'full' },
+    { path: 'account', component: AccountComponent, pathMatch: 'full' },
+    { path: 'my-tickets', component: MyTicketsListComponent, pathMatch: 'full' },
 
 	//Admin
 	{

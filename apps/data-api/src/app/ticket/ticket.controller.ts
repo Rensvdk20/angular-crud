@@ -23,6 +23,13 @@ export class TicketController {
         return this.ticketService.getAllUnreservedTicketsFromMatch(matchId);
     }
 
+    @Get('user')
+    async getAllTicketsFromUser(
+        @InjectToken() token: Token,
+    ): Promise<Ticket[]> {
+        return this.ticketService.getAllTicketsFromUser(token.id);
+    }
+
     @Get(':matchId')
     async getAllTicketsFromMatch(
         @Param('matchId') matchId: string,

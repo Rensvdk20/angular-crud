@@ -17,6 +17,7 @@ import { AccountComponent } from './pages/account/account.component';
 import {
 	MatchCompeteAsRacerComponent,
 	MatchListComponent,
+    MyTicketsListComponent,
     UserEditComponent,
 } from '@drone-races/features-ui';
 import { MatchDetailsComponent } from '@drone-races/features-ui';
@@ -30,6 +31,7 @@ import { LoginComponent } from './pages/account/login/login.component';
 import { MatchReserveTicketsComponent } from '@drone-races/features-ui';
 
 import { HttpClientModule } from '@angular/common/http';
+
 import { RegisterComponent } from './pages/account/register/register.component';
 import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/account/register-form/register-form.component';
 @NgModule({
@@ -52,7 +54,8 @@ import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/ac
 		MatchReserveTicketsComponent,
 		MatchCompeteAsRacerComponent,
 		AccountComponent,
-        UserEditComponent
+        UserEditComponent,
+        MyTicketsListComponent,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

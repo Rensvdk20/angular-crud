@@ -11,3 +11,5 @@ export * from './lib/match/match-reserve-tickets/match-reserve-tickets.component
 export * from './lib/match/match-compete-as-racer/match-compete-as-racer.component';
 
 export * from './lib/user/user-edit/user-edit.component';
+
+export * from './lib/tickets/my-tickets-list/my-tickets-list.component';

@@ -23,6 +23,20 @@ export class TicketService {
         ).pipe(map((data: any) => data.results));
     }
 
+    getAllTicketsFromUser(): Observable<ITicket[]> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+        const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `${token}`,
+        });
+        return this.httpClient.get<ITicket[]>(
+            `http://localhost:3333/data-api/ticket/user`,
+            {
+                headers: headers,
+            }
+        ).pipe(map((data: any) => data.results));
+    }
+
     reserveTicketsForMatch(ticketId: string): Observable<ITicket> {
         const token = JSON.parse(localStorage.getItem('userToken') || '').token;
         const headers = new HttpHeaders({
