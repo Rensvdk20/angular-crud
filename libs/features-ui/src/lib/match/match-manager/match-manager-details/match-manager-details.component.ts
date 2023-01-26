@@ -26,6 +26,7 @@ export class MatchManagerDetailsComponent {
 				.getMatchById(params['id'])
 				.subscribe((match: any) => {
 					this.match = match.results;
+                    console.log(match);
 				});
 		});
 	}

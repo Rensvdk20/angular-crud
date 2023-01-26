@@ -47,6 +47,7 @@ export class MatchManagerEditComponent {
 					location: '',
 					rank: 1,
 					prizeMoney: 0,
+                    racers: [],
 					winner: null,
 				};
 			}

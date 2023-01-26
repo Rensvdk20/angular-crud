@@ -25,6 +25,9 @@ export class Match {
 	@Prop({ required: true })
 	prizeMoney: number;
 
+    @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: User.name }] })
+    racers: User[];
+
 	@Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
 	winner: User;
 }

@@ -7,5 +7,6 @@ export interface IMatch {
 	location: string;
 	rank: number;
 	prizeMoney: number;
+    racers: IUser[];
 	winner: IUser | null;
 }

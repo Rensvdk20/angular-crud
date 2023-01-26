@@ -5,7 +5,15 @@
                 <h1>{{ match.name }} - Rank {{ match.rank }}</h1><br />
                 <p><b>Date: </b>{{ match.date | date: 'MM/dd/yyyy' }}<br /></p>
                 <p><b>Location: </b>{{ match.location }}<br /></p>
+                <p><b>Rank: </b>{{ match.rank }}<br /></p>
                 <p><b>Prize pool: </b>&euro; {{ match.prizeMoney }}<br /></p>
+                <p><b>Racers: </b>
+                    <span *ngIf="match.racers.length === 0">-</span>
+                    <span *ngIf="match.racers.length > 0">
+                        <span *ngFor="let racer of match.racers;let last = last">
+                            {{ racer.firstName }} {{ racer.lastName }}{{ last?'':', ' }}
+                        </span>
+                    </span>
                 <p *ngIf="match?.winner">
                     <b>Winner: </b>
                     {{ match.winner!.firstName + " " + match!.winner!.lastName }}

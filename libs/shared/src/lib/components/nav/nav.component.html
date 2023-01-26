@@ -30,8 +30,21 @@
         <a class="nav-link" routerLink="register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
     </li>
 
-    <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">
-        <a class="nav-link" routerLink="account">Account</a>
+    <li *ngIf="loggedInUser$ | async as user" class="nav-item dropdown">
+        <!-- <a class="nav-link" routerLink="account">Account</a> -->
+            <div ngbDropdown class="d-inline-block">
+                <a class="nav-link" ngbDropdownToggle>Account</a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li ngbDropdownItem class="nav-item">
+                        <a class="nav-link" routerLink="account" routerLinkActive="active"
+                            ariaCurrentWhenActive="page">Profile</a>
+                    </li>
+                    <li ngbDropdownItem class="nav-item">
+                        <a class="nav-link" routerLink="match-manager" routerLinkActive="active"
+                            ariaCurrentWhenActive="page">My matches</a>
+                    </li>
+                </div>
+            </div>
     </li>
 
     <li *ngIf="loggedInUser$ | async as user" class="nav-item nav-item-login">

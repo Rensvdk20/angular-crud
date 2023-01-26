@@ -26,6 +26,14 @@ export class MatchController {
 		return this.matchService.getMatchById(matchId);
 	}
 
+    @Post('compete/:matchId')
+    async competeInMatch(
+        @InjectToken() token: Token,
+        @Param('matchId') matchId: string
+    ): Promise<Match> {
+        return this.matchService.competeInMatch(token.id, matchId);
+    }
+
 	@Post()
 	async addMatch(
 		@InjectToken() token: Token,
