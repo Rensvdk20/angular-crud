@@ -23,7 +23,7 @@ export class MyTicketsListComponent {
         this.ticketService.cancelTicket(ticketId).subscribe((result) => {
             if(result.results) {
                 console.log(result.results);
-                this.successMessage = `You succesfully cancelled your ticket to the ${result.results.match.name} on seatnumber ${result.results.seatNumber}` ;
+                this.successMessage = `You succesfully cancelled your ticket to the ${result.results.match.name} with seatnumber ${result.results.seatNumber}` ;
             } else {
                 if(result.statusCode == 400) {
                     this.errorMessage = result.message;
