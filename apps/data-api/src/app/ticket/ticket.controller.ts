@@ -37,6 +37,21 @@ export class TicketController {
         return this.ticketService.getAllTicketsFromMatch(matchId);
     }
 
+    @Get(':ticketId')
+    async getTicketById(
+        @Param('ticketId') ticketId: string,
+    ): Promise<Ticket> {
+        return this.ticketService.getTicketById(ticketId);
+    }
+
+    @Post('cancel/:ticketId')
+    async cancelTicket(
+        @InjectToken() token: Token,
+        @Param('ticketId') ticketId: string,
+    ): Promise<Ticket> {
+        return this.ticketService.cancelTicket(token.id, ticketId);
+    }
+
     @Post('reserve/:ticketId')
     async ReserveTicket(
         @InjectToken() token: Token,

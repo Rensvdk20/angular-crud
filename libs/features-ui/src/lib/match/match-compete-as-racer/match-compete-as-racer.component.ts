@@ -13,10 +13,6 @@ export class MatchCompeteAsRacerComponent {
 
     constructor(private matchService: MatchService) { }
 
-    ngOnInit(): void {
-
-    }
-
     competeInMatch() {
         this.matchService.competeInMatch(this.matchId).subscribe((result: any) => {
             this.emptyMessages();

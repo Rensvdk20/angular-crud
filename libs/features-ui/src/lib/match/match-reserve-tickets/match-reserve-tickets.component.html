@@ -4,7 +4,7 @@
 </div> -->
 
 <h3>Tickets</h3>
-<table class="table">
+<table *ngIf="tickets.length > 0" class="table">
     <thead>
         <tr>
             <th>#</th>
@@ -24,3 +24,6 @@
         </tr>
     </tbody>
 </table>
+<div *ngIf="tickets.length === 0">
+    <p>No tickets available</p>
+</div>

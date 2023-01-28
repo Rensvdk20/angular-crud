@@ -8,13 +8,40 @@ import { ITicket, TicketService } from '@drone-races/shared/src';
 })
 export class MyTicketsListComponent {
     tickets: ITicket[] = [];
+    successMessage: string = '';
+    errorMessage: string = '';
 
 	constructor(private ticketService: TicketService) {}
 
 	ngOnInit(): void {
+        this.getAllTicketsFromUser();
+    }
+
+    cancelTicket(ticketId: string) {
+        this.emptyMessages();
+
+        this.ticketService.cancelTicket(ticketId).subscribe((result) => {
+            if(result.results) {
+                console.log(result.results);
+                this.successMessage = `You succesfully cancelled your ticket to the ${result.results.match.name} on seatnumber ${result.results.seatNumber}` ;
+            } else {
+                if(result.statusCode == 400) {
+                    this.errorMessage = result.message;
+                }
+            }
+
+            this.getAllTicketsFromUser();
+        });
+    }
+
+    getAllTicketsFromUser() {
         this.ticketService.getAllTicketsFromUser().subscribe((tickets: any) => {
-            console.log(tickets);
             this.tickets = tickets;
         });
+    }
+
+    emptyMessages() {
+        this.successMessage = '';
+        this.errorMessage = '';
     }
 }

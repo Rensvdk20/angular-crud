@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ITicket } from '../models/ticket.model';
 
@@ -35,6 +35,25 @@ export class TicketService {
                 headers: headers,
             }
         ).pipe(map((data: any) => data.results));
+    }
+
+    cancelTicket(ticketId: string): Observable<any> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+        const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `${token}`,
+        });
+        return this.httpClient.post<any>(
+            `http://localhost:3333/data-api/ticket/cancel/${ticketId}`, {},
+            {
+                headers: headers,
+            }
+        ).pipe(
+            catchError((error) => {
+                console.log('error: ', error);
+                return of(error.error);
+            })
+        );
     }
 
     reserveTicketsForMatch(ticketId: string): Observable<ITicket> {

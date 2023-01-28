@@ -29,6 +29,16 @@ export class TicketService {
         return this.ticketModel.find({ reservedBy: user }).populate('match');
     }
 
+    async getTicketById(ticketId: string): Promise<Ticket> {
+        const ticket = await await this.ticketModel.findOne({ id: ticketId }).populate('reservedBy').populate('match');
+
+        if(ticket == null) {
+            throw new HttpException('Ticket not found', HttpStatus.NOT_FOUND);
+        }
+
+        return ticket;
+    }
+
 	async addTicket(ticket: Ticket): Promise<Ticket> {
         if ('match' in ticket) {
             const match = await this.matchService.getMatchById(
@@ -47,8 +57,36 @@ export class TicketService {
         return newTicket.save();
 	}
 
+    async cancelTicket(userId: string, ticketId: string): Promise<Ticket> {
+        const ticket = await this.getTicketById(ticketId);
+
+        if(ticket.reservedBy.id !== userId) {
+            throw new HttpException('You cannot cancel this ticket', HttpStatus.BAD_REQUEST);
+        }
+
+        //If the ticket match date is 7 days or less in the future, the ticket cannot be cancelled
+        const matchDate = ticket.match.date;
+        const currentDate = new Date();
+        const differenceInTime = matchDate.getTime() - currentDate.getTime();
+        const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+        if(differenceInDays <= 7) {
+            console.log(differenceInDays);
+            throw new HttpException('You can only cancel a ticket 7 days before the match', HttpStatus.BAD_REQUEST);
+        }
+
+        ticket.reservedBy = null;
+        
+        console.log(ticket);
+        return await this.ticketModel.findOneAndUpdate(
+            { id: ticket.id },
+            ticket,
+            { new: true }
+        ).populate('match');
+    }
+
     async reserveTicket(userId: string, ticketId: string): Promise<Ticket> {
-        const ticket = await this.ticketModel.findOne({ id: ticketId });
+        const ticket = await this.getTicketById(ticketId);
 
         if (ticket == null) {
             throw new HttpException('Ticket not found', HttpStatus.NOT_FOUND);
@@ -60,6 +98,10 @@ export class TicketService {
 
         ticket.reservedBy = await this.userService.getUserById(userId);
 
-        return ticket.save();
+        return await this.ticketModel.findOneAndUpdate(
+            { id: ticket.id},
+            ticket,
+            { new: true}
+        );
     }
 }
