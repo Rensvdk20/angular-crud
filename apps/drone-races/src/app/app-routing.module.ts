@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AboutComponent } from './pages/about/about.component';
 
-import { MatchManagerDetailsComponent, MyTicketsListComponent } from '@drone-races/features-ui';
+import { MatchManagerDetailsComponent, MyTicketsListComponent, TicketManagerDetailsComponent, TicketManagerEditComponent, TicketManagerOverviewComponent } from '@drone-races/features-ui';
 import { MatchManagerEditComponent } from '@drone-races/features-ui';
 import { MatchManagerOverviewComponent } from '@drone-races/features-ui';
 
@@ -35,6 +35,16 @@ const routes: Routes = [
 			{ path: ':id', component: MatchManagerDetailsComponent },
 		],
 	},
+    {
+		path: 'ticket-manager',
+		component: TicketManagerOverviewComponent,
+		children: [
+			{ path: 'add', component: TicketManagerEditComponent },
+			{ path: ':id/edit', component: TicketManagerEditComponent },
+			{ path: ':id', component: TicketManagerDetailsComponent },
+		],
+	},
+
 	//Page not found
 	{ path: '**', pathMatch: 'full', component: HomepageComponent },
 ];

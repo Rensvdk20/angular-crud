@@ -28,7 +28,6 @@ export class MatchService {
 	}
 
 	async editMatchById(
-		userId: string,
 		matchId: string,
 		match: Match
 	): Promise<Match> {

@@ -44,11 +44,10 @@ export class MatchController {
 
 	@Put(':id')
 	async editMatchById(
-		@InjectToken() token: Token,
 		@Param('id') matchId: string,
 		@Body() match: Match
 	): Promise<Match> {
-		return this.matchService.editMatchById(token.id, matchId, match);
+		return this.matchService.editMatchById(matchId, match);
 	}
 
 	@Delete(':id')

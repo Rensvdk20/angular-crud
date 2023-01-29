@@ -14,6 +14,10 @@ export class TicketService {
 		private readonly matchService: MatchService
 	) {}
 
+    async getAllTickets(): Promise<Ticket[]> {
+        return this.ticketModel.find().populate('match').sort({ match: 1 });
+    }
+
     async getAllTicketsFromMatch(matchId: string): Promise<Ticket[]> {
         const match = await this.matchService.getMatchById(matchId);
         return this.ticketModel.find({ match: match });
@@ -60,6 +64,10 @@ export class TicketService {
     async cancelTicket(userId: string, ticketId: string): Promise<Ticket> {
         const ticket = await this.getTicketById(ticketId);
 
+        if(ticket.reservedBy == null) {
+            throw new HttpException('This ticket is not reserved by anyone', HttpStatus.BAD_REQUEST);
+        }
+
         if(ticket.reservedBy.id !== userId) {
             throw new HttpException('You cannot cancel this ticket', HttpStatus.BAD_REQUEST);
         }
@@ -71,13 +79,11 @@ export class TicketService {
         const differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
         if(differenceInDays <= 7) {
-            console.log(differenceInDays);
             throw new HttpException('You can only cancel a ticket 7 days before the match', HttpStatus.BAD_REQUEST);
         }
 
         ticket.reservedBy = null;
         
-        console.log(ticket);
         return await this.ticketModel.findOneAndUpdate(
             { id: ticket.id },
             ticket,
@@ -103,5 +109,30 @@ export class TicketService {
             ticket,
             { new: true}
         );
+    }
+
+    async editTicketById(ticketId: string, ticket: Ticket): Promise<Ticket> {
+        if ('match' in ticket) {
+            const match = await this.matchService.getMatchById(
+                String(ticket.match)
+            );
+
+            ticket.match = match;
+        }
+
+        return await this.ticketModel.findOneAndUpdate(
+            { id: ticketId },
+            ticket,
+            { new: true }
+        );
+    }
+
+    async deleteTicketById(ticketId: string): Promise<Ticket> {
+        const ticket = await this.ticketModel.findOneAndDelete({ id: ticketId });
+        if(ticket == null) {
+            throw new HttpException('Ticket not found', HttpStatus.NOT_FOUND);
+        }
+
+        return ticket;
     }
 }

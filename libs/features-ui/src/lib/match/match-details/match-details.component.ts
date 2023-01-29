@@ -17,10 +17,7 @@ export class MatchDetailsComponent {
         private matchService: MatchService,
         private userService: UserService,
 		private route: ActivatedRoute
-        ) {
-            // this.user = JSON.parse(localStorage.getItem('currentUser') || '{}').results;
-            // console.log(this.user);
-        }
+        ) {}
         
     ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
@@ -33,7 +30,6 @@ export class MatchDetailsComponent {
 
         this.userService.getUserInfo().subscribe((user: any) => {
             this.user = user;
-            console.log(this.user);
         });
 	}
 }

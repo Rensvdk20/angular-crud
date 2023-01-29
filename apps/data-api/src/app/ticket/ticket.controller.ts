@@ -16,6 +16,11 @@ import { TicketService } from './ticket.service';
 export class TicketController {
 	constructor(private readonly ticketService: TicketService) {}
 
+    @Get()
+    async getAllTickets(): Promise<Ticket[]> {
+        return this.ticketService.getAllTickets();
+    }
+
     @Get('unreserved/:matchId')
     async getAllUnreservedTicketsFromMatch(
         @Param('matchId') matchId: string,
@@ -30,12 +35,12 @@ export class TicketController {
         return this.ticketService.getAllTicketsFromUser(token.id);
     }
 
-    @Get(':matchId')
-    async getAllTicketsFromMatch(
-        @Param('matchId') matchId: string,
-    ): Promise<Ticket[]> {
-        return this.ticketService.getAllTicketsFromMatch(matchId);
-    }
+    // @Get(':matchId')
+    // async getAllTicketsFromMatch(
+    //     @Param('matchId') matchId: string,
+    // ): Promise<Ticket[]> {
+    //     return this.ticketService.getAllTicketsFromMatch(matchId);
+    // }
 
     @Get(':ticketId')
     async getTicketById(
@@ -66,4 +71,19 @@ export class TicketController {
 	): Promise<Ticket> {
 		return this.ticketService.addTicket(ticket);
 	}
+
+    @Put(':ticketId')
+    async editTicketById(
+        @Param('ticketId') ticketId: string,
+        @Body() ticket: Ticket,
+    ): Promise<Ticket> {
+        return this.ticketService.editTicketById(ticketId, ticket);
+    }
+
+    @Delete(':ticketId')
+    async deleteTicketById(
+        @Param('ticketId') ticketId: string,
+    ): Promise<Ticket> {
+        return this.ticketService.deleteTicketById(ticketId);
+    }
 }

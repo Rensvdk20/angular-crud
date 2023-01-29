@@ -25,7 +25,6 @@ export class MatchReserveTicketsComponent {
 
     reserveTicket(ticketId: string) {
         this.ticketService.reserveTicketsForMatch(ticketId).subscribe((result) => {
-            console.log(result);
             this.getUnreservedTicketsForMatch();
         });
     }

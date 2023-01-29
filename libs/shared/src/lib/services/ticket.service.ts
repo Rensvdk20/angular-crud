@@ -9,6 +9,34 @@ import { ITicket } from '../models/ticket.model';
 export class TicketService {
     constructor(private httpClient: HttpClient) {}
 
+    getAllTickets(): Observable<ITicket[]> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+        const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `${token}`,
+        });
+        return this.httpClient.get<ITicket[]>(
+            `http://localhost:3333/data-api/ticket`,
+            {
+                headers: headers,
+            }
+        ).pipe(map((data: any) => data.results));
+    }
+
+    getTicketById(ticketId: string): Observable<ITicket> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+        const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `${token}`,
+        });
+        return this.httpClient.get<ITicket>(
+            `http://localhost:3333/data-api/ticket/${ticketId}`,
+            {
+                headers: headers,
+            }
+        ).pipe(map((data: any) => data.results));
+    }
+
     getUnreservedTicketsForMatch(matchId: string): Observable<ITicket[]> {
         const token = JSON.parse(localStorage.getItem('userToken') || '').token;
         const headers = new HttpHeaders({
@@ -37,6 +65,20 @@ export class TicketService {
         ).pipe(map((data: any) => data.results));
     }
 
+    addNewTicket(ticket: ITicket): Observable<ITicket> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+        const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `${token}`,
+        });
+        return this.httpClient.post<ITicket>(
+            `http://localhost:3333/data-api/ticket`, ticket,
+            {
+                headers: headers,
+            }
+        ).pipe(map((data: any) => data.results));
+    }
+
     cancelTicket(ticketId: string): Observable<any> {
         const token = JSON.parse(localStorage.getItem('userToken') || '').token;
         const headers = new HttpHeaders({
@@ -50,7 +92,6 @@ export class TicketService {
             }
         ).pipe(
             catchError((error) => {
-                console.log('error: ', error);
                 return of(error.error);
             })
         );
@@ -68,5 +109,38 @@ export class TicketService {
                 headers: headers,
             }
         ).pipe(map((data: any) => data.results));
+    }
+
+    editTicket(ticketId: string, ticket: ITicket): Observable<ITicket> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+        const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `${token}`,
+        });
+        return this.httpClient.put<ITicket>(
+            `http://localhost:3333/data-api/ticket/${ticketId}`,
+            ticket,
+            {
+                headers: headers,
+            }
+        ).pipe(map((data: any) => data.results));
+    }
+
+    deleteTicketById(ticketId: string): Observable<any> {
+        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+        const headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `${token}`,
+        });
+        return this.httpClient.delete<any>(
+            `http://localhost:3333/data-api/ticket/${ticketId}`,
+            {
+                headers: headers,
+            }
+        ).pipe(
+            catchError((error) => {
+                return of(error.error);
+            })
+        );
     }
 }

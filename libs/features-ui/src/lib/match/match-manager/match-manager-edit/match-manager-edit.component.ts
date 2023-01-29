@@ -35,8 +35,6 @@ export class MatchManagerEditComponent {
 						this.match = match.results;
 						//Deepclone the user
 						this.tempMatch = JSON.parse(JSON.stringify(this.match));
-
-						console.log(this.tempMatch);
 					});
 			} else {
 				//Create an empty user
@@ -61,7 +59,6 @@ export class MatchManagerEditComponent {
 	onSubmit(userForm: NgForm) {
 		if (!this.match) {
 			//Add new match
-            console.log(userForm.value);
 			this.tempMatch = {
 				// id: this.matchService.getAllMatches().length + 1,
 				// ...userForm.value,
@@ -84,7 +81,7 @@ export class MatchManagerEditComponent {
 			//Edit the user
 			this.matchService
 				.editMatchById(this.tempMatch!)
-				.subscribe((test: any) => {
+				.subscribe(() => {
                     this.router.navigate(['match-manager']);
 				});
 		}

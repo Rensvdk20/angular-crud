@@ -64,7 +64,6 @@ export class AuthService {
 					return 'success';
 				}),
 				catchError((error) => {
-					console.log('error:', error);
 					return of(error);
 				})
 			);
@@ -78,7 +77,6 @@ export class AuthService {
 			.pipe(
 				map((data: any) => data.results),
 				catchError((error) => {
-					console.log('error:', error);
 					return of(error);
 				})
 			);

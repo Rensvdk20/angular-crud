@@ -18,6 +18,10 @@ import {
 	MatchCompeteAsRacerComponent,
 	MatchListComponent,
     MyTicketsListComponent,
+    TicketManagerDetailsComponent,
+    TicketManagerEditComponent,
+    TicketManagerListComponent,
+    TicketManagerOverviewComponent,
     UserEditComponent,
 } from '@drone-races/features-ui';
 import { MatchDetailsComponent } from '@drone-races/features-ui';
@@ -56,6 +60,10 @@ import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/ac
 		AccountComponent,
         UserEditComponent,
         MyTicketsListComponent,
+        TicketManagerOverviewComponent,
+        TicketManagerListComponent,
+        TicketManagerDetailsComponent,
+        TicketManagerEditComponent
 	],
 	providers: [],
 	bootstrap: [AppComponent],

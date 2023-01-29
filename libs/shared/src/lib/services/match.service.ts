@@ -90,7 +90,6 @@ export class MatchService {
         )
         .pipe(
             catchError((error) => {
-                console.log('error: ', error);
                 return of(error.error);
             })
         )

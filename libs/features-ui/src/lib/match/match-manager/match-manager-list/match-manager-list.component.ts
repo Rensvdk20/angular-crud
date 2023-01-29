@@ -26,7 +26,9 @@ export class MatchManagerListComponent {
         });
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+        this.getAllMatches();
+    }
 
     getAllMatches() {
         this.matchService.getAllMatches().subscribe((matches: any) => {
