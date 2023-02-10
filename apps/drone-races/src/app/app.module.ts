@@ -7,7 +7,12 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LoginFormComponent, NavComponent } from '@drone-races/shared';
+import {
+	AdminGuard,
+	LoginFormComponent,
+	NavComponent,
+	UserGuard,
+} from '@drone-races/shared';
 import { FooterComponent } from '@drone-races/shared';
 
 import { HomepageComponent } from './pages/homepage/homepage.component';
@@ -17,12 +22,12 @@ import { AccountComponent } from './pages/account/account.component';
 import {
 	MatchCompeteAsRacerComponent,
 	MatchListComponent,
-    MyTicketsListComponent,
-    TicketManagerDetailsComponent,
-    TicketManagerEditComponent,
-    TicketManagerListComponent,
-    TicketManagerOverviewComponent,
-    UserEditComponent,
+	MyTicketsListComponent,
+	TicketManagerDetailsComponent,
+	TicketManagerEditComponent,
+	TicketManagerListComponent,
+	TicketManagerOverviewComponent,
+	UserEditComponent,
 } from '@drone-races/features-ui';
 import { MatchDetailsComponent } from '@drone-races/features-ui';
 
@@ -58,14 +63,14 @@ import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/ac
 		MatchReserveTicketsComponent,
 		MatchCompeteAsRacerComponent,
 		AccountComponent,
-        UserEditComponent,
-        MyTicketsListComponent,
-        TicketManagerOverviewComponent,
-        TicketManagerListComponent,
-        TicketManagerDetailsComponent,
-        TicketManagerEditComponent
+		UserEditComponent,
+		MyTicketsListComponent,
+		TicketManagerOverviewComponent,
+		TicketManagerListComponent,
+		TicketManagerDetailsComponent,
+		TicketManagerEditComponent,
 	],
-	providers: [],
+	providers: [UserGuard, AdminGuard],
 	bootstrap: [AppComponent],
 	imports: [
 		BrowserModule,

@@ -10,11 +10,17 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavComponent implements OnInit {
 	loggedInUser$!: Observable<UserInfo | undefined>;
+	isAdmin: boolean = false;
 
 	constructor(private authService: AuthService) {}
 
 	ngOnInit(): void {
 		this.loggedInUser$ = this.authService.currentUser$;
+		this.authService.getUserFromLocalStorage().subscribe((user) => {
+			if (user) {
+				this.isAdmin = user.isAdmin;
+			}
+		});
 	}
 
 	logout() {
