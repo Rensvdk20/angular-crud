@@ -13,6 +13,7 @@ import { IdentitySchema } from './auth/identity.schema';
 import { TicketSchema } from './ticket/ticket.schema';
 import { TicketService } from './ticket/ticket.service';
 import { TicketController } from './ticket/ticket.controller';
+import { AuthService } from './auth/auth.service';
 @Module({
 	imports: [
 		MongooseModule.forFeature([
@@ -23,6 +24,6 @@ import { TicketController } from './ticket/ticket.controller';
 		]),
 	],
 	controllers: [UserController, TicketController, MatchController],
-	providers: [UserService, TicketService, MatchService],
+	providers: [UserService, TicketService, MatchService, AuthService],
 })
 export class DataModule {}

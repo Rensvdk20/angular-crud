@@ -32,9 +32,9 @@ export class UserService {
 	async getUserById(id: string): Promise<User> {
 		const user = this.userModel.findOne({ id: id });
 
-        if (user == null) return null;
+		if (user == null) return null;
 
-        return user;
+		return user;
 	}
 
 	async getUserInfo(userId: string): Promise<User | null> {
@@ -116,6 +116,11 @@ export class UserService {
 
 		user.racer = undefined;
 		return await user.save();
+	}
+
+	async checkIfAdmin(userId: string): Promise<boolean> {
+		const user = await this.getUserInfo(userId);
+		return user.isAdmin;
 	}
 
 	// ##### Drone #####

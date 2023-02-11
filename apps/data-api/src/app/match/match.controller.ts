@@ -6,11 +6,13 @@ import {
 	Param,
 	Post,
 	Put,
+	UseGuards,
 } from '@nestjs/common';
 
 import { MatchService } from './match.service';
 import { Match } from './match.schema';
 import { InjectToken, Token } from '../auth/token.decorator';
+import { AdminGuard } from '../guards/admin/admin.guard';
 
 @Controller('match')
 export class MatchController {
@@ -26,15 +28,16 @@ export class MatchController {
 		return this.matchService.getMatchById(matchId);
 	}
 
-    @Post('compete/:matchId')
-    async competeInMatch(
-        @InjectToken() token: Token,
-        @Param('matchId') matchId: string
-    ): Promise<Match> {
-        return this.matchService.competeInMatch(token.id, matchId);
-    }
+	@Post('compete/:matchId')
+	async competeInMatch(
+		@InjectToken() token: Token,
+		@Param('matchId') matchId: string
+	): Promise<Match> {
+		return this.matchService.competeInMatch(token.id, matchId);
+	}
 
 	@Post()
+	@UseGuards(AdminGuard)
 	async addMatch(
 		@InjectToken() token: Token,
 		@Body() match: Match
@@ -43,6 +46,7 @@ export class MatchController {
 	}
 
 	@Put(':id')
+	@UseGuards(AdminGuard)
 	async editMatchById(
 		@Param('id') matchId: string,
 		@Body() match: Match
@@ -51,6 +55,7 @@ export class MatchController {
 	}
 
 	@Delete(':id')
+	@UseGuards(AdminGuard)
 	async deleteMatchById(
 		@InjectToken() token: Token,
 		@Param('id') matchId: string

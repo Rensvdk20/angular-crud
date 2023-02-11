@@ -4,11 +4,10 @@ import {
 	Controller,
 	Delete,
 	Get,
-	HttpException,
-	HttpStatus,
 	Param,
 	Post,
 	Put,
+	UseGuards,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
@@ -16,6 +15,7 @@ import { User } from './user.schema';
 import { InjectToken, Token } from '../auth/token.decorator';
 import { Racer } from '../racer/racer.schema';
 import { Drone } from '../drone/drone.schema';
+import { AdminGuard } from '../guards/admin/admin.guard';
 
 @Controller('user')
 export class UserController {
@@ -24,6 +24,7 @@ export class UserController {
 	// ##### User #####
 
 	@Get()
+	@UseGuards(AdminGuard)
 	async getAllUsers(): Promise<User[]> {
 		return this.userService.getAllUsers();
 	}
@@ -34,10 +35,8 @@ export class UserController {
 	}
 
 	@Get(':id')
-	async getUserById(
-		@InjectToken() token: Token,
-		@Param('id') id: string
-	): Promise<User> {
+	@UseGuards(AdminGuard)
+	async getUserById(@Param('id') id: string): Promise<User> {
 		return this.userService.getUserById(id);
 	}
 
@@ -50,6 +49,7 @@ export class UserController {
 	}
 
 	@Delete()
+	@UseGuards(AdminGuard)
 	async deleteUser(@InjectToken() token: Token): Promise<User> {
 		return this.userService.deleteUser(token.id, token.email);
 	}
