@@ -42,7 +42,7 @@ export class AppModule {
 			.apply(TokenMiddleware)
 			.exclude(
 				{ path: 'data-api/match', method: RequestMethod.GET },
-				{ path: 'data-api/match/:id', method: RequestMethod.GET },
+				{ path: 'data-api/match/:id', method: RequestMethod.GET }
 			)
 			.forRoutes('data-api');
 	}

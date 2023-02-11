@@ -13,10 +13,19 @@ import { MatchService } from './match.service';
 import { Match } from './match.schema';
 import { InjectToken, Token } from '../auth/token.decorator';
 import { AdminGuard } from '../guards/admin/admin.guard';
+import { IMatch } from '@drone-races/shared/src';
 
 @Controller('match')
 export class MatchController {
 	constructor(private readonly matchService: MatchService) {}
+
+	@Get('recommended/for-me')
+	async getRecommendedMatches(
+		@InjectToken() token: Token
+	): Promise<IMatch[]> {
+		console.log(token);
+		return this.matchService.getRecommendedMatches(token.id);
+	}
 
 	@Get()
 	async getAllMatches(): Promise<Match[]> {
