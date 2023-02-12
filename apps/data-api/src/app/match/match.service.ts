@@ -4,13 +4,35 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Match, MatchDocument } from './match.schema';
 import { UserService } from '../user/user.service';
+import { Neo4jService } from '../neo4j/neo4j.service';
+import { IMatch } from '@drone-races/shared/src';
 
 @Injectable()
 export class MatchService {
 	constructor(
 		@InjectModel(Match.name) private matchModel: Model<MatchDocument>,
-		private readonly userService: UserService
+		private readonly userService: UserService,
+		private readonly neo4jService: Neo4jService
 	) {}
+
+	async getRecommendedMatches(userId: string): Promise<IMatch[]> {
+		const matches = [] as IMatch[];
+
+		const recommendedMatches = await this.neo4jService.singleRead(
+			`MATCH(user:User { id: '${userId}' })-[:HAS_BOUGHT]->(ticket:Ticket)-[:BELONGS_TO]->(userMatches:Match)<-[:COMPETES_IN]-(racer:User)-[:COMPETES_IN]->(racerMatches)
+            RETURN racerMatches`
+		);
+
+		for (const record of recommendedMatches.records) {
+			//Get the id of the recommended match
+			const matchId = record.get('racerMatches').properties['id'];
+			//Get the match based on the match id
+			const match = await this.matchModel.findOne({ id: matchId });
+			matches.push(match);
+		}
+
+		return matches;
+	}
 
 	async getAllMatches(): Promise<Match[]> {
 		return this.matchModel.find().exec();

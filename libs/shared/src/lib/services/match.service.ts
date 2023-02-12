@@ -21,6 +21,20 @@ export class MatchService {
 		);
 	}
 
+	getRecommendedMatches(): Observable<IMatch[]> {
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient.get<IMatch[]>(
+			`http://localhost:3333/data-api/match/recommended/for-me`,
+			{
+				headers: headers,
+			}
+		);
+	}
+
 	getMatchById(id: string): Observable<IMatch> {
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
@@ -49,49 +63,52 @@ export class MatchService {
 	}
 
 	deleteMatchById(matchId: string): Observable<IMatch> {
-        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
 		const headers = new HttpHeaders({
-            'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
 		});
 		return this.httpClient.delete<IMatch>(
-            `http://localhost:3333/data-api/match/${matchId}`,
-            {
-                headers: headers,
-            }
-        );
-    }
+			`http://localhost:3333/data-api/match/${matchId}`,
+			{
+				headers: headers,
+			}
+		);
+	}
 
 	addNewMatch(match: IMatch): Observable<IMatch> {
-        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
-        const headers = new HttpHeaders({
-            'Access-Control-Allow-Origin': '*',
-            Authorization: `${token}`,
-        });
-        return this.httpClient.post<IMatch>(
-            `http://localhost:3333/data-api/match`, match,
-            {
-                headers: headers,
-            }
-        );
-    }
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient.post<IMatch>(
+			`http://localhost:3333/data-api/match`,
+			match,
+			{
+				headers: headers,
+			}
+		);
+	}
 
-    competeInMatch(matchId: string): Observable<IMatch> {
-        const token = JSON.parse(localStorage.getItem('userToken') || '').token;
-        const headers = new HttpHeaders({
-            'Access-Control-Allow-Origin': '*',
-            Authorization: `${token}`,
-        });
-        return this.httpClient.post<IMatch>(
-            `http://localhost:3333/data-api/match/compete/${matchId}`, {},
-            {
-                headers: headers,
-            }
-        )
-        .pipe(
-            catchError((error) => {
-                return of(error.error);
-            })
-        )
-    }
+	competeInMatch(matchId: string): Observable<IMatch> {
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient
+			.post<IMatch>(
+				`http://localhost:3333/data-api/match/compete/${matchId}`,
+				{},
+				{
+					headers: headers,
+				}
+			)
+			.pipe(
+				catchError((error) => {
+					return of(error.error);
+				})
+			);
+	}
 }

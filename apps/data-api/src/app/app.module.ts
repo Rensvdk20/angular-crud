@@ -14,7 +14,11 @@ import { Neo4jModule } from './neo4j/neo4j.module';
 			`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`
 		),
 		Neo4jModule.forRoot({
-			scheme: 'neo4j',
+			// Localhost
+			// scheme: 'neo4j',
+
+			// Aura
+			scheme: 'neo4j+s',
 			host: process.env.NEO4J_HOST,
 			username: process.env.NEO4J_USERNAME,
 			password: process.env.NEO4J_PASSWORD,
@@ -42,7 +46,7 @@ export class AppModule {
 			.apply(TokenMiddleware)
 			.exclude(
 				{ path: 'data-api/match', method: RequestMethod.GET },
-				{ path: 'data-api/match/:id', method: RequestMethod.GET },
+				{ path: 'data-api/match/:id', method: RequestMethod.GET }
 			)
 			.forRoutes('data-api');
 	}
