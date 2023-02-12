@@ -38,11 +38,8 @@ export class MatchController {
 
 	@Post()
 	@UseGuards(AdminGuard)
-	async addMatch(
-		@InjectToken() token: Token,
-		@Body() match: Match
-	): Promise<Match> {
-		return this.matchService.addMatch(token.id, match);
+	async addMatch(@Body() match: Match): Promise<Match> {
+		return this.matchService.addMatch(match);
 	}
 
 	@Put(':id')
@@ -56,10 +53,7 @@ export class MatchController {
 
 	@Delete(':id')
 	@UseGuards(AdminGuard)
-	async deleteMatchById(
-		@InjectToken() token: Token,
-		@Param('id') matchId: string
-	): Promise<Match> {
-		return this.matchService.deleteMatchById(token.id, matchId);
+	async deleteMatchById(@Param('id') matchId: string): Promise<Match> {
+		return this.matchService.deleteMatchById(matchId);
 	}
 }
