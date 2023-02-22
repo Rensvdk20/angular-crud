@@ -1,13 +1,8 @@
-import { getGreeting } from '../support/app.po';
-
 describe('data-api', () => {
-	beforeEach(() => cy.visit('/'));
-
-	it('should display welcome message', () => {
-		// Custom command example, see `../support/commands.ts` file
-		cy.login('my-email@something.com', 'myPassword');
-
-		// Function helper example, see `../support/app.po.ts` file
-		getGreeting().contains('Welcome data-api');
+	it('should get all matches', () => {
+		cy.request(`localhost:3333/data-api/match`).then((response) => {
+			expect(response.status).to.eq(200);
+			expect(response.body).to.be.at.least(1);
+		});
 	});
 });
