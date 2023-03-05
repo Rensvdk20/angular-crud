@@ -1,0 +1,29 @@
+<h3>My tickets</h3>
+<table *ngIf="tickets.length > 0" class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Match</th>
+            <th>Type</th>
+            <th>Seatnumber</th>
+            <th>Date</th>
+            <th>Cancel</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ticket of tickets; let i = index">
+            <th>{{i+1}}</th>
+            <td><a [routerLink]="['/match', ticket.match.id]">{{ticket.match.name}}</a></td>
+            <td>{{ticket.type}}</td>
+            <td>{{ticket.seatNumber}}</td>
+            <td>{{ticket.match.date | date: 'MM/dd/yyyy'}}</td>
+            <td><button class="btn btn-danger" (click)="cancelTicket(ticket.id)">Cancel ticket</button></td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="tickets.length === 0">
+    <p>You have no tickets yet, reserve them <a [routerLink]="['/matches']">here</a>
+    </p>
+</div>
+<span class="text-success">{{successMessage}}</span>
+<span class="text-danger">{{errorMessage}}</span>

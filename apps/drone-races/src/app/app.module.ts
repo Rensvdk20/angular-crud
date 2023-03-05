@@ -5,48 +5,81 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NavComponent } from '@drone-races/shared/src/lib/nav/nav.component';
-import { FooterComponent } from '@drone-races/shared/src/lib/footer/footer.component';
+import {
+	AdminGuard,
+	LoginFormComponent,
+	NavComponent,
+	UserGuard,
+} from '@drone-races/shared';
+import { FooterComponent } from '@drone-races/shared';
 
-import { AboutComponent } from '@drone-races/features-ui/src/lib/about/about.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { AboutComponent } from './pages/about/about.component';
+import { AccountComponent } from './pages/account/account.component';
 
-import { UserColumnsComponent } from '@drone-races/features-ui/src/lib/user/user-overview.component';
-import { UserListComponent } from '@drone-races/features-ui/src/lib/user/user-list/user-list.component';
-import { UserDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-details/user-details.component';
-import { UserEditComponent } from '@drone-races/features-ui/src/lib/user/user-edit/user-edit.component';
+import {
+	MatchCompeteAsRacerComponent,
+	MatchListComponent,
+	MyTicketsListComponent,
+	TicketManagerDetailsComponent,
+	TicketManagerEditComponent,
+	TicketManagerListComponent,
+	TicketManagerOverviewComponent,
+	UserEditComponent,
+} from '@drone-races/features-ui';
+import { MatchDetailsComponent } from '@drone-races/features-ui';
 
-import { MatchOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-overview.component';
-import { MatchListComponent } from '@drone-races/features-ui/src/lib/match/match-list/match-list.component';
-import { MatchDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-details/match-details.component';
-import { MatchEditComponent } from '@drone-races/features-ui/src/lib/match/match-edit/match-edit.component';
+import { MatchManagerOverviewComponent } from '@drone-races/features-ui';
+import { MatchManagerListComponent } from '@drone-races/features-ui';
+import { MatchManagerDetailsComponent } from '@drone-races/features-ui';
+import { MatchManagerEditComponent } from '@drone-races/features-ui';
+import { LoginComponent } from './pages/account/login/login.component';
+
+import { MatchReserveTicketsComponent } from '@drone-races/features-ui';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import { RegisterComponent } from './pages/account/register/register.component';
+import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/account/register-form/register-form.component';
 @NgModule({
 	declarations: [
 		AppComponent,
-
 		NavComponent,
 		FooterComponent,
+		HomepageComponent,
 		AboutComponent,
-
-		UserColumnsComponent,
-		UserListComponent,
-		UserDetailsComponent,
-		UserEditComponent,
-
-		MatchOverviewComponent,
 		MatchListComponent,
 		MatchDetailsComponent,
-		MatchEditComponent,
+		MatchManagerOverviewComponent,
+		MatchManagerListComponent,
+		MatchManagerDetailsComponent,
+		MatchManagerEditComponent,
+		LoginComponent,
+		LoginFormComponent,
+		RegisterComponent,
+		RegisterFormComponent,
+		MatchReserveTicketsComponent,
+		MatchCompeteAsRacerComponent,
+		AccountComponent,
+		UserEditComponent,
+		MyTicketsListComponent,
+		TicketManagerOverviewComponent,
+		TicketManagerListComponent,
+		TicketManagerDetailsComponent,
+		TicketManagerEditComponent,
 	],
+	providers: [UserGuard, AdminGuard],
+	bootstrap: [AppComponent],
 	imports: [
 		BrowserModule,
 		RouterModule,
 		AppRoutingModule,
 		NgbModule,
 		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule,
 	],
-	providers: [],
-	bootstrap: [AppComponent],
 })
 export class AppModule {}

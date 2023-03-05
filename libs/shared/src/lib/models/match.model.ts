@@ -1,11 +1,12 @@
 import { IUser } from './user.model';
 
 export interface IMatch {
-	id: number;
+	id: string;
 	name: string;
 	date: Date;
 	location: string;
 	rank: number;
 	prizeMoney: number;
-	winnerId: number | null;
+    racers: IUser[];
+	winner: IUser | null;
 }

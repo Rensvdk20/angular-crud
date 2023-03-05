@@ -1,35 +1,71 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from '@drone-races/features-ui/src/lib/about/about.component';
 
-import { MatchDetailsComponent } from '@drone-races/features-ui/src/lib/match/match-details/match-details.component';
-import { MatchEditComponent } from '@drone-races/features-ui/src/lib/match/match-edit/match-edit.component';
-import { MatchOverviewComponent } from '@drone-races/features-ui/src/lib/match/match-overview.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { AboutComponent } from './pages/about/about.component';
 
-import { UserColumnsComponent } from '@drone-races/features-ui/src/lib/user/user-overview.component';
-import { UserDetailsComponent } from '@drone-races/features-ui/src/lib/user/user-details/user-details.component';
-import { UserEditComponent } from '@drone-races/features-ui/src/lib/user/user-edit/user-edit.component';
+import {
+	MatchManagerDetailsComponent,
+	MyTicketsListComponent,
+	TicketManagerDetailsComponent,
+	TicketManagerEditComponent,
+	TicketManagerOverviewComponent,
+} from '@drone-races/features-ui';
+import { MatchManagerEditComponent } from '@drone-races/features-ui';
+import { MatchManagerOverviewComponent } from '@drone-races/features-ui';
+
+import { MatchDetailsComponent } from '@drone-races/features-ui';
+import { LoginComponent } from './pages/account/login/login.component';
+import { RegisterComponent } from './pages/account/register/register.component';
+import { AccountComponent } from './pages/account/account.component';
+import { AdminGuard, UserGuard } from '@drone-races/shared';
 
 const routes: Routes = [
+	//Pages
+	{ path: '', component: HomepageComponent, pathMatch: 'full' },
 	{ path: 'about', component: AboutComponent, pathMatch: 'full' },
+	{ path: 'login', component: LoginComponent, pathMatch: 'full' },
+	{ path: 'register', component: RegisterComponent, pathMatch: 'full' },
+
+	//Features
+	{ path: 'match/:id', component: MatchDetailsComponent, pathMatch: 'full' },
 	{
-		path: 'user',
-		component: UserColumnsComponent,
-		children: [
-			{ path: 'add', component: UserEditComponent },
-			{ path: ':id/edit', component: UserEditComponent },
-			{ path: ':id', component: UserDetailsComponent },
-		],
+		path: 'account',
+		component: AccountComponent,
+		pathMatch: 'full',
+		canActivate: [UserGuard],
 	},
 	{
-		path: 'match',
-		component: MatchOverviewComponent,
-		children: [
-			{ path: 'add', component: MatchEditComponent },
-			{ path: ':id/edit', component: MatchEditComponent },
-			{ path: ':id', component: MatchDetailsComponent },
-		],
+		path: 'my-tickets',
+		component: MyTicketsListComponent,
+		pathMatch: 'full',
+		canActivate: [UserGuard],
 	},
+
+	//Admin
+	{
+		path: 'match-manager',
+		component: MatchManagerOverviewComponent,
+		children: [
+			{ path: 'add', component: MatchManagerEditComponent },
+			{ path: ':id/edit', component: MatchManagerEditComponent },
+			{ path: ':id', component: MatchManagerDetailsComponent },
+		],
+		canActivate: [AdminGuard],
+	},
+	{
+		path: 'ticket-manager',
+		component: TicketManagerOverviewComponent,
+		children: [
+			{ path: 'add', component: TicketManagerEditComponent },
+			{ path: ':id/edit', component: TicketManagerEditComponent },
+			{ path: ':id', component: TicketManagerDetailsComponent },
+		],
+		canActivate: [AdminGuard],
+	},
+
+	//Page not found
+	{ path: '**', pathMatch: 'full', component: HomepageComponent },
 ];
 
 @NgModule({

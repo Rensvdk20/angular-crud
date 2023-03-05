@@ -1,0 +1,16 @@
+.navbar-nav {
+    width: 100%;
+
+    .nav-item, .right-side {
+        display: flex;
+        align-items: center;
+    }
+
+    .right-side {
+        margin-left: auto;
+    }
+    
+    img {
+        width: 40px;
+    }
+}

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IMatch } from '@drone-races/shared/src/lib/models/match.model';
-import { IUser } from '@drone-races/shared/src/lib/models/user.model';
-import { MatchService } from '@drone-races/shared/src/lib/services/match.service';
-import { UserService } from '@drone-races/shared/src/lib/services/user.service';
+import { AuthService, IMatch, UserInfo, UserService } from '@drone-races/shared';
+import { MatchService } from '@drone-races/shared';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'drone-races-match-details',
@@ -11,21 +10,26 @@ import { UserService } from '@drone-races/shared/src/lib/services/user.service';
 	styleUrls: ['./match-details.component.scss'],
 })
 export class MatchDetailsComponent {
-	match: IMatch | undefined;
-	matchWinner: IUser | undefined;
-
+	match!: IMatch;
+    user: any;
+    
 	constructor(
-		private matchService: MatchService,
-		private userService: UserService,
+        private matchService: MatchService,
+        private userService: UserService,
 		private route: ActivatedRoute
-	) {}
-
-	ngOnInit(): void {
+        ) {}
+        
+    ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
-			this.match = this.matchService.getMatchById(params['id']);
-			this.matchWinner = this.userService.getUserById(
-				this.match!.winnerId!
-			);
+			this.matchService
+				.getMatchById(params['id'])
+				.subscribe((match: any) => {
+					this.match = match.results;
+				});
 		});
+
+        this.userService.getUserInfo().subscribe((user: any) => {
+            this.user = user;
+        });
 	}
 }

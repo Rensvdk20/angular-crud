@@ -1,0 +1,27 @@
+<h3>Tickets</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Match</th>
+            <th>Type</th>
+            <th>Seatnumber</th>
+            <th>Date</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ticket of tickets; let i = index">
+            <th>{{i+1}}</th>
+            <td><a [routerLink]="['/match', ticket.match.id]">{{ticket.match.name}}</a></td>
+            <td>{{ticket.type}}</td>
+            <td>{{ticket.seatNumber}}</td>
+            <td>{{ticket.match.date | date: 'MM/dd/yyyy'}}</td>
+            <td><a class="btn btn-primary" routerLink={{ticket.id}} ariaCurrentWhenActive="page">Details</a></td>
+            <td><a class="btn btn-warning" routerLink="{{ticket.id}}/edit" ariaCurrentWhenActive="page">Edit</a></td>
+            <td><button class="btn btn-danger" (click)="deleteTicket(ticket.id)" ariaCurrentWhenActive="page">Delete</button></td>
+        </tr>
+    </tbody>
+</table>

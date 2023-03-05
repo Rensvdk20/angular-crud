@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IMatch } from '@drone-races/shared/src/lib/models/match.model';
-import { MatchService } from '@drone-races/shared/src/lib/services/match.service';
+import { Component, Input } from '@angular/core';
+import { IMatch } from '@drone-races/shared';
+import { MatchService } from '@drone-races/shared';
 
 @Component({
 	selector: 'drone-races-match-list',
@@ -9,14 +9,21 @@ import { MatchService } from '@drone-races/shared/src/lib/services/match.service
 })
 export class MatchListComponent {
 	matches: IMatch[] = [];
+	@Input() recommended: boolean = false;
 
 	constructor(private matchService: MatchService) {}
 
 	ngOnInit(): void {
-		this.matches = this.matchService.getAllMatches();
-	}
-
-	deleteMatch(id: number) {
-		this.matchService.deleteMatchById(id);
+		if (this.recommended) {
+			this.matchService
+				.getRecommendedMatches()
+				.subscribe((matches: any) => {
+					this.matches = matches.results;
+				});
+		} else {
+			this.matchService.getAllMatches().subscribe((matches: any) => {
+				this.matches = matches.results;
+			});
+		}
 	}
 }

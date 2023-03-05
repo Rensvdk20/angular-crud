@@ -1,25 +1,34 @@
-<h3>Details</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Rank</th>
-            <th>Prize money</th>
-            <th>Winner</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{match!.name}}</td>
-            <td>{{match!.date | date: 'MM/dd/yyyy'}}</td>
-            <td>{{match!.location}}</td>
-            <td>{{match!.rank }}</td>
-            <td>&euro; {{match!.prizeMoney}}</td>
-            <td *ngIf="!matchWinner">-</td>
-            <td *ngIf="matchWinner"><a [routerLink]="['/user', matchWinner.id]">{{matchWinner!.firstName + " " + matchWinner!.lastName}}</a></td>
-
-        </tr>
-    </tbody>
-</table>
+<div class="match">
+    <div class="match-info">
+        <div class="row">
+            <div class="col-6">
+                <h1>{{ match.name }} - Rank {{ match.rank }}</h1><br />
+                <p><b>Date: </b>{{ match.date | date: 'MM/dd/yyyy' }}<br /></p>
+                <p><b>Location: </b>{{ match.location }}<br /></p>
+                <p><b>Rank: </b>{{ match.rank }}<br /></p>
+                <p><b>Prize pool: </b>&euro; {{ match.prizeMoney }}<br /></p>
+                <p><b>Racers: </b>
+                    <span *ngIf="match.racers.length === 0">-</span>
+                    <span *ngIf="match.racers.length > 0">
+                        <span *ngFor="let racer of match.racers;let last = last">
+                            {{ racer.firstName }} {{ racer.lastName }}{{ last?'':', ' }}
+                        </span>
+                    </span>
+                <p *ngIf="match?.winner">
+                    <b>Winner: </b>
+                    {{ match.winner!.firstName + " " + match!.winner!.lastName }}
+                </p><br />
+                
+                <drone-races-match-reserve-tickets *ngIf="user && !user.racer" [matchId]="match.id"></drone-races-match-reserve-tickets>
+                <drone-races-match-compete-as-racer *ngIf="user && user.racer" [matchId]="match.id"></drone-races-match-compete-as-racer>
+            </div>
+            <div class="col-6">
+                <img src="https://i.imgur.com/cbX6J2V.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="match-recommended">
+        <h2>Recommended matches</h2>
+        <drone-races-match-list [recommended]="true"></drone-races-match-list>
+    </div>
+</div>

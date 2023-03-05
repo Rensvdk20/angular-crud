@@ -1,0 +1,27 @@
+<h3>Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Rank</th>
+            <th>Prize money</th>
+            <th>Racers</th>
+            <th>Winner</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="match">
+        <tr>
+            <td>{{match!.name}}</td>
+            <td>{{match!.date | date: 'MM/dd/yyyy'}}</td>
+            <td>{{match!.location}}</td>
+            <td>{{match!.rank }}</td>
+            <td>&euro; {{match!.prizeMoney}}</td>
+            <td *ngIf="match.racers.length === 0"><span>-</span></td>
+            <td *ngIf="match.racers.length > 0"><span *ngFor="let racer of match.racers;let last = last">{{racer.firstName}} {{racer.lastName}}{{last?'':', '}}</span></td>
+            <td *ngIf="!match.winner">-</td>
+            <td *ngIf="match.winner">{{match!.winner!.firstName + " " + match!.winner!.lastName}}</td>
+        </tr>
+    </tbody>
+</table>

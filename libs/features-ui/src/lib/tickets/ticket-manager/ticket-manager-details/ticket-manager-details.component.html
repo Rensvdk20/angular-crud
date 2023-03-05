@@ -1,0 +1,24 @@
+<h3>Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Match</th>
+            <th>Type</th>
+            <th>Seat number</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Reserved By</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="ticket">
+        <tr>
+            <td>{{ticket!.match.name}}</td>
+            <td>{{ticket!.type }}</td>
+            <td>{{ticket!.seatNumber }}</td>
+            <td>{{ticket!.match.date | date: 'MM/dd/yyyy'}}</td>
+            <td>{{ticket!.price}}</td>
+            <td *ngIf="ticket?.reservedBy != null">{{ticket!.reservedBy!.firstName + " " + ticket!.reservedBy!.lastName }}</td>
+            <td *ngIf="ticket?.reservedBy == null">-</td>
+        </tr>
+    </tbody>
+</table>
