@@ -111,15 +111,20 @@ describe('end-to-end tests of data API', () => {
 	});
 
 	describe('matches', () => {
-		// beforeEach(() => {
-
-		// });
+		beforeEach(() => {
+			return mongoc.db('test').collection('matches').insertOne({
+				name: 'Beginner match',
+				date: '9-8-2023',
+				location: 'Jaarbeurs Utrecht',
+				rank: 1,
+				prizeMoney: 100,
+			});
+		});
 
 		it('should get all matches', async () => {
 			const matches = await request(server).get('/data-api/match');
-			console.log(matches.body);
 			expect(matches.status).toBe(200);
-			expect(matches.body.results.length).toBeGreaterThanOrEqual(1);
+			expect(matches.body.results.length).toBe(1);
 		});
 	});
 });
