@@ -7,6 +7,7 @@
             <th>Type</th>
             <th>Seatnumber</th>
             <th>Date</th>
+            <th>Reserved</th>
             <th>Details</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -19,6 +20,7 @@
             <td>{{ticket.type}}</td>
             <td>{{ticket.seatNumber}}</td>
             <td>{{ticket.match.date | date: 'MM/dd/yyyy'}}</td>
+            <td>{{ticket.reservedBy ? "✓" : "×"}}</td>
             <td><a class="btn btn-primary" routerLink={{ticket.id}} ariaCurrentWhenActive="page">Details</a></td>
             <td><a class="btn btn-warning" routerLink="{{ticket.id}}/edit" ariaCurrentWhenActive="page">Edit</a></td>
             <td><button class="btn btn-danger" (click)="deleteTicket(ticket.id)" ariaCurrentWhenActive="page">Delete</button></td>
