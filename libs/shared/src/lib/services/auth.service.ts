@@ -50,9 +50,13 @@ export class AuthService {
 
 	login(formData: UserCredentials) {
 		return this.http
-			.post<any>(`http://localhost:3333/auth-api/login`, formData, {
-				headers: this.headers,
-			})
+			.post<any>(
+				`https://angular-crud-production.up.railway.app/auth-api/login`,
+				formData,
+				{
+					headers: this.headers,
+				}
+			)
 			.pipe(
 				map((data: any) => data.results),
 				map((token: Token) => {
@@ -71,9 +75,13 @@ export class AuthService {
 
 	register(formData: UserRegistration) {
 		return this.http
-			.post<any>(`http://localhost:3333/auth-api/register`, formData, {
-				headers: this.headers,
-			})
+			.post<any>(
+				`https://angular-crud-production.up.railway.app/auth-api/register`,
+				formData,
+				{
+					headers: this.headers,
+				}
+			)
 			.pipe(
 				map((data: any) => data.results),
 				catchError((error) => {

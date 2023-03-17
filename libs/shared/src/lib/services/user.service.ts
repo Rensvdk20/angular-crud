@@ -16,7 +16,7 @@ export class UserService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient.get<IUser[]>(
-			`http://localhost:3333/data-api/user/`,
+			`https://angular-crud-production.up.railway.app/data-api/user/`,
 			{
 				headers: headers,
 			}
@@ -30,7 +30,7 @@ export class UserService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient.get<IUser>(
-			`http://localhost:3333/data-api/user/${id}`,
+			`https://angular-crud-production.up.railway.app/data-api/user/${id}`,
 			{
 				headers: headers,
 			}
@@ -44,9 +44,13 @@ export class UserService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient
-			.put<IUser>(`http://localhost:3333/data-api/user`, user, {
-				headers: headers,
-			})
+			.put<IUser>(
+				`https://angular-crud-production.up.railway.app/data-api/user`,
+				user,
+				{
+					headers: headers,
+				}
+			)
 			.pipe(map((data: any) => data.results));
 	}
 
@@ -57,9 +61,12 @@ export class UserService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient
-			.get<IUser>(`http://localhost:3333/data-api/user/info`, {
-				headers: headers,
-			})
+			.get<IUser>(
+				`https://angular-crud-production.up.railway.app/data-api/user/info`,
+				{
+					headers: headers,
+				}
+			)
 			.pipe(map((data: any) => data.results));
 	}
 }
