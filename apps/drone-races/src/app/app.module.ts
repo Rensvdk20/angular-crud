@@ -22,6 +22,7 @@ import { AccountComponent } from './pages/account/account.component';
 import {
 	MatchCompeteAsRacerComponent,
 	MatchListComponent,
+	MatchRecommendedListComponent,
 	MyTicketsListComponent,
 	TicketManagerDetailsComponent,
 	TicketManagerEditComponent,
@@ -52,6 +53,7 @@ import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/ac
 		AboutComponent,
 		MatchListComponent,
 		MatchDetailsComponent,
+		MatchRecommendedListComponent,
 		MatchManagerOverviewComponent,
 		MatchManagerListComponent,
 		MatchManagerDetailsComponent,

@@ -14,7 +14,19 @@ export class MatchService {
 			'Access-Control-Allow-Origin': '*',
 		});
 		return this.httpClient.get<IMatch[]>(
-			`http://localhost:3333/data-api/match`,
+			`https://angular-crud-production.up.railway.app/data-api/match`,
+			{
+				headers: headers,
+			}
+		);
+	}
+
+	getAllRecommendedMatches(): Observable<IMatch[]> {
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+		});
+		return this.httpClient.get<IMatch[]>(
+			`https://angular-crud-production.up.railway.app/data-api/match/recommended/for-me`,
 			{
 				headers: headers,
 			}
@@ -28,7 +40,7 @@ export class MatchService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient.get<IMatch[]>(
-			`http://localhost:3333/data-api/match/recommended/for-me`,
+			`https://angular-crud-production.up.railway.app/data-api/match/recommended/for-me`,
 			{
 				headers: headers,
 			}
@@ -40,7 +52,7 @@ export class MatchService {
 			'Access-Control-Allow-Origin': '*',
 		});
 		return this.httpClient.get<IMatch>(
-			`http://localhost:3333/data-api/match/${id}`,
+			`https://angular-crud-production.up.railway.app/data-api/match/${id}`,
 			{
 				headers: headers,
 			}
@@ -54,7 +66,7 @@ export class MatchService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient.put<IMatch>(
-			`http://localhost:3333/data-api/match/${match.id}`,
+			`https://angular-crud-production.up.railway.app/data-api/match/${match.id}`,
 			match,
 			{
 				headers: headers,
@@ -69,7 +81,7 @@ export class MatchService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient.delete<IMatch>(
-			`http://localhost:3333/data-api/match/${matchId}`,
+			`https://angular-crud-production.up.railway.app/data-api/match/${matchId}`,
 			{
 				headers: headers,
 			}
@@ -83,7 +95,7 @@ export class MatchService {
 			Authorization: `${token}`,
 		});
 		return this.httpClient.post<IMatch>(
-			`http://localhost:3333/data-api/match`,
+			`https://angular-crud-production.up.railway.app/data-api/match`,
 			match,
 			{
 				headers: headers,
@@ -99,7 +111,7 @@ export class MatchService {
 		});
 		return this.httpClient
 			.post<IMatch>(
-				`http://localhost:3333/data-api/match/compete/${matchId}`,
+				`https://angular-crud-production.up.railway.app/data-api/match/compete/${matchId}`,
 				{},
 				{
 					headers: headers,

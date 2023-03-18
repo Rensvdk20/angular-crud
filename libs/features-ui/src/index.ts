@@ -1,6 +1,7 @@
 export * from './lib/features-ui.module';
 export * from './lib/match/match-list/match-list.component';
 export * from './lib/match/match-details/match-details.component';
+export * from './lib/match/match-recommended-list/match-recommended-list.component';
 
 export * from './lib/match/match-manager/match-manager-overview.component';
 export * from './lib/match/match-manager/match-manager-list/match-manager-list.component';

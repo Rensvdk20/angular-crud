@@ -39,15 +39,17 @@
         <label for="drone_category">Category: </label><br />
         <input type="text" id="drone_category" name="drone_category" [(ngModel)]="user.racer!.drone.category"><br />
 
-        <label for="drone_weight">Category: </label><br />
+        <label for="drone_weight">Weight: </label><br />
         <input type="number" id="drone_weight" name="drone_weight" [(ngModel)]="user.racer!.drone.weight"><br />
 
         <label for="drone_brushless">Brushless: </label><br />
-        <select name="drone_brushless" id="drone_brushless" [(ngModel)]="user.racer!.drone.brushless">
+        <select id="drone_brushless" name="drone_brushless" [(ngModel)]="user.racer!.drone.brushless">
             <option [ngValue]="false">false</option>
             <option [ngValue]="true">true</option>
         </select><br />
     </div>
 
-    <button class="btn btn-primary">Edit user</button>
+    <button [disabled]="!userEditForm.valid" class="btn btn-primary">Edit user</button>
+    <p *ngIf="!user.racer">Want to become a racer? Click <span class="clickableWord" (click)="registerAsRacer()">here</span></p>
+    <p *ngIf="user.racer">Retire as racer? Click <span class="clickableWord" (click)="retireAsRacer()">here</span></p>
 </form>
