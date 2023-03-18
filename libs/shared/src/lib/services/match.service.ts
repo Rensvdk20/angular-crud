@@ -21,6 +21,18 @@ export class MatchService {
 		);
 	}
 
+	getAllRecommendedMatches(): Observable<IMatch[]> {
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+		});
+		return this.httpClient.get<IMatch[]>(
+			`https://angular-crud-production.up.railway.app/data-api/match/recommended/for-me`,
+			{
+				headers: headers,
+			}
+		);
+	}
+
 	getRecommendedMatches(): Observable<IMatch[]> {
 		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
 		const headers = new HttpHeaders({
