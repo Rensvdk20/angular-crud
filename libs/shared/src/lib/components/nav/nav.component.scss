@@ -1,6 +1,10 @@
 .navbar-nav {
     width: 100%;
 
+    li {
+        cursor: pointer;
+    }
+
     .nav-item, .right-side {
         display: flex;
         align-items: center;
