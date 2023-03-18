@@ -47,6 +47,7 @@ describe('AuthService', () => {
 
 	beforeEach(async () => {
 		await mongoc.db('test').collection('identities').deleteMany({});
+		await mongoc.db('test').collection('users').deleteMany({});
 	});
 
 	afterAll(async () => {
