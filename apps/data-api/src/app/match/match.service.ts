@@ -75,6 +75,13 @@ export class MatchService {
 			);
 		}
 
+		if (user.racer.rank == null) {
+			throw new HttpException(
+				'You do not have a rank yet',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
 		if (match.racers.filter((racer) => racer.id === user.id).length > 0) {
 			throw new HttpException(
 				`You're already competing in this match`,
