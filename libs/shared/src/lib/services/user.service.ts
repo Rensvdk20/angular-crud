@@ -69,4 +69,37 @@ export class UserService {
 			)
 			.pipe(map((data: any) => data.results));
 	}
+
+	registerAsRacer(): Observable<IUser> {
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient
+			.post<IUser>(
+				`https://angular-crud-production.up.railway.app/data-api/user/racer`,
+				{},
+				{
+					headers: headers,
+				}
+			)
+			.pipe(map((data: any) => data.results));
+	}
+
+	retireAsRacer(): Observable<IUser> {
+		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient
+			.delete<IUser>(
+				`https://angular-crud-production.up.railway.app/data-api/user/racer`,
+				{
+					headers: headers,
+				}
+			)
+			.pipe(map((data: any) => data.results));
+	}
 }
