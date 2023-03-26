@@ -53,7 +53,7 @@ describe('MatchService', () => {
 	it('should return matches list', () => {
 		httpClientSpy.get.mockReturnValue(of(MATCHES));
 		service.getAllMatches().subscribe((matches) => {
-			expect(matches).toEqual(MATCHES);
+			expect(matches).toEqual(MATCHES.results);
 		});
 		expect(httpClientSpy.get).toHaveBeenCalled();
 	});

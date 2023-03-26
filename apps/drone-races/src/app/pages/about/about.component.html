@@ -6,11 +6,11 @@
 </div>
 
 <div>
-    <h4>Casus:</h4>
+    <h3>Casus:</h3>
     <p>
         Deze casus gaat over drone races. Deze worden georganiseerd op een specifieke datum en drone racers kunnen zich hiervoor inschrijven.<br />
-        Vervolgens kunnen mensen zich registreren op de website en na het inloggen kunnen ze tickets bestellen om naar de match te gaan. <br  />
-        Een gebruiker kan matches aangeraden krijgen op basis van een droneracer die heeft geracet bij een racer waar de gebruiker eerder is geweest.
+        Ook kunnen mensen zich registreren op de website en na het inloggen kunnen ze tickets bestellen om naar de match te gaan. <br  />
+        Een gebruiker kan matches aangeraden krijgen op basis van een droneracer die heeft geracet bij een match waar de gebruiker eerder is geweest.
         <br /><br />
         Het is ook mogelijk te registreren als drone racer en je in te schrijven voor een match die voldoet aan je eigen ranking.<br />
         De drone die je wilt gebruiken voor de race kan je ook beheren.
@@ -19,31 +19,89 @@
 </div>
 
 <div>
-    <h4>Entiteiten:</h4>
-    <h5>User:</h5>
-    <p>
-        -Een user kan 1 of meerdere tickets bestellen voor een match.<br />
-        -Een user <u>kan</u> een drone racer zijn.<br />
-        -Een user kan tot 7 dagen van te voren zijn/haar ticket cancellen.
-    </p>
-    <h5>Ticket:</h5>
-    <p>
-        -Een match bestaat uit een prijs, type (VIP of normaal) en stoelnummer.<br />
-        -Een ticket hoort bij 1 match en kan gekoppeld zijn aan een user.
-    </p>
-    <h5>Match:</h5>
-    <p>
-        -Een match heeft een naam, datum, locatie, rank, prijzengeld en winnaar<br />
-        -De winnaar krijgt uiteindelijk het prijzengeld.
-    </p>
-    <h5>Drone Racer:</h5>
-    <p>
-        -Een drone racer is een user maar een user hoeft niet een drone racer te zijn.<br />
-        -Als drone racer kan je jezelf inschrijven voor een match als je voldoet aan de benodigde ranking.<br />
-        -Als drone racer mag je ook 1 drone kiezen die je meeneemt in de race. Deze mag je tot 3 dagen voor de match datum aanpassen.
-    </p>
-    <h5>Drone:</h5>
-    <p>
-        -Een drone heeft een naam, type (quadcopter, hexacopter), gewicht en of het brushless motors heeft of niet<br />
-        -Een drone kan maar bij 1 drone racer horen.
+    <h3>Entiteiten:</h3>
+    <hr>
+    <h4>User:</h4>
+    <h5>Info</h5>
+    <ul>
+        <li>Een user kan 1 of meerdere tickets bestellen voor een match.</li>
+        <li>Een user <u>kan</u> een drone racer zijn.</li>
+        <li>Een user kan tot 7 dagen van te voren zijn/haar ticket cancellen.</li>
+    </ul>
+    <h5>Attributen</h5>
+    <ul>
+        <li>Voornaam</li>
+        <li>Achternaam</li>
+        <li>Email</li>
+        <li>Geboorte datum</li>
+        <li>Is een admin</li>
+        <li>Drone racer</li>
+    </ul>
+
+    <hr>
+
+    <h4>Drone Racer:</h4>
+    <h5>Info</h5>
+    <ul>
+        <li>Een drone racer is een user maar een user hoeft niet een drone racer te zijn.</li>
+        <li>Als drone racer kan je jezelf inschrijven voor een match als je voldoet aan de benodigde ranking.</li>
+    </ul>
+    <h5>Attributen</h5>
+    <ul>
+        <li>Team</li>
+        <li>Ranking</li>
+        <li>Drone</li>
+    </ul>
+
+    <hr>
+
+    <h4>Drone:</h4>
+    <h5>Info</h5>
+    <ul>
+        <li>Een drone heeft een naam, categorie (quadcopter, hexacopter), gewicht en of het brushless motors heeft of niet</li>
+        <li>Een drone kan maar bij 1 drone racer horen.</li>
+    </ul>
+    <h5>Attributen</h5>
+    <ul>
+        <li>Naam</li>
+        <li>Categorie</li>
+        <li>Gewicht</li>
+        <li>Heeft brushless motors</li>
+    </ul>
+
+    <hr>
+
+    <h4>Ticket:</h4>
+    <h5>Info</h5>
+    <ul>
+        <li>Type kan bijvoorbeeld VIP of normaal zijn</li>
+        <li>Een ticket hoort bij 1 match en kan gekoppeld zijn aan 1 user.</li>
+    </ul>
+    <h5>Attributen</h5>
+    <ul>
+        <li>Prijs</li>
+        <li>Type</li>
+        <li>Stoelnummer</li>
+        <li>Match</li>
+        <li>Gereserveerd door</li>
+    </ul>
+
+    <hr>
+
+    <h4>Match:</h4>
+    <h5>Info</h5>
+    <ul>
+        <li>De winnaar is gekoppeld aan de racer die de match heeft gewonnen</li>
+        <li>De rank is er zodat niet elke racer kan meedoen aan elke race</li>
+    </ul>
+    <h5>Attributen</h5>
+    <ul>
+        <li>Naam</li>
+        <li>Datum</li>
+        <li>Locatie</li>
+        <li>Rank</li>
+        <li>Prijzengeld</li>
+        <li>Winnaar</li>
+    </ul>
+    <hr>
 </div>
