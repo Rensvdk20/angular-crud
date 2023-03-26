@@ -34,7 +34,8 @@ export class MatchService {
 	}
 
 	getRecommendedMatches(): Observable<IMatch[]> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -60,7 +61,8 @@ export class MatchService {
 	}
 
 	editMatchById(match: IMatch): Observable<IMatch> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -75,7 +77,8 @@ export class MatchService {
 	}
 
 	deleteMatchById(matchId: string): Observable<IMatch> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -89,7 +92,8 @@ export class MatchService {
 	}
 
 	addNewMatch(match: IMatch): Observable<IMatch> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -104,7 +108,8 @@ export class MatchService {
 	}
 
 	competeInMatch(matchId: string): Observable<IMatch> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,

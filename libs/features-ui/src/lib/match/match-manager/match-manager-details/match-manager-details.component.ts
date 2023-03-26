@@ -11,12 +11,10 @@ import { UserService } from '@drone-races/shared';
 	styleUrls: ['./match-manager-details.component.scss'],
 })
 export class MatchManagerDetailsComponent {
-	match: IMatch | undefined;
-	matchWinner: IUser | undefined;
+	match: IMatch = {} as IMatch;
 
 	constructor(
 		private matchService: MatchService,
-		private userService: UserService,
 		private route: ActivatedRoute
 	) {}
 

@@ -10,7 +10,8 @@ export class UserService {
 	constructor(private httpClient: HttpClient) {}
 
 	getAllUsers() {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -24,7 +25,8 @@ export class UserService {
 	}
 
 	getUserById(id: string) {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -38,7 +40,8 @@ export class UserService {
 	}
 
 	editUser(user: IUser) {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -55,7 +58,8 @@ export class UserService {
 	}
 
 	getUserInfo(): Observable<IUser> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -71,7 +75,8 @@ export class UserService {
 	}
 
 	registerAsRacer(): Observable<IUser> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -88,7 +93,8 @@ export class UserService {
 	}
 
 	retireAsRacer(): Observable<IUser> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,

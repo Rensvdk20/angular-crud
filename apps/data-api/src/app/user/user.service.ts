@@ -13,19 +13,11 @@ export class UserService {
 	constructor(
 		@InjectModel('User') private userModel: Model<UserDocument>,
 		@InjectModel('Identity') private identityModel: Model<IdentityDocument>
-	) // private readonly neo4jService: Neo4jService
-	{}
+	) {}
 
 	// ##### User #####
 
 	async getAllUsers(): Promise<User[]> {
-		// const movies = await this.neo4jService.singleRead(
-		// 	'MATCH (n) RETURN n LIMIT 25'
-		// );
-		// movies.records.forEach((record) => {
-		// 	console.log(record.get('n'));
-		// });
-
 		return this.userModel.find().exec();
 	}
 

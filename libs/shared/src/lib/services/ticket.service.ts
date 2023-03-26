@@ -10,7 +10,8 @@ export class TicketService {
 	constructor(private httpClient: HttpClient) {}
 
 	getAllTickets(): Observable<ITicket[]> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -26,7 +27,8 @@ export class TicketService {
 	}
 
 	getTicketById(ticketId: string): Observable<ITicket> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -42,7 +44,8 @@ export class TicketService {
 	}
 
 	getUnreservedTicketsForMatch(matchId: string): Observable<ITicket[]> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -58,7 +61,8 @@ export class TicketService {
 	}
 
 	getAllTicketsFromUser(): Observable<ITicket[]> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -74,7 +78,8 @@ export class TicketService {
 	}
 
 	addNewTicket(ticket: ITicket): Observable<ITicket> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -91,7 +96,8 @@ export class TicketService {
 	}
 
 	cancelTicket(ticketId: string): Observable<any> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -112,7 +118,8 @@ export class TicketService {
 	}
 
 	reserveTicketsForMatch(ticketId: string): Observable<ITicket> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -129,7 +136,8 @@ export class TicketService {
 	}
 
 	editTicket(ticketId: string, ticket: ITicket): Observable<ITicket> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
@@ -146,7 +154,8 @@ export class TicketService {
 	}
 
 	deleteTicketById(ticketId: string): Observable<any> {
-		const token = JSON.parse(localStorage.getItem('userToken') || '').token;
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
 		const headers = new HttpHeaders({
 			'Access-Control-Allow-Origin': '*',
 			Authorization: `${token}`,
