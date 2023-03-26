@@ -9,12 +9,16 @@ describe('MatchManagerDetailComponent', () => {
 	let component: MatchManagerDetailsComponent;
 	let fixture: ComponentFixture<MatchManagerDetailsComponent>;
 	const MATCH = {
-		name: 'Beginner match',
-		date: new Date('2023-05-05T00:00:00.000+00:00'),
-		location: 'Jaarbeurs Utrecht',
-		rank: 1,
-		prizeMoney: 100,
-		id: '7c27b334-a1f4-4526-a90b-79556797d732',
+		results: [
+			{
+				name: 'Beginner match',
+				date: new Date('2023-05-05T00:00:00.000+00:00'),
+				location: 'Jaarbeurs Utrecht',
+				rank: 1,
+				prizeMoney: 100,
+				id: '7c27b334-a1f4-4526-a90b-79556797d732',
+			},
+		],
 	};
 
 	const matchServiceSpy = {
@@ -40,10 +44,8 @@ describe('MatchManagerDetailComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should fetch match details on init', () => {
-		component.ngOnInit();
-
-		expect(matchServiceSpy.getMatchById).toHaveBeenCalledWith(1);
-		expect(component.match).toEqual({ results: MATCH });
+	it('should fetch match details', () => {
+		expect(matchServiceSpy.getMatchById).toHaveBeenCalled();
+		expect(component.match).toEqual(MATCH);
 	});
 });

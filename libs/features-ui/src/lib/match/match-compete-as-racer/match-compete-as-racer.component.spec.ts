@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatchCompeteAsRacerComponent } from './match-compete-as-racer.component';
@@ -9,6 +10,7 @@ describe('MatchCompeteAsRacerComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [MatchCompeteAsRacerComponent],
+			imports: [HttpClientTestingModule],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(MatchCompeteAsRacerComponent);
