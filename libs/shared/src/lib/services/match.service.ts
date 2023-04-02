@@ -21,18 +21,6 @@ export class MatchService {
 		);
 	}
 
-	getAllRecommendedMatches(): Observable<IMatch[]> {
-		const headers = new HttpHeaders({
-			'Access-Control-Allow-Origin': '*',
-		});
-		return this.httpClient.get<IMatch[]>(
-			`https://angular-crud-production.up.railway.app/data-api/match/recommended/for-me`,
-			{
-				headers: headers,
-			}
-		);
-	}
-
 	getRecommendedMatches(): Observable<IMatch[]> {
 		const userToken = localStorage.getItem('userToken');
 		const token = userToken ? JSON.parse(userToken).token : '';
@@ -42,6 +30,21 @@ export class MatchService {
 		});
 		return this.httpClient.get<IMatch[]>(
 			`https://angular-crud-production.up.railway.app/data-api/match/recommended/for-me`,
+			{
+				headers: headers,
+			}
+		);
+	}
+
+	getAllMatchesFromRacer(): Observable<IMatch[]> {
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient.get<IMatch[]>(
+			`https://angular-crud-production.up.railway.app/data-api/match/racer/my-matches`,
 			{
 				headers: headers,
 			}

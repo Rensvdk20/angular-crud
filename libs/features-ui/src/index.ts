@@ -15,6 +15,8 @@ export * from './lib/user/user-edit/user-edit.component';
 
 export * from './lib/tickets/my-tickets-list/my-tickets-list.component';
 
+export * from './lib/match/match-racer-matches/match-racer-matches.component';
+
 export * from './lib/tickets/ticket-manager/ticket-manager-overview.component';
 export * from './lib/tickets/ticket-manager/ticket-manager-list/ticket-manager-list.component';
 export * from './lib/tickets/ticket-manager/ticket-manager-details/ticket-manager-details.component';

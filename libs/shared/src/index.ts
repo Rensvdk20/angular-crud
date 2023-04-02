@@ -14,3 +14,4 @@ export * from './lib/components/account/login-form/login-form.component';
 export * from './lib/services/ticket.service';
 export * from './lib/guards/user/user.guard';
 export * from './lib/guards/admin/admin.guard';
+export * from './lib/guards/racer/racer.guard';

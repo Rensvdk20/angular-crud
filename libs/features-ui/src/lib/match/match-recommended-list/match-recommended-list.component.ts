@@ -8,23 +8,12 @@ import { IMatch, MatchService } from '@drone-races/shared/src';
 })
 export class MatchRecommendedListComponent {
 	matches: IMatch[] = [];
-	@Input() recommended: boolean = false;
 
 	constructor(private matchService: MatchService) {}
 
 	ngOnInit(): void {
-		if (this.recommended) {
-			this.matchService
-				.getRecommendedMatches()
-				.subscribe((matches: any) => {
-					this.matches = matches.results;
-				});
-		} else {
-			this.matchService
-				.getAllRecommendedMatches()
-				.subscribe((matches: any) => {
-					this.matches = matches.results;
-				});
-		}
+		this.matchService.getRecommendedMatches().subscribe((matches: any) => {
+			this.matches = matches.results;
+		});
 	}
 }

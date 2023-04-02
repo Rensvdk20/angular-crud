@@ -12,6 +12,7 @@ import {
 	LoginFormComponent,
 	NavComponent,
 	UserGuard,
+	RacerGuard,
 } from '@drone-races/shared';
 import { FooterComponent } from '@drone-races/shared';
 
@@ -22,6 +23,7 @@ import { AccountComponent } from './pages/account/account.component';
 import {
 	MatchCompeteAsRacerComponent,
 	MatchListComponent,
+	MatchRacerMatchesComponent,
 	MatchRecommendedListComponent,
 	MyTicketsListComponent,
 	TicketManagerDetailsComponent,
@@ -71,8 +73,9 @@ import { RegisterFormComponent } from '@drone-races/shared/src/lib/components/ac
 		TicketManagerListComponent,
 		TicketManagerDetailsComponent,
 		TicketManagerEditComponent,
+		MatchRacerMatchesComponent,
 	],
-	providers: [UserGuard, AdminGuard],
+	providers: [UserGuard, AdminGuard, RacerGuard],
 	bootstrap: [AppComponent],
 	imports: [
 		BrowserModule,

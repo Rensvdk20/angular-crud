@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '@drone-races/shared';
-import { Observable } from 'rxjs';
+import { Observable, race } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class NavComponent implements OnInit {
 	loggedInUser$!: Observable<UserInfo | undefined>;
 	isAdmin: boolean = false;
+	isRacer: boolean = false;
 
 	constructor(private authService: AuthService) {}
 
@@ -19,6 +20,7 @@ export class NavComponent implements OnInit {
 		this.authService.getUserFromLocalStorage().subscribe((user) => {
 			if (user) {
 				this.isAdmin = user.isAdmin;
+				this.isRacer = user.racer == null ? false : true;
 			}
 		});
 	}
