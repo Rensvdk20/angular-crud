@@ -27,6 +27,12 @@ export class MatchController {
 		return this.matchService.getRecommendedMatches(token.id);
 	}
 
+	@Get('racer/my-matches')
+	async get(@InjectToken() token: Token): Promise<IMatch[]> {
+		console.log(token);
+		return this.matchService.getRacerFromMatch(token.id);
+	}
+
 	@Get()
 	async getAllMatches(): Promise<Match[]> {
 		return this.matchService.getAllMatches();

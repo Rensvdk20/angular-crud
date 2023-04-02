@@ -50,6 +50,24 @@ export class MatchService {
 		return match;
 	}
 
+	async getRacerFromMatch(racerId: string): Promise<Match[]> {
+		const racer = await this.userService.getUserInfo(racerId);
+		const matches = await this.matchModel.find({ racers: racer });
+
+		if (racer.racer == null) {
+			throw new HttpException(
+				'You are not a racer',
+				HttpStatus.BAD_REQUEST
+			);
+		}
+
+		if (matches == null) {
+			throw new HttpException('No matches found', HttpStatus.NOT_FOUND);
+		}
+
+		return matches;
+	}
+
 	async editMatchById(matchId: string, match: Match): Promise<Match> {
 		if ('winner' in match) {
 			const matchWinner = await this.userService.getUserInfo(
