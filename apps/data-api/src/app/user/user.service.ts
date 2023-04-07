@@ -6,7 +6,6 @@ import { User, UserDocument } from './user.schema';
 import { Racer } from '../racer/racer.schema';
 import { IdentityDocument } from '../auth/identity.schema';
 import { Drone } from '../drone/drone.schema';
-import { Neo4jService } from '../neo4j/neo4j.service';
 
 @Injectable()
 export class UserService {
@@ -18,7 +17,7 @@ export class UserService {
 	// ##### User #####
 
 	async getAllUsers(): Promise<User[]> {
-		return this.userModel.find().exec();
+		return this.userModel.find();
 	}
 
 	async getUserById(id: string): Promise<User> {
@@ -38,9 +37,16 @@ export class UserService {
 	}
 
 	async updateUser(userId: string, user: User): Promise<User> {
-		return this.userModel.findOneAndUpdate({ id: userId }, user, {
-			new: true,
-		});
+		return this.userModel.findOneAndUpdate(
+			{ id: userId },
+			{
+				firstName: user.firstName,
+				lastName: user.lastName,
+			},
+			{
+				new: true,
+			}
+		);
 	}
 
 	async deleteUser(userId: string, userEmail: string): Promise<User> {
