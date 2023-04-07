@@ -28,7 +28,7 @@ describe('MatchSchema', () => {
 		}).compile();
 
 		matchModel = app.get<Model<MatchDocument>>(getModelToken(Match.name));
-        
+
 		await matchModel.ensureIndexes();
 	});
 
@@ -46,9 +46,47 @@ describe('MatchSchema', () => {
 
 	it('has a required name', () => {
 		const model = new matchModel();
-
 		const err = model.validateSync();
 
 		expect(err.errors.name).toBeInstanceOf(Error);
+	});
+
+	it('has a required date', () => {
+		const model = new matchModel();
+		const err = model.validateSync();
+
+		expect(err.errors.date).toBeInstanceOf(Error);
+	});
+
+	it('has a required location', () => {
+		const model = new matchModel();
+		const err = model.validateSync();
+
+		expect(err.errors.location).toBeInstanceOf(Error);
+	});
+
+	it('has a required rank', () => {
+		const model = new matchModel();
+		const err = model.validateSync();
+
+		expect(err.errors.rank).toBeInstanceOf(Error);
+	});
+
+	it('has a required prizeMoney', () => {
+		const model = new matchModel();
+		const err = model.validateSync();
+
+		expect(err.errors.prizeMoney).toBeInstanceOf(Error);
+	});
+
+	it('has an empty array of racers', () => {
+		const model = new matchModel();
+		expect(model.racers).toBeInstanceOf(Array);
+		expect(model.racers.length).toBe(0);
+	});
+
+	it('winner is default undefined', () => {
+		const model = new matchModel();
+		expect(model.winner).toBeUndefined();
 	});
 });
