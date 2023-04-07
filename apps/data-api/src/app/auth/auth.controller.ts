@@ -32,7 +32,7 @@ export class AuthController {
 					credentials.lastName,
 					credentials.email,
 					credentials.birthday,
-					credentials.isAdmin
+					false
 				),
 			};
 		} catch (e) {
