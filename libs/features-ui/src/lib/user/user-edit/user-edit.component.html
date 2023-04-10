@@ -8,16 +8,6 @@
         <label for="lastName">Last Name: </label><br />
         <input type="text"  required minlength="1" #lastName="ngModel" id="lastName" name="lastName" [(ngModel)]="user!.lastName"><br />
         <span *ngIf="!lastName.valid && lastName.touched" class="text-danger">*Fill in a last name<br /></span>
-
-        
-        <label for="email">Email: </label><br />
-        <input type="text" required minlength="1" #email="ngModel" id="email" name="email" [(ngModel)]="user.email"><br />
-        <span *ngIf="!email.valid && email.touched" class="text-danger">*Fill in an email<br /></span>
-
-
-        <label for="birthday">Birthday: </label><br />
-        <input type="text" required minlength="1" #birthday="ngModel" id="birthday" name="birthday" (ngModel)="user.birthday" [ngModel]="user.birthday | date: 'MM/dd/yyyy'" pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"><br />
-        <span *ngIf="!birthday.valid && birthday.touched" class="text-danger">*Fill in a valid birthday<br /></span>
     </div>
 
     <div *ngIf="user.racer">

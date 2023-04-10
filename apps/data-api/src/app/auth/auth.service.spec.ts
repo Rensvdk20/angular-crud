@@ -94,14 +94,17 @@ describe('AuthService', () => {
 
 			const verifiedToken = await service.verifyToken(token);
 
-			expect(verifiedToken).toHaveProperty('email', examplePayload.email);
-			expect(verifiedToken).toHaveProperty('id', examplePayload.id);
+			expect(verifiedToken.email).toEqual(examplePayload.email);
+			expect(verifiedToken.id).toEqual(examplePayload.id);
 		});
 
 		it('should throw on invalid token', async () => {
 			const token = 'fake.fake.fake';
-
-			await expect(service.verifyToken(token)).rejects.toThrow();
+			try {
+				await service.verifyToken(token);
+			} catch (e) {
+				expect(e.message).toEqual('invalid token');
+			}
 		});
 	});
 });

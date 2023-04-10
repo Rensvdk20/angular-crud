@@ -22,7 +22,7 @@ export class User {
 	@Prop({ required: true })
 	birthday: Date;
 
-	@Prop({ required: true })
+	@Prop({ required: true, default: false })
 	isAdmin: boolean;
 
 	@Prop()

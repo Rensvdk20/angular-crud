@@ -6,6 +6,7 @@ import { AboutComponent } from './pages/about/about.component';
 
 import {
 	MatchManagerDetailsComponent,
+	MatchRacerMatchesComponent,
 	MyTicketsListComponent,
 	TicketManagerDetailsComponent,
 	TicketManagerEditComponent,
@@ -18,7 +19,7 @@ import { MatchDetailsComponent } from '@drone-races/features-ui';
 import { LoginComponent } from './pages/account/login/login.component';
 import { RegisterComponent } from './pages/account/register/register.component';
 import { AccountComponent } from './pages/account/account.component';
-import { AdminGuard, UserGuard } from '@drone-races/shared';
+import { AdminGuard, RacerGuard, UserGuard } from '@drone-races/shared';
 
 const routes: Routes = [
 	//Pages
@@ -40,6 +41,12 @@ const routes: Routes = [
 		component: MyTicketsListComponent,
 		pathMatch: 'full',
 		canActivate: [UserGuard],
+	},
+	{
+		path: 'my-races',
+		component: MatchRacerMatchesComponent,
+		pathMatch: 'full',
+		canActivate: [RacerGuard],
 	},
 
 	//Admin

@@ -19,6 +19,7 @@ export class TicketController {
 	constructor(private readonly ticketService: TicketService) {}
 
 	@Get()
+	@UseGuards(AdminGuard)
 	async getAllTickets(): Promise<Ticket[]> {
 		return this.ticketService.getAllTickets();
 	}

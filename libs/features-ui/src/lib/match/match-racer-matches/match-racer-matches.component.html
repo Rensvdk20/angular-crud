@@ -1,0 +1,23 @@
+<h3>My Races</h3>
+<table *ngIf="matches.length > 0" class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Match</th>
+            <th>Location</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let match of matches; let i = index">
+            <th>{{i+1}}</th>
+            <td><a [routerLink]="['/match', match.id]">{{match.name}}</a></td>
+            <td>{{match.location}}</td>
+            <td>{{match.date | date: 'MM/dd/yyyy'}}</td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="matches.length === 0">
+    <p>You have not signed up to any races, choose a match to sign up for <a [routerLink]="['/matches']">here</a>
+    </p>
+</div>

@@ -44,8 +44,10 @@
                             ariaCurrentWhenActive="page">Profile</a>
                     </li>
                     <li ngbDropdownItem class="nav-item">
-                        <a class="nav-link" routerLink="my-tickets" routerLinkActive="active"
-                            ariaCurrentWhenActive="page">My matches</a>
+                        <a *ngIf="!isRacer" class="nav-link" routerLink="my-tickets" routerLinkActive="active"
+                            ariaCurrentWhenActive="page">My Tickets</a>
+                        <a *ngIf="isRacer" class="nav-link" routerLink="my-races" routerLinkActive="active"
+                        ariaCurrentWhenActive="page">My Races</a>
                     </li>
                 </div>
             </div>

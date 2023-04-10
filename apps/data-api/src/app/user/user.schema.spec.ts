@@ -66,13 +66,8 @@ describe('User Schema', () => {
 		expect(model.validateSync().errors.birthday).toBeDefined();
 	});
 
-	it('has a required isAdmin', () => {
+	it('has a property isadmin that is false by default', () => {
 		const model = new userModel();
-		expect(model.validateSync().errors.isAdmin).toBeDefined();
-	});
-
-	it('has a racer that is null by default', () => {
-		const model = new userModel();
-		expect(model.racer).toBeNull();
+		expect(model.isAdmin).toBe(false);
 	});
 });

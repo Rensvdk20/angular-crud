@@ -79,10 +79,6 @@ describe('end-to-end tests of data API', () => {
 	let mongoc: MongoClient;
 
 	beforeAll(async () => {
-		// sadly I have not found a way to override the Mongoose connection of the AppModule,
-		// so here we duplicate the config of the AppModule...
-		// contact me if you know how to do this better!
-		// https://github.com/nestjs/nest/issues/4905
 		module = await Test.createTestingModule({
 			imports: [TestAppModule],
 		}).compile();
@@ -113,6 +109,7 @@ describe('end-to-end tests of data API', () => {
 	describe('matches', () => {
 		beforeEach(() => {
 			return mongoc.db('test').collection('matches').insertOne({
+				id: 'b06440a5-92eb-41dd-bd96-2be511c45b2e',
 				name: 'Beginner match',
 				date: '9-8-2023',
 				location: 'Jaarbeurs Utrecht',
@@ -125,6 +122,28 @@ describe('end-to-end tests of data API', () => {
 			const matches = await request(server).get('/data-api/match');
 			expect(matches.status).toBe(200);
 			expect(matches.body.results.length).toBe(1);
+		});
+
+		it('should get zero matches', async () => {
+			await mongoc.db('test').collection('matches').deleteMany({});
+			const matches = await request(server).get('/data-api/match');
+			expect(matches.status).toBe(200);
+			expect(matches.body.results.length).toBe(0);
+		});
+
+		it('should get a single match', async () => {
+			const match = await request(server).get(
+				'/data-api/match/b06440a5-92eb-41dd-bd96-2be511c45b2e'
+			);
+			expect(match.status).toBe(200);
+			expect(match.body.results.id).toBe(
+				'b06440a5-92eb-41dd-bd96-2be511c45b2e'
+			);
+		});
+
+		it('should not find match', async () => {
+			const match = await request(server).get('/data-api/match/123');
+			expect(match.status).toBe(404);
 		});
 	});
 });
