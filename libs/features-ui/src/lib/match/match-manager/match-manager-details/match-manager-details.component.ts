@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IMatch } from '@drone-races/shared';
+import { IMatch, ITicket, TicketService } from '@drone-races/shared';
 import { IUser } from '@drone-races/shared';
 import { MatchService } from '@drone-races/shared';
 import { UserService } from '@drone-races/shared';
@@ -12,9 +12,11 @@ import { UserService } from '@drone-races/shared';
 })
 export class MatchManagerDetailsComponent {
 	match: IMatch = {} as IMatch;
+	tickets: ITicket[] = [];
 
 	constructor(
 		private matchService: MatchService,
+		private ticketService: TicketService,
 		private route: ActivatedRoute
 	) {}
 
@@ -24,6 +26,12 @@ export class MatchManagerDetailsComponent {
 				.getMatchById(params['id'])
 				.subscribe((match: any) => {
 					this.match = match.results;
+				});
+
+			this.ticketService
+				.getAllTicketsFromMatch(params['id'])
+				.subscribe((tickets: any) => {
+					this.tickets = tickets;
 				});
 		});
 	}

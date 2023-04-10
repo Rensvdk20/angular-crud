@@ -38,12 +38,12 @@ export class TicketController {
 		return this.ticketService.getAllTicketsFromUser(token.id);
 	}
 
-	// @Get(':matchId')
-	// async getAllTicketsFromMatch(
-	//     @Param('matchId') matchId: string,
-	// ): Promise<Ticket[]> {
-	//     return this.ticketService.getAllTicketsFromMatch(matchId);
-	// }
+	@Get('match/:matchId')
+	async getAllTicketsFromMatch(
+		@Param('matchId') matchId: string
+	): Promise<Ticket[]> {
+		return this.ticketService.getAllTicketsFromMatch(matchId);
+	}
 
 	@Get(':ticketId')
 	async getTicketById(@Param('ticketId') ticketId: string): Promise<Ticket> {

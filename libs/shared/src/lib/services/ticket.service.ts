@@ -77,6 +77,23 @@ export class TicketService {
 			.pipe(map((data: any) => data.results));
 	}
 
+	getAllTicketsFromMatch(matchId: string): Observable<ITicket[]> {
+		const userToken = localStorage.getItem('userToken');
+		const token = userToken ? JSON.parse(userToken).token : '';
+		const headers = new HttpHeaders({
+			'Access-Control-Allow-Origin': '*',
+			Authorization: `${token}`,
+		});
+		return this.httpClient
+			.get<ITicket[]>(
+				`https://angular-crud-production.up.railway.app/data-api/ticket/match/${matchId}`,
+				{
+					headers: headers,
+				}
+			)
+			.pipe(map((data: any) => data.results));
+	}
+
 	addNewTicket(ticket: ITicket): Observable<ITicket> {
 		const userToken = localStorage.getItem('userToken');
 		const token = userToken ? JSON.parse(userToken).token : '';
