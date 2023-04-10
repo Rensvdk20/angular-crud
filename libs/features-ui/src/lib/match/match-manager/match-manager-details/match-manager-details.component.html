@@ -7,6 +7,7 @@
             <th>Location</th>
             <th>Rank</th>
             <th>Prize money</th>
+            <th>Total tickets sold</th>
             <th>Racers</th>
             <th>Winner</th>
         </tr>
@@ -18,6 +19,7 @@
             <td>{{match.location}}</td>
             <td>{{match.rank }}</td>
             <td>&euro; {{match!.prizeMoney}}</td>
+            <td>{{tickets.length}}</td>
             <td *ngIf="!match.racers"><span>-</span></td>
             <td *ngIf="match.racers"><span *ngFor="let racer of match.racers;let last = last">{{racer.firstName}} {{racer.lastName}}{{last?'':', '}}</span></td>
             <td *ngIf="!match.winner">-</td>
